@@ -1,1 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UltraVision AI — Study Smarter</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#060810;--s1:#0A0D18;--s2:#0F1422;--s3:#141928;--b1:#1A2340;--b2:#243055;--b3:#2E3F70;--ac:#4C7FFF;--ac2:#3366E0;--ac3:#6B9FFF;--gold:#E8B86D;--grn:#00E5A0;--red:#FF5757;--pur:#A78BFA;--warn:#FFB547;--txt:#EEF2FF;--t2:#8899CC;--t3:#4A5A80;}
+html,body{height:100%;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);overflow:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--s1)}::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px}
+.hidden{display:none!important}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(76,127,255,.14),transparent 70%);top:-200px;right:-100px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(167,139,250,.09),transparent 70%);bottom:-150px;left:-100px}
+#auth-wrap{position:fixed;inset:0;z-index:200;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-page{width:100%;max-width:440px;position:relative;z-index:1}
+#pg-land{max-width:480px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(76,127,255,.1);border:1px solid rgba(76,127,255,.25);color:var(--ac3);padding:6px 16px;border-radius:50px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px}
+.pdot{width:6px;height:6px;border-radius:50%;background:var(--grn);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.llogo{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:24px}
+.lmark{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--pur));display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(76,127,255,.4)}
+.ltxt{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.ltxt span{color:var(--ac)}
+.lh1{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;line-height:1.1;margin-bottom:14px}
+.lh1 em{font-style:italic;color:var(--ac)}
+.lsub{font-size:15px;color:var(--t2);line-height:1.7;margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto}
+.lbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.btn-main{background:linear-gradient(135deg,var(--ac),var(--pur));border:none;color:#fff;padding:14px 32px;border-radius:10px;font-size:14px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;box-shadow:0 4px 24px rgba(76,127,255,.35);transition:all .25s}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(76,127,255,.5)}
+.btn-ghost{background:transparent;border:1px solid var(--b2);color:var(--t2);padding:14px 32px;border-radius:10px;font-size:14px;font-weight:500;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .25s}
+.btn-ghost:hover{border-color:var(--ac);color:var(--ac)}
+.lpills{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:400px;margin:0 auto}
+.lpill{background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px;text-align:left}
+.lpill-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.lpill-t{font-size:12px;font-weight:600;margin-bottom:1px}
+.lpill-s{font-size:10px;color:var(--t3)}
+.acard{background:rgba(10,13,24,.97);border:1px solid var(--b1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.alogo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:24px;cursor:pointer}
+.alogo .lmark{width:34px;height:34px;border-radius:9px}
+.alogo .ltxt{font-size:16px}
+.atitle{font-size:21px;font-weight:700;margin-bottom:5px}
+.asub{font-size:13px;color:var(--t2);margin-bottom:22px;line-height:1.5}
+.fg{margin-bottom:15px}
+.flbl{display:block;font-size:10px;color:var(--t2);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+.fi{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:10px;padding:12px 15px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--txt);outline:none;transition:all .2s}
+.fi::placeholder{color:var(--t3)}
+.fi:focus{border-color:var(--ac);background:rgba(76,127,255,.06);box-shadow:0 0 0 3px rgba(76,127,255,.1)}
+.fi.inv{border-color:var(--red)!important}
+.ferr{font-size:11px;color:var(--red);margin-top:5px;display:none;line-height:1.4}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pw-w{position:relative}
+.pw-w .fi{padding-right:44px}
+.pw-eye{position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);cursor:pointer;padding:4px;display:flex;align-items:center;transition:color .2s}
+.pw-eye:hover{color:var(--txt)}
+.sw-tr{height:3px;background:var(--b1);border-radius:2px;margin-top:8px;overflow:hidden}
+.sw-b{height:100%;border-radius:2px;width:0;transition:all .35s}
+.sw-l{font-size:10px;margin-top:4px;font-weight:500}
+.trow{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px}
+.trow input[type=checkbox]{width:15px;height:15px;margin-top:2px;accent-color:var(--ac);flex-shrink:0;cursor:pointer}
+.trow label{font-size:12px;color:var(--t2);line-height:1.5;cursor:pointer}
+.trow a{color:var(--ac);text-decoration:none}
+.asub-btn{width:100%;background:linear-gradient(135deg,var(--ac),var(--pur));border:none;color:#fff;padding:13px;border-radius:10px;font-size:14px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;box-shadow:0 4px 20px rgba(76,127,255,.3);margin-bottom:16px;transition:all .25s}
+.asub-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(76,127,255,.45)}
+.asub-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.adiv{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.adiv-l{flex:1;height:1px;background:var(--b1)}
+.adiv-t{font-size:11px;color:var(--t3);font-weight:500}
+.g-btn{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--b1);color:var(--t2);padding:12px;border-radius:10px;font-size:13px;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;font-weight:500}
+.g-btn:hover{border-color:var(--b2);color:var(--txt)}
+.aswitch{font-size:12px;color:var(--t2);text-align:center}
+.aswitch a{color:var(--ac);font-weight:600;cursor:pointer;text-decoration:none}
+.flnk{font-size:11px;color:var(--t3);text-align:right;display:block;margin-bottom:14px;cursor:pointer;transition:color .2s}
+.flnk:hover{color:var(--ac)}
+.back-btn{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);cursor:pointer;margin-bottom:20px;border:none;background:none;font-family:'Outfit',sans-serif;padding:0;transition:color .2s}
+.back-btn:hover{color:var(--ac)}
+.sbox{background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);border-radius:10px;padding:14px;font-size:12px;color:var(--grn);line-height:1.55;display:none;margin-bottom:14px}
+.conf-w{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.conf-ring{width:68px;height:68px;border-radius:50%;border:2px solid var(--grn);display:flex;align-items:center;justify-content:center;animation:scIn .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes scIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.conf-title{font-size:22px;font-weight:700}
+.conf-sub{font-size:13px;color:var(--t2);line-height:1.65;max-width:300px}
+.conf-etag{background:rgba(76,127,255,.1);border:1px solid rgba(76,127,255,.2);color:var(--ac3);padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;word-break:break-all}
+.btn-ol{background:transparent;border:1px solid var(--b2);color:var(--t2);padding:10px 22px;border-radius:9px;font-size:12px;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;font-weight:500}
+.btn-ol:hover{border-color:var(--ac);color:var(--ac)}
+.btn-cont{background:linear-gradient(135deg,var(--ac),var(--pur));border:none;color:#fff;padding:12px 28px;border-radius:10px;font-size:13px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;box-shadow:0 4px 18px rgba(76,127,255,.3)}
+.slnk{font-size:11px;color:var(--t3);cursor:pointer;text-decoration:underline}
+/* BANNED SCREEN */
+.banned-w{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.banned-icon{font-size:56px}
+.banned-title{font-size:22px;font-weight:700;color:var(--red)}
+.banned-sub{font-size:13px;color:var(--t2);line-height:1.65;max-width:300px}
+/* APP */
+#app{display:none;height:100vh;position:relative;z-index:1}
+#app.on{display:flex;flex-direction:column}
+.shell{display:flex;flex:1;overflow:hidden}
+.sidebar{width:228px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column}
+.sb-in{display:flex;flex-direction:column;height:100%}
+.sb-head{padding:16px;border-bottom:1px solid var(--b1)}
+.sb-logo{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.sb-lm{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--ac),var(--pur));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(76,127,255,.35)}
+.sb-lt{font-size:12px;font-weight:800;line-height:1.2}
+.sb-lt span{color:var(--ac)}
+.sb-user{background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+.sb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--pur));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sb-av.admin-av{background:linear-gradient(135deg,var(--gold),var(--warn))}
+.sb-un{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-pl{font-size:10px;color:var(--gold);font-weight:500}
+.sb-pl.admin-pl{color:var(--warn)}
+.sb-nav{flex:1;padding:10px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.sb-sec{font-size:9px;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:8px 8px 4px;margin-top:4px}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;cursor:pointer;transition:all .15s;border:1px solid transparent;user-select:none}
+.ni:hover{background:rgba(255,255,255,.04);border-color:var(--b1)}
+.ni.active{background:rgba(76,127,255,.12);border-color:rgba(76,127,255,.3)}
+.ni.active .ni-ic,.ni.active .ni-lb{color:var(--ac)}
+.ni.admin-ni.active{background:rgba(232,184,109,.12);border-color:rgba(232,184,109,.3)}
+.ni.admin-ni.active .ni-ic,.ni.admin-ni.active .ni-lb{color:var(--gold)}
+.ni-ic{width:16px;height:16px;color:var(--t3);flex-shrink:0;transition:color .15s}
+.ni-lb{font-size:12px;color:var(--t2);font-weight:500;transition:color .15s;flex:1}
+.ni-bdg{background:var(--ac);color:#fff;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
+.ni-bdg.warn-bdg{background:var(--warn);color:#07090F}
+.sb-foot{padding:12px;border-top:1px solid var(--b1)}
+.streak-c{background:linear-gradient(135deg,rgba(232,184,109,.1),rgba(255,181,71,.05));border:1px solid rgba(232,184,109,.2);border-radius:10px;padding:10px 13px;display:flex;align-items:center;gap:10px}
+.s-num{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold)}
+.s-lbl{font-size:10px;color:rgba(232,184,109,.7);font-weight:500}
+.main-area{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{padding:13px 22px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:rgba(10,13,24,.8);backdrop-filter:blur(10px)}
+.pg-t{font-size:16px;font-weight:700}
+.pg-s{font-size:11px;color:var(--t2);margin-top:1px}
+.tb-r{display:flex;gap:8px;align-items:center}
+.tbtn{background:rgba(255,255,255,.04);border:1px solid var(--b1);color:var(--t2);padding:8px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.tbtn:hover{border-color:var(--b2);color:var(--txt)}
+.tbtn.pri{background:linear-gradient(135deg,var(--ac),var(--pur));border:none;color:#fff;box-shadow:0 4px 14px rgba(76,127,255,.3)}
+.tbtn.pri:hover{box-shadow:0 6px 20px rgba(76,127,255,.45);transform:translateY(-1px)}
+.tbtn.danger{background:rgba(255,87,87,.1);border:1px solid rgba(255,87,87,.3);color:var(--red)}
+.tbtn.danger:hover{background:rgba(255,87,87,.2)}
+.content{flex:1;overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column;gap:14px}
+.view{display:none;flex-direction:column;height:100%;overflow:hidden}
+.view.active{display:flex}
+/* DASHBOARD */
+.wb{background:linear-gradient(135deg,rgba(76,127,255,.1),rgba(167,139,250,.08));border:1px solid rgba(76,127,255,.2);border-radius:14px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.wb-g{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:4px}
+.wb-g em{font-style:italic;color:var(--ac)}
+.wb-s{font-size:12px;color:var(--t2)}
+.wb-btn{background:linear-gradient(135deg,var(--ac),var(--pur));border:none;color:#fff;padding:10px 20px;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;box-shadow:0 4px 16px rgba(76,127,255,.3);transition:all .2s}
+.wb-btn:hover{transform:translateY(-1px)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sc{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:14px 16px;transition:all .2s}
+.sc:hover{border-color:var(--b2);transform:translateY(-1px)}
+.sc-l{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px}
+.sc-v{font-size:26px;font-weight:800;font-family:'Playfair Display',serif}
+.sc-s{font-size:10px;color:var(--t3);margin-top:3px}
+.sec-t{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-t::after{content:'';flex:1;height:1px;background:var(--b1)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tc{background:var(--s1);border:1px solid var(--b1);border-radius:13px;padding:16px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
+.tc:hover{transform:translateY(-3px)}
+.tc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .22s;pointer-events:none}
+.tc:hover::before{opacity:1}
+.tc.c1{border-color:rgba(76,127,255,.2)}.tc.c1:hover{border-color:rgba(76,127,255,.4);box-shadow:0 12px 32px rgba(76,127,255,.15)}.tc.c1::before{background:radial-gradient(circle at 0 0,rgba(76,127,255,.09),transparent 60%)}
+.tc.c2{border-color:rgba(167,139,250,.2)}.tc.c2:hover{border-color:rgba(167,139,250,.4);box-shadow:0 12px 32px rgba(167,139,250,.15)}.tc.c2::before{background:radial-gradient(circle at 0 0,rgba(167,139,250,.09),transparent 60%)}
+.tc.c3{border-color:rgba(232,184,109,.2)}.tc.c3:hover{border-color:rgba(232,184,109,.4);box-shadow:0 12px 32px rgba(232,184,109,.15)}.tc.c3::before{background:radial-gradient(circle at 0 0,rgba(232,184,109,.09),transparent 60%)}
+.tc.c4{border-color:rgba(0,229,160,.2)}.tc.c4:hover{border-color:rgba(0,229,160,.4);box-shadow:0 12px 32px rgba(0,229,160,.15)}.tc.c4::before{background:radial-gradient(circle at 0 0,rgba(0,229,160,.09),transparent 60%)}
+.tc.c5{border-color:rgba(255,181,71,.2)}.tc.c5:hover{border-color:rgba(255,181,71,.4);box-shadow:0 12px 32px rgba(255,181,71,.15)}.tc.c5::before{background:radial-gradient(circle at 0 0,rgba(255,181,71,.09),transparent 60%)}
+.tc.c6{border-color:rgba(255,87,87,.2)}.tc.c6:hover{border-color:rgba(255,87,87,.4);box-shadow:0 12px 32px rgba(255,87,87,.15)}.tc.c6::before{background:radial-gradient(circle at 0 0,rgba(255,87,87,.09),transparent 60%)}
+.tc-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative;z-index:1}
+.tc-nm{font-size:13px;font-weight:700;margin-bottom:4px;position:relative;z-index:1}
+.tc-ds{font-size:11px;color:var(--t2);line-height:1.45;position:relative;z-index:1}
+.rec-list{display:flex;flex-direction:column;gap:7px}
+.ri{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:11px}
+.ri-d{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ri-t{flex:1;font-size:12px;font-weight:500}
+.ri-tm{font-size:10px;color:var(--t3)}
+.up-card{background:linear-gradient(135deg,rgba(232,184,109,.08),rgba(255,181,71,.05));border:1px solid rgba(232,184,109,.2);border-radius:13px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.up-t{font-size:12px;line-height:1.5}
+.up-t strong{color:var(--gold)}
+.up-b{background:var(--gold);border:none;color:#07090F;padding:9px 18px;border-radius:8px;font-size:11px;font-weight:800;font-family:'Outfit',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:opacity .2s}
+.up-b:hover{opacity:.88}
+/* CHAT */
+.chat-wrap{display:flex;flex-direction:column;flex:1;overflow:hidden}
+.mode-bar{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:10px}
+.mchip{border:1px solid var(--b1);background:transparent;color:var(--t2);border-radius:25px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.mchip.active{background:rgba(76,127,255,.14);border-color:rgba(76,127,255,.4);color:var(--ac)}
+.mchip:hover:not(.active){border-color:var(--b2);color:var(--txt)}
+.qchips{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:9px}
+.qc{border:1px solid var(--b1);background:rgba(255,255,255,.02);color:var(--t2);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.qc:hover{border-color:var(--ac);color:var(--ac)}
+.msgs{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding:2px 0 8px}
+.mr{display:flex;gap:10px;animation:mIn .22s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.mr.user{flex-direction:row-reverse}
+.mav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:3px}
+.mav.ai{background:linear-gradient(135deg,var(--ac),var(--pur));color:#fff}
+.mav.me{background:var(--s3);color:var(--t2);border:1px solid var(--b1)}
+.bub{max-width:80%;padding:12px 15px;border-radius:13px;font-size:12.5px;line-height:1.75}
+.bub.ai{background:var(--s2);border:1px solid var(--b1);border-bottom-left-radius:4px}
+.bub.user{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-bottom-right-radius:4px;box-shadow:0 4px 16px rgba(76,127,255,.25)}
+.bub.ai strong,.bub.ai b{color:var(--gold);font-weight:600}
+.typ-ind{display:flex;gap:5px;padding:12px 15px;background:var(--s2);border:1px solid var(--b1);border-radius:13px;border-bottom-left-radius:4px;align-items:center}
+.td{width:5px;height:5px;border-radius:50%;background:var(--t2);animation:td 1.3s infinite}
+.td:nth-child(2){animation-delay:.22s}.td:nth-child(3){animation-delay:.44s}
+@keyframes td{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1.1);opacity:1}}
+.ibar{padding-top:11px;border-top:1px solid var(--b1);display:flex;gap:10px;align-items:flex-end}
+.cta{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:11px;padding:11px 14px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--txt);outline:none;resize:none;min-height:42px;max-height:110px;line-height:1.5;transition:border-color .2s}
+.cta::placeholder{color:var(--t3)}
+.cta:focus{border-color:var(--ac)}
+.sbtn{width:42px;height:42px;background:linear-gradient(135deg,var(--ac),var(--pur));border:none;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;box-shadow:0 4px 14px rgba(76,127,255,.3)}
+.sbtn:hover{box-shadow:0 6px 20px rgba(76,127,255,.45);transform:translateY(-1px)}
+.sbtn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+/* FORMS */
+.fsel,.finp{background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:9px;padding:10px 13px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--txt);outline:none;transition:all .2s;font-weight:500}
+.fsel:focus,.finp:focus{border-color:var(--ac);background:rgba(76,127,255,.06)}
+.fsel option{background:var(--s2)}
+.finp::placeholder{color:var(--t3)}
+.flbl2{display:block;font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:7px}
+.act-btn{background:linear-gradient(135deg,var(--ac),var(--pur));border:none;color:#fff;padding:11px 22px;border-radius:9px;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(76,127,255,.3)}
+.act-btn:hover{box-shadow:0 6px 22px rgba(76,127,255,.45);transform:translateY(-1px)}
+.act-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+/* QUIZ */
+.sp{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:20px}
+.sg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.qqc{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:20px}
+.qq-n{font-size:10px;color:var(--ac);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:9px}
+.qq-q{font-size:14px;line-height:1.6;margin-bottom:16px;font-weight:500}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.qopt{background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:10px;padding:11px 14px;cursor:pointer;font-size:12px;color:var(--t2);transition:all .15s;display:flex;align-items:center;gap:11px;font-weight:500}
+.qopt:hover{border-color:var(--b2);color:var(--txt)}
+.qopt.ok{border-color:var(--grn)!important;color:var(--grn)!important;background:rgba(0,229,160,.08)!important}
+.qopt.no{border-color:var(--red)!important;color:var(--red)!important;background:rgba(255,87,87,.08)!important}
+.opt-l{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+/* FLASHCARDS */
+.fc-bar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.fc-zone{perspective:1400px;height:180px;cursor:pointer;flex-shrink:0}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;gap:8px}
+.fc-face.front{background:var(--s1);border:1px solid var(--b1)}
+.fc-face.back{transform:rotateY(180deg);background:rgba(76,127,255,.08);border:1px solid rgba(76,127,255,.3)}
+.fc-lbl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.fc-txt{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;line-height:1.4}
+.fc-hint{font-size:10px;color:var(--t3);font-weight:500}
+.fc-pb{height:4px;background:var(--b1);border-radius:2px;overflow:hidden}
+.fc-pf{height:100%;background:linear-gradient(90deg,var(--ac),var(--pur));border-radius:2px;transition:width .3s}
+.fc-ctrl{display:flex;gap:8px;align-items:center}
+.fc-btn{background:rgba(255,255,255,.04);border:1px solid var(--b1);color:var(--t2);padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.fc-btn:hover{border-color:var(--b2);color:var(--txt)}
+.fc-btn.kn{background:rgba(0,229,160,.08);border-color:rgba(0,229,160,.3);color:var(--grn)}
+.fc-btn.un{background:rgba(255,181,71,.08);border-color:rgba(255,181,71,.3);color:var(--warn)}
+.fc-ctr{flex:1;text-align:center;font-size:11px;color:var(--t2);font-weight:600}
+/* ESSAY */
+.ebox{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:11px}
+.eta{background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:10px;padding:14px;font-size:12.5px;font-family:'Outfit',sans-serif;color:var(--txt);outline:none;resize:none;line-height:1.8;min-height:175px;width:100%;transition:border-color .2s}
+.eta::placeholder{color:var(--t3)}
+.eta:focus{border-color:var(--ac)}
+.e-acts{display:flex;gap:7px;flex-wrap:wrap}
+.e-btn{background:rgba(255,255,255,.04);border:1px solid var(--b1);color:var(--t2);padding:8px 13px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.e-btn:hover{border-color:var(--ac);color:var(--ac)}
+.e-btn:disabled{opacity:.5;cursor:not-allowed}
+.e-res{background:rgba(255,255,255,.02);border:1px solid var(--b1);border-radius:10px;padding:16px;font-size:12.5px;line-height:1.8;display:none;white-space:pre-wrap;word-break:break-word}
+/* HOMEWORK */
+.hw-drop{border:1.5px dashed var(--b2);border-radius:13px;padding:28px;text-align:center;cursor:pointer;transition:all .2s}
+.hw-drop:hover{border-color:var(--ac);background:rgba(76,127,255,.04)}
+.hw-sep{text-align:center;font-size:10px;color:var(--t3);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:6px 0}
+.hw-row{display:flex;gap:10px}
+.hw-inp{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:12px 15px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--txt);outline:none;transition:border-color .2s}
+.hw-inp::placeholder{color:var(--t3)}
+.hw-inp:focus{border-color:var(--ac)}
+.hw-res{background:var(--s1);border:1px solid var(--b1);border-radius:14px;padding:18px;display:none}
+.hw-rt{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--ac3);margin-bottom:13px}
+.hw-steps{display:flex;flex-direction:column;gap:10px}
+.hw-step{display:flex;gap:12px;align-items:flex-start}
+.sn{width:24px;height:24px;border-radius:50%;background:rgba(76,127,255,.15);border:1px solid rgba(76,127,255,.3);color:var(--ac);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.st{font-size:12.5px;line-height:1.65;flex:1}
+/* PAPERS */
+.pp-f{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.papers{display:flex;flex-direction:column;gap:8px}
+.pp{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:all .15s}
+.pp:hover{border-color:var(--b2);background:var(--s2);transform:translateX(4px)}
+.pp-ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-info{flex:1}
+.pp-ti{font-size:12.5px;font-weight:600;margin-bottom:3px}
+.pp-me{font-size:10px;color:var(--t3)}
+.pp-bd{font-size:9px;padding:4px 10px;border-radius:20px;font-weight:700;border:1px solid;flex-shrink:0;letter-spacing:.04em;text-transform:uppercase}
+.bg{color:var(--ac);border-color:rgba(76,127,255,.3);background:rgba(76,127,255,.1)}
+.ba{color:var(--pur);border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.1)}
+/* ADMIN */
+.admin-banner{background:linear-gradient(135deg,rgba(232,184,109,.1),rgba(255,181,71,.05));border:1px solid rgba(232,184,109,.3);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.admin-banner-icon{font-size:22px}
+.admin-banner-txt{font-size:12px;color:var(--gold);font-weight:600}
+.admin-banner-sub{font-size:11px;color:rgba(232,184,109,.6);font-weight:400}
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.as{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:16px}
+.as-v{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:4px}
+.as-l{font-size:11px;color:var(--t2);font-weight:500}
+.atw{background:var(--s1);border:1px solid var(--b1);border-radius:14px;overflow:hidden}
+.ath{padding:14px 18px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.att{font-size:13px;font-weight:700}
+.adm-search{background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:8px;padding:7px 12px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--txt);outline:none;width:200px;transition:border-color .2s}
+.adm-search::placeholder{color:var(--t3)}
+.adm-search:focus{border-color:var(--ac)}
+.atbl{width:100%;border-collapse:collapse}
+.atbl th{padding:11px 16px;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;text-align:left;border-bottom:1px solid var(--b1)}
+.atbl td{padding:11px 16px;font-size:12px;border-bottom:1px solid rgba(26,35,64,.5);vertical-align:middle}
+.atbl tr:last-child td{border-bottom:none}
+.atbl tr:hover td{background:rgba(255,255,255,.02)}
+.atbl tr.banned-row td{opacity:.5}
+.abd{display:inline-block;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:600}
+.ab-a{background:rgba(0,229,160,.1);color:var(--grn);border:1px solid rgba(0,229,160,.2)}
+.ab-n{background:rgba(76,127,255,.1);color:var(--ac3);border:1px solid rgba(76,127,255,.2)}
+.ab-b{background:rgba(255,87,87,.1);color:var(--red);border:1px solid rgba(255,87,87,.2)}
+.ban-btn{background:rgba(255,87,87,.1);border:1px solid rgba(255,87,87,.3);color:var(--red);padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.ban-btn:hover{background:rgba(255,87,87,.2)}
+.unban-btn{background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.3);color:var(--grn);padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.unban-btn:hover{background:rgba(0,229,160,.2)}
+.del-btn{background:rgba(255,87,87,.06);border:1px solid rgba(255,87,87,.2);color:rgba(255,87,87,.6);padding:4px 8px;border-radius:6px;font-size:10px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;margin-left:4px}
+.del-btn:hover{background:rgba(255,87,87,.15);color:var(--red)}
+.exp-btn{background:rgba(255,255,255,.04);border:1px solid var(--b1);color:var(--t2);padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.exp-btn:hover{border-color:var(--ac);color:var(--ac)}
+.adm-actions{display:flex;gap:6px;align-items:center}
+/* USER DETAIL MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(6,8,16,.8);z-index:300;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.show{display:flex}
+.modal{background:var(--s1);border:1px solid var(--b2);border-radius:16px;padding:28px;width:480px;max-width:95vw;max-height:85vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.06);border:1px solid var(--b1);color:var(--t2);width:28px;height:28px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:20px}
+.modal-field{margin-bottom:14px}
+.modal-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:5px}
+.modal-value{font-size:13px;color:var(--txt);background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:8px;padding:9px 12px;word-break:break-all}
+.modal-actions{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+/* TOAST + OVERLAY */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--s2);border:1px solid var(--b2);color:var(--txt);padding:12px 22px;border-radius:11px;font-size:12px;font-weight:500;opacity:0;transition:all .3s cubic-bezier(.34,1.2,.64,1);z-index:9999;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#ai-ol{display:none;position:fixed;inset:0;background:rgba(6,8,16,.75);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px;backdrop-filter:blur(4px)}
+#ai-ol.show{display:flex}
+.spin{width:44px;height:44px;border:3px solid var(--b2);border-top-color:var(--ac);border-radius:50%;animation:sp .75s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ai-mt{font-size:13px;color:var(--t2);font-weight:500}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div><div class="orb orb2"></div>
 
+<!-- AUTH -->
+<div id="auth-wrap">
+  <!-- LANDING -->
+  <div class="auth-page" id="pg-land" style="max-width:480px;text-align:center">
+    <div class="badge"><div class="pdot"></div>100% Free — AI Powered</div>
+    <div class="llogo"><div class="lmark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ltxt">Ultra<span>Vision</span> AI</div></div>
+    <h1 class="lh1">Study <em>smarter.</em><br>Achieve more.</h1>
+    <p class="lsub">The most powerful free AI study platform for GCSE & A-Level students. Tutor, Quiz, Flashcards, Essay Help, Homework Solver & Past Papers — all in one place.</p>
+    <div class="lbtns"><button class="btn-main" onclick="showPg('signup')">Create free account →</button><button class="btn-ghost" onclick="showPg('login')">Sign in</button></div>
+    <div class="lpills">
+      <div class="lpill"><div class="lpill-ic" style="background:rgba(76,127,255,.15)">🎓</div><div><div class="lpill-t">AI Tutor</div><div class="lpill-s">Expert help, any subject</div></div></div>
+      <div class="lpill"><div class="lpill-ic" style="background:rgba(167,139,250,.15)">📝</div><div><div class="lpill-t">Quiz Generator</div><div class="lpill-s">Instant AI quizzes</div></div></div>
+      <div class="lpill"><div class="lpill-ic" style="background:rgba(0,229,160,.15)">✍️</div><div><div class="lpill-t">Essay Helper</div><div class="lpill-s">Plan, write, improve</div></div></div>
+      <div class="lpill"><div class="lpill-ic" style="background:rgba(232,184,109,.15)">🃏</div><div><div class="lpill-t">Flashcards</div><div class="lpill-s">Smart revision cards</div></div></div>
+    </div>
+  </div>
+  <!-- SIGNUP -->
+  <div class="auth-page hidden" id="pg-signup">
+    <div class="acard">
+      <div class="alogo" onclick="showPg('land')"><div class="lmark" style="width:32px;height:32px;border-radius:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ltxt" style="font-size:15px">Ultra<span>Vision</span> AI</div></div>
+      <div class="atitle">Create your account</div>
+      <div class="asub">Free forever. No credit card. Start in 30 seconds.</div>
+      <div class="row2"><div class="fg"><label class="flbl">First name</label><input class="fi" id="su-fn" type="text" placeholder="Alex"></div><div class="fg"><label class="flbl">Last name</label><input class="fi" id="su-ln" type="text" placeholder="Smith"></div></div>
+      <div class="fg"><label class="flbl">Email address</label><input class="fi" id="su-em" type="email" placeholder="alex@email.com"><div class="ferr" id="su-em-err">Please enter a valid email address</div><div class="ferr" id="su-dup-err">Account already exists. <a onclick="showPg('login')" style="color:var(--ac);cursor:pointer">Sign in →</a></div></div>
+      <div class="fg"><label class="flbl">Password</label><div class="pw-w"><input class="fi" id="su-pw" type="password" placeholder="Min 8 characters" oninput="pwStr(this.value)"><button class="pw-eye" onclick="togglePw('su-pw')" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div class="sw-tr"><div class="sw-b" id="sw-b"></div></div><div class="sw-l" id="sw-l"></div></div>
+      <div class="trow"><input type="checkbox" id="su-tc"><label for="su-tc">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label></div>
+      <button class="asub-btn" id="su-btn" onclick="doSignup()">Create my free account</button>
+      <div class="adiv"><div class="adiv-l"></div><div class="adiv-t">or sign up with</div><div class="adiv-l"></div></div>
+      <button class="g-btn" onclick="toast('Google sign-in coming soon!','info')"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4C7FFF" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#A78BFA" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#8899CC" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#8899CC" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Continue with Google</button>
+      <div class="aswitch">Already have an account? <a onclick="showPg('login')">Sign in here →</a></div>
+    </div>
+  </div>
+  <!-- LOGIN -->
+  <div class="auth-page hidden" id="pg-login">
+    <div class="acard">
+      <div class="alogo" onclick="showPg('land')"><div class="lmark" style="width:32px;height:32px;border-radius:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ltxt" style="font-size:15px">Ultra<span>Vision</span> AI</div></div>
+      <div class="atitle">Welcome back 👋</div>
+      <div class="asub">Good to see you. Let's get back to studying.</div>
+      <div class="fg"><label class="flbl">Email address</label><input class="fi" id="li-em" type="email" placeholder="alex@email.com"></div>
+      <div class="fg"><label class="flbl">Password</label><div class="pw-w"><input class="fi" id="li-pw" type="password" placeholder="Your password"><button class="pw-eye" onclick="togglePw('li-pw')" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div class="ferr" id="li-err">Incorrect email or password. Please try again.</div></div>
+      <span class="flnk" onclick="showPg('forgot')">Forgot your password?</span>
+      <button class="asub-btn" id="li-btn" onclick="doLogin()">Sign in to UltraVision AI</button>
+      <div class="adiv"><div class="adiv-l"></div><div class="adiv-t">or continue with</div><div class="adiv-l"></div></div>
+      <button class="g-btn" onclick="toast('Google sign-in coming soon!','info')"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4C7FFF" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#A78BFA" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#8899CC" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#8899CC" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Continue with Google</button>
+      <div class="aswitch">Don't have an account? <a onclick="showPg('signup')">Create one free →</a></div>
+    </div>
+  </div>
+  <!-- FORGOT -->
+  <div class="auth-page hidden" id="pg-forgot">
+    <div class="acard">
+      <div class="alogo" onclick="showPg('land')"><div class="lmark" style="width:32px;height:32px;border-radius:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ltxt" style="font-size:15px">Ultra<span>Vision</span> AI</div></div>
+      <button class="back-btn" onclick="showPg('login')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back to sign in</button>
+      <div class="atitle">Reset your password</div>
+      <div class="asub">Enter your email and we'll send a reset link to your inbox.</div>
+      <div class="sbox" id="fg-ok">✓ Reset link sent! Check your inbox and spam folder.</div>
+      <div class="fg"><label class="flbl">Email address</label><input class="fi" id="fg-em" type="email" placeholder="alex@email.com"></div>
+      <button class="asub-btn" onclick="doForgot()">Send reset link</button>
+      <div class="aswitch">Remember it? <a onclick="showPg('login')">Sign in →</a></div>
+    </div>
+  </div>
+  <!-- CONFIRM -->
+  <div class="auth-page hidden" id="pg-confirm">
+    <div class="acard">
+      <div class="conf-w">
+        <div class="conf-ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="conf-title">Check your email!</div>
+        <p class="conf-sub">We sent a confirmation link to:</p>
+        <div class="conf-etag" id="conf-em">—</div>
+        <p class="conf-sub">Click the link to activate your account. Check spam if you don't see it.</p>
+        <button class="btn-ol" onclick="toast('Email resent!','success')">Resend email</button>
+        <button class="btn-cont" onclick="launchApp()">Continue to UltraVision AI →</button>
+        <span class="slnk" onclick="showPg('signup')">← Back to sign up</span>
+      </div>
+    </div>
+  </div>
+  <!-- BANNED -->
+  <div class="auth-page hidden" id="pg-banned">
+    <div class="acard">
+      <div class="banned-w">
+        <div class="banned-icon">🚫</div>
+        <div class="banned-title">Account Suspended</div>
+        <p class="banned-sub">Your account has been suspended by the UltraVision AI administrator. If you believe this is a mistake, please contact support.</p>
+        <button class="btn-ol" onclick="doLogout()">Back to home</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+ <div class="shell">
+  <div class="sidebar"><div class="sb-in">
+   <div class="sb-head">
+    <div class="sb-logo"><div class="sb-lm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="sb-lt">Ultra<span>Vision</span><br>AI</div></div>
+    <div class="sb-user"><div class="sb-av" id="sb-av">?</div><div style="min-width:0"><div class="sb-un" id="sb-name">Student</div><div class="sb-pl" id="sb-plan">✦ Free — AI Powered</div></div></div>
+   </div>
+   <div class="sb-nav">
+    <div class="sb-sec">Overview</div>
+    <div class="ni active" id="ni-d" onclick="goV('dashboard',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="ni-lb">Dashboard</span></div>
+    <div class="sb-sec">Study Tools</div>
+    <div class="ni" id="ni-t" onclick="goV('tutor',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="ni-lb">AI Tutor</span></div>
+    <div class="ni" id="ni-q" onclick="goV('quiz',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="ni-lb">Quiz Generator</span></div>
+    <div class="ni" id="ni-f" onclick="goV('flashcards',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span class="ni-lb">Flashcards</span></div>
+    <div class="ni" id="ni-e" onclick="goV('essay',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="ni-lb">Essay Helper</span></div>
+    <div class="ni" id="ni-h" onclick="goV('homework',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span class="ni-lb">Homework Solver</span></div>
+    <div class="ni" id="ni-p" onclick="goV('papers',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="ni-lb">Past Papers</span><span class="ni-bdg">New</span></div>
+    <div class="sb-sec" id="sb-admin-sec" style="display:none">Admin</div>
+    <div class="ni admin-ni hidden" id="ni-a" onclick="goV('admin',this)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="ni-lb">Admin Dashboard</span><span class="ni-bdg warn-bdg">ADMIN</span></div>
+    <div class="sb-sec">Account</div>
+    <div class="ni" onclick="doLogout()"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span class="ni-lb">Sign out</span></div>
+   </div>
+   <div class="sb-foot"><div class="streak-c"><div style="font-size:22px">🔥</div><div><div class="s-lbl">Day streak</div><div class="s-num" id="sb-streak">1</div></div><div style="font-size:11px;color:rgba(232,184,109,.5);margin-left:auto">days</div></div></div>
+  </div></div>
+
+  <div class="main-area">
+   <!-- DASHBOARD -->
+   <div id="v-dashboard" class="view active">
+    <div class="topbar"><div><div class="pg-t">Dashboard</div><div class="pg-s" id="dash-date"></div></div><div class="tb-r"><button class="tbtn pri" onclick="goV('tutor',document.getElementById('ni-t'))">+ Start studying</button></div></div>
+    <div class="content">
+     <div class="wb"><div><div class="wb-g">Good to see you, <em id="dash-name">Student</em> 👋</div><div class="wb-s">Your AI tutor is ready. What are we studying today?</div></div><button class="wb-btn" onclick="goV('tutor',document.getElementById('ni-t'))">Open AI Tutor →</button></div>
+     <div class="stats-row">
+      <div class="sc"><div class="sc-l">Sessions today</div><div class="sc-v" style="color:var(--ac)" id="st-s">0</div><div class="sc-s">Keep going!</div></div>
+      <div class="sc"><div class="sc-l">Quiz average</div><div class="sc-v" style="color:var(--grn)" id="st-a">—</div><div class="sc-s">All quizzes</div></div>
+      <div class="sc"><div class="sc-l">Cards reviewed</div><div class="sc-v" style="color:var(--gold)" id="st-c">0</div><div class="sc-s">Total flashcards</div></div>
+      <div class="sc"><div class="sc-l">Day streak</div><div class="sc-v" style="color:var(--warn)" id="st-r">🔥 1</div><div class="sc-s">Login daily!</div></div>
+     </div>
+     <div class="up-card"><div class="up-t"><strong>✦ UltraVision Pro coming soon</strong> — Unlimited AI, advanced grading, all exam boards for just £7.99/month</div><button class="up-b" onclick="toast('Join waitlist — launching soon!','info')">Join waitlist</button></div>
+     <div><div class="sec-t">Study Tools</div><div class="tgrid">
+      <div class="tc c1" onclick="goV('tutor',document.getElementById('ni-t'))"><div class="tc-ic" style="background:rgba(76,127,255,.15);border:1px solid rgba(76,127,255,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4C7FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="tc-nm">AI Tutor</div><div class="tc-ds">Expert teaching across every GCSE & A-Level subject</div></div>
+      <div class="tc c2" onclick="goV('quiz',document.getElementById('ni-q'))"><div class="tc-ic" style="background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="tc-nm">Quiz Generator</div><div class="tc-ds">AI questions with instant marking & explanations</div></div>
+      <div class="tc c3" onclick="goV('flashcards',document.getElementById('ni-f'))"><div class="tc-ic" style="background:rgba(232,184,109,.15);border:1px solid rgba(232,184,109,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8B86D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><div class="tc-nm">Flashcards</div><div class="tc-ds">AI revision cards — track what you know</div></div>
+      <div class="tc c4" onclick="goV('essay',document.getElementById('ni-e'))"><div class="tc-ic" style="background:rgba(0,229,160,.15);border:1px solid rgba(0,229,160,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="tc-nm">Essay Helper</div><div class="tc-ds">Planning, feedback, grade prediction</div></div>
+      <div class="tc c5" onclick="goV('homework',document.getElementById('ni-h'))"><div class="tc-ic" style="background:rgba(255,181,71,.15);border:1px solid rgba(255,181,71,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="tc-nm">Homework Solver</div><div class="tc-ds">Step-by-step solutions that teach understanding</div></div>
+      <div class="tc c6" onclick="goV('papers',document.getElementById('ni-p'))"><div class="tc-ic" style="background:rgba(255,87,87,.15);border:1px solid rgba(255,87,87,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF5757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div class="tc-nm">Past Papers</div><div class="tc-ds">GCSE & A-Level papers with AI support</div></div>
+     </div></div>
+     <div><div class="sec-t">Recent Activity</div><div class="rec-list" id="rec-list"><div class="ri"><div class="ri-d" style="background:var(--t3)"></div><div class="ri-t" style="color:var(--t2)">No activity yet — choose a tool and start studying!</div></div></div></div>
+    </div>
+   </div>
+   <!-- TUTOR -->
+   <div id="v-tutor" class="view">
+    <div class="topbar"><div><div class="pg-t">AI Tutor</div><div class="pg-s">Expert GCSE & A-Level teaching — ask absolutely anything</div></div><div class="tb-r"><button class="tbtn" onclick="clearChat()">Clear chat</button></div></div>
+    <div class="content" style="gap:8px">
+     <div class="mode-bar">
+      <button class="mchip active" onclick="setMode(this,'tutor')">🎓 Tutor</button>
+      <button class="mchip" onclick="setMode(this,'explain')">💡 Explain it</button>
+      <button class="mchip" onclick="setMode(this,'simplify')">🧩 Simplify</button>
+      <button class="mchip" onclick="setMode(this,'exam')">📋 Exam tips</button>
+      <button class="mchip" onclick="setMode(this,'check')">✅ Check my answer</button>
+     </div>
+     <div class="qchips">
+      <button class="qc" onclick="qs('Explain the causes of World War 1 for GCSE History')">WW1 causes</button>
+      <button class="qc" onclick="qs('Help me understand quadratic equations step by step')">Quadratic equations</button>
+      <button class="qc" onclick="qs('Explain photosynthesis for A-Level Biology in detail')">Photosynthesis</button>
+      <button class="qc" onclick="qs('Key themes in Macbeth by Shakespeare')">Macbeth themes</button>
+      <button class="qc" onclick="qs('Explain Newton\'s three laws of motion with examples')">Newton\'s laws</button>
+      <button class="qc" onclick="qs('How does the human heart work? GCSE Biology')">Human heart</button>
+      <button class="qc" onclick="qs('Difference between mitosis and meiosis')">Mitosis vs meiosis</button>
+      <button class="qc" onclick="qs('Explain supply and demand for Economics')">Supply & demand</button>
+     </div>
+     <div class="chat-wrap">
+      <div class="msgs" id="chat-msgs"><div class="mr"><div class="mav ai">UV</div><div class="bub ai">Hi! I'm your <strong>UltraVision AI Tutor</strong> — expert help for GCSE and A-Level students across every subject.<br><br>I explain concepts clearly, build real understanding, give exam tips and check your work. What are we studying today? 📚</div></div></div>
+      <div class="ibar"><textarea class="cta" id="chat-ta" placeholder="Ask anything — any subject, any topic..." rows="1" onkeydown="chatKey(event)" oninput="grow(this)"></textarea><button class="sbtn" id="sbtn" onclick="sendMsg()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
+     </div>
+    </div>
+   </div>
+   <!-- QUIZ -->
+   <div id="v-quiz" class="view">
+    <div class="topbar"><div><div class="pg-t">Quiz Generator</div><div class="pg-s">AI exam questions with instant marking & explanations</div></div><div class="tb-r"><button class="tbtn" onclick="resetQuiz()">New quiz</button></div></div>
+    <div class="content">
+     <div class="sp" id="quiz-setup">
+      <div class="sg3">
+       <div><label class="flbl2">Subject</label><select class="fsel" id="q-subj" style="width:100%"><option>Mathematics</option><option>English Literature</option><option>English Language</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>History</option><option>Geography</option><option>French</option><option>Spanish</option><option>Computer Science</option><option>Psychology</option><option>Sociology</option><option>Business Studies</option><option>Economics</option></select></div>
+       <div><label class="flbl2">Level</label><select class="fsel" id="q-lvl" style="width:100%"><option>GCSE</option><option>A-Level</option></select></div>
+       <div><label class="flbl2">Questions</label><select class="fsel" id="q-num" style="width:100%"><option value="5">5 questions</option><option value="10">10 questions</option><option value="15">15 questions</option></select></div>
+      </div>
+      <div style="margin-bottom:14px"><label class="flbl2">Specific topic (optional)</label><input class="finp" id="q-top" placeholder="e.g. Algebra, WW2, Cell biology, Macbeth..." style="width:100%"></div>
+      <button class="act-btn" id="q-btn" onclick="genQuiz()">Generate Quiz →</button>
+     </div>
+     <div id="quiz-area" style="display:none;flex-direction:column;gap:12px"></div>
+    </div>
+   </div>
+   <!-- FLASHCARDS -->
+   <div id="v-flashcards" class="view">
+    <div class="topbar"><div><div class="pg-t">Flashcards</div><div class="pg-s">AI revision cards — click to flip, track your progress</div></div><div class="tb-r"><button class="act-btn" onclick="genCards()">Generate cards</button></div></div>
+    <div class="content">
+     <div class="fc-bar">
+      <select class="fsel" id="fc-s" style="width:145px"><option>Biology</option><option>Chemistry</option><option>Physics</option><option>Mathematics</option><option>History</option><option>English Literature</option><option>Geography</option><option>Psychology</option><option>Computer Science</option></select>
+      <input class="finp" id="fc-t" placeholder="Topic e.g. Cell division, WW2, Algebra..." style="flex:1">
+      <select class="fsel" id="fc-l" style="width:105px"><option>GCSE</option><option>A-Level</option></select>
+     </div>
+     <div class="fc-zone" onclick="flipCard()"><div class="fc-card" id="fc-card"><div class="fc-face front"><div class="fc-lbl">Question</div><div class="fc-txt" id="fc-front">Click "Generate cards" to create your revision deck</div><div class="fc-hint" id="fc-hint">Choose a subject and topic above</div></div><div class="fc-face back"><div class="fc-lbl">Answer</div><div class="fc-txt" id="fc-back">—</div></div></div></div>
+     <div class="fc-pb"><div class="fc-pf" id="fc-pf" style="width:0%"></div></div>
+     <div class="fc-ctrl">
+      <button class="fc-btn un" onclick="rateCard('unsure')">🤔 Not sure</button>
+      <button class="fc-btn" onclick="prevCard()">← Prev</button>
+      <div class="fc-ctr" id="fc-ctr">0 / 0</div>
+      <button class="fc-btn" onclick="nextCard()">Next →</button>
+      <button class="fc-btn kn" onclick="rateCard('know')">✓ Got it!</button>
+     </div>
+     <div id="fc-stat" style="font-size:11px;color:var(--t3);text-align:center;padding:3px;font-weight:500"></div>
+    </div>
+   </div>
+   <!-- ESSAY -->
+   <div id="v-essay" class="view">
+    <div class="topbar"><div><div class="pg-t">Essay Helper</div><div class="pg-s">AI essay planning, feedback, grading and improvement</div></div></div>
+    <div class="content">
+     <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end">
+      <div><label class="flbl2">Essay title or question</label><input class="finp" id="es-q" placeholder="e.g. How does Shakespeare present ambition in Macbeth?" style="width:100%"></div>
+      <div><label class="flbl2">Level</label><select class="fsel" id="es-l" style="width:115px"><option>GCSE</option><option>A-Level</option></select></div>
+     </div>
+     <div class="ebox">
+      <textarea class="eta" id="es-txt" placeholder="Paste your essay here for feedback and grade prediction.&#10;Or leave blank and use the buttons below for essay plans, key points and intro help."></textarea>
+      <div class="e-acts">
+       <button class="e-btn" id="eb1" onclick="essayDo('feedback')">📊 Full feedback</button>
+       <button class="e-btn" id="eb2" onclick="essayDo('plan')">📋 Essay plan</button>
+       <button class="e-btn" id="eb3" onclick="essayDo('improve')">✨ Improve intro</button>
+       <button class="e-btn" id="eb4" onclick="essayDo('grade')">🎯 Predict grade</button>
+       <button class="e-btn" id="eb5" onclick="essayDo('points')">💡 Key points</button>
+      </div>
+      <div class="e-res" id="es-res"></div>
+     </div>
+    </div>
+   </div>
+   <!-- HOMEWORK -->
+   <div id="v-homework" class="view">
+    <div class="topbar"><div><div class="pg-t">Homework Solver</div><div class="pg-s">Step-by-step solutions that teach you how to solve it</div></div></div>
+    <div class="content">
+     <div class="hw-drop" onclick="toast('📸 Photo upload coming in v2 — type below!','info')"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:10px"><strong style="color:var(--ac3)">Upload a photo</strong> of your homework<br><span style="font-size:10px;color:var(--t3)">Photo upload coming in v2 — type below for now</span></div></div>
+     <div class="hw-sep">— or type your question —</div>
+     <div class="hw-row"><input class="hw-inp" id="hw-q" placeholder="Any homework question — Maths, Science, English, History, Languages..." onkeydown="if(event.key==='Enter')solveHW()"><button class="act-btn" onclick="solveHW()">Solve it →</button></div>
+     <div class="hw-res" id="hw-res"><div class="hw-rt" id="hw-title">Solution</div><div class="hw-steps" id="hw-steps"></div></div>
+    </div>
+   </div>
+   <!-- PAST PAPERS -->
+   <div id="v-papers" class="view">
+    <div class="topbar"><div><div class="pg-t">Past Papers</div><div class="pg-s">GCSE & A-Level practice — click any paper for AI help</div></div></div>
+    <div class="content">
+     <div class="pp-f">
+      <select class="fsel" style="width:115px"><option>All levels</option><option>GCSE</option><option>A-Level</option></select>
+      <select class="fsel" style="width:150px"><option>All subjects</option><option>Mathematics</option><option>English</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>History</option></select>
+      <select class="fsel" style="width:115px"><option>All boards</option><option>AQA</option><option>Edexcel</option><option>OCR</option><option>WJEC</option></select>
+      <select class="fsel" style="width:108px"><option>All years</option><option>2024</option><option>2023</option><option>2022</option><option>2019</option></select>
+     </div>
+     <div class="papers">
+      <div class="pp" onclick="openPaper('GCSE Mathematics Paper 1 2024','Mathematics')"><div class="pp-ic" style="background:rgba(76,127,255,.12);border:1px solid rgba(76,127,255,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4C7FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="pp-info"><div class="pp-ti">Mathematics — Paper 1 (Non-Calculator)</div><div class="pp-me">GCSE · 2024 · AQA · 80 marks · 1h 30m</div></div><span class="pp-bd bg">GCSE</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pp" onclick="openPaper('GCSE Mathematics Paper 2 2024','Mathematics')"><div class="pp-ic" style="background:rgba(76,127,255,.12);border:1px solid rgba(76,127,255,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4C7FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="pp-info"><div class="pp-ti">Mathematics — Paper 2 (Calculator)</div><div class="pp-me">GCSE · 2024 · AQA · 80 marks · 1h 30m</div></div><span class="pp-bd bg">GCSE</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pp" onclick="openPaper('A-Level Biology Paper 2 2024','Biology')"><div class="pp-ic" style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg></div><div class="pp-info"><div class="pp-ti">Biology — Paper 2 (Organisms, Evolution)</div><div class="pp-me">A-Level · 2024 · OCR · 100 marks · 2h 15m</div></div><span class="pp-bd ba">A-Level</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pp" onclick="openPaper('GCSE History Germany 2023','History')"><div class="pp-ic" style="background:rgba(232,184,109,.1);border:1px solid rgba(232,184,109,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B86D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><div class="pp-info"><div class="pp-ti">History — Germany 1890–1945</div><div class="pp-me">GCSE · 2023 · Edexcel · 52 marks · 1h 15m</div></div><span class="pp-bd bg">GCSE</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pp" onclick="openPaper('GCSE English Literature 2023','English')"><div class="pp-ic" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="pp-info"><div class="pp-ti">English Literature — Shakespeare & Poetry</div><div class="pp-me">GCSE · 2023 · AQA · 64 marks · 1h 45m</div></div><span class="pp-bd bg">GCSE</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pp" onclick="openPaper('A-Level Chemistry 2022','Chemistry')"><div class="pp-ic" style="background:rgba(255,87,87,.1);border:1px solid rgba(255,87,87,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF5757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11"/></svg></div><div class="pp-info"><div class="pp-ti">Chemistry — Organic Chemistry & Analysis</div><div class="pp-me">A-Level · 2022 · AQA · 105 marks · 2h 30m</div></div><span class="pp-bd ba">A-Level</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+     </div>
+    </div>
+   </div>
+   <!-- ADMIN DASHBOARD — ONLY FOR admin-ultravisionai@proton.me -->
+   <div id="v-admin" class="view">
+    <div class="topbar"><div><div class="pg-t">⚡ Admin Dashboard</div><div class="pg-s">Full platform control — only visible to you</div></div><div class="tb-r"><button class="exp-btn" onclick="exportCSV()">Export CSV</button><button class="tbtn" onclick="refreshAdmin()">↻ Refresh</button></div></div>
+    <div class="content">
+     <div class="admin-banner"><div class="admin-banner-icon">🛡️</div><div><div class="admin-banner-txt">UltraVision AI — Super Admin</div><div class="admin-banner-sub">admin-ultravisionai@proton.me · Full access to all user data and controls</div></div></div>
+     <div class="ag">
+      <div class="as"><div class="as-v" style="color:var(--ac)" id="adm-tot">0</div><div class="as-l">Total users</div></div>
+      <div class="as"><div class="as-v" style="color:var(--grn)" id="adm-td">0</div><div class="as-l">Joined today</div></div>
+      <div class="as"><div class="as-v" style="color:var(--gold)" id="adm-ac">0</div><div class="as-l">Active this week</div></div>
+      <div class="as"><div class="as-v" style="color:var(--red)" id="adm-bn">0</div><div class="as-l">Banned users</div></div>
+     </div>
+     <div class="atw">
+      <div class="ath">
+       <div class="att">All Registered Users</div>
+       <input class="adm-search" id="adm-s" placeholder="Search name or email..." oninput="filterUsers(this.value)">
+      </div>
+      <div style="overflow-x:auto">
+       <table class="atbl" id="adm-tbl">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Joined</th><th>Last Active</th><th>Sessions</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="adm-body"></tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- USER DETAIL MODAL -->
+<div class="modal-overlay" id="user-modal">
+ <div class="modal">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-title">👤 User Details</div>
+  <div class="modal-field"><div class="modal-label">Full Name</div><div class="modal-value" id="md-name">—</div></div>
+  <div class="modal-field"><div class="modal-label">Email Address</div><div class="modal-value" id="md-email">—</div></div>
+  <div class="modal-field"><div class="modal-label">Joined</div><div class="modal-value" id="md-joined">—</div></div>
+  <div class="modal-field"><div class="modal-label">Last Active</div><div class="modal-value" id="md-last">—</div></div>
+  <div class="modal-field"><div class="modal-label">Total Sessions</div><div class="modal-value" id="md-sess">—</div></div>
+  <div class="modal-field"><div class="modal-label">Account Status</div><div class="modal-value" id="md-status">—</div></div>
+  <div class="modal-actions" id="md-actions"></div>
+ </div>
+</div>
+
+<div id="toast"></div>
+<div id="ai-ol"><div class="spin"></div><div class="ai-mt" id="ai-msg">UltraVision AI is thinking...</div></div>
+<script>
+// ============ CONSTANTS ============
+const ADMIN_EMAIL = 'admin-ultravisionai@proton.me';
+
+// ============ USER DATABASE ============
+function getUsers(){try{return JSON.parse(localStorage.getItem('uv_users')||'[]')}catch(e){return[]}}
+function saveUsers(u){localStorage.setItem('uv_users',JSON.stringify(u))}
+function findUser(email){return getUsers().find(u=>u.email.toLowerCase()===email.toLowerCase())}
+function getSession(){try{return JSON.parse(localStorage.getItem('uv_sess')||'null')}catch(e){return null}}
+function saveSession(u){localStorage.setItem('uv_sess',JSON.stringify(u))}
+function clearSession(){localStorage.removeItem('uv_sess')}
+function getStats(email){try{return JSON.parse(localStorage.getItem('uv_st_'+email)||'{"sessions":0,"scores":[],"cards":0,"streak":1}')}catch(e){return{sessions:0,scores:[],cards:0,streak:1}}}
+function saveStatsDB(email,s){localStorage.setItem('uv_st_'+email,JSON.stringify(s))}
+function isAdmin(email){return email&&email.toLowerCase()===ADMIN_EMAIL.toLowerCase()}
+
+// ============ STATE ============
+let CU=null,US={sessions:0,scores:[],cards:0,streak:1};
+let chatH=[],tutorMode='tutor',chatBusy=false;
+let quizData=[],quizIdx=0,quizScore=0,quizAnswered=false;
+let fcCards=[],fcIdx=0,fcKnow=0,fcUnsure=0;
+let activity=[],allUsers=[],selectedUserEmail=null;
+
+// ============ TOAST / LOAD ============
+function toast(m,t){const el=document.getElementById('toast');const c={success:'#00E5A0',info:'#4C7FFF',error:'#FF5757'};el.textContent=m;el.style.borderColor=c[t]||c.info;el.style.color=c[t]||c.info;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3500)}
+function showLoad(m){document.getElementById('ai-msg').textContent=m||'UltraVision AI is thinking...';document.getElementById('ai-ol').classList.add('show')}
+function hideLoad(){document.getElementById('ai-ol').classList.remove('show')}
+
+// ============ AUTH NAV ============
+function showPg(id){document.querySelectorAll('#auth-wrap > div').forEach(el=>el.classList.add('hidden'));const t=document.getElementById('pg-'+id);if(t)t.classList.remove('hidden')}
+function togglePw(id){const el=document.getElementById(id);if(el)el.type=el.type==='password'?'text':'password'}
+function pwStr(v){const b=document.getElementById('sw-b'),l=document.getElementById('sw-l');if(!b)return;if(!v){b.style.width='0';l.textContent='';return}let s=0;if(v.length>=8)s++;if(/[A-Z]/.test(v))s++;if(/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;const m=[['0','',''],['25%','#FF5757','Too short'],['50%','#FFB547','Weak'],['75%','#E8B86D','Fair'],['100%','#00E5A0','Strong']];b.style.width=m[s][0];b.style.background=m[s][1];l.textContent=m[s][2];l.style.color=m[s][1]}
+function vEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+
+// ============ SIGN UP ============
+function doSignup(){
+  const fn=(document.getElementById('su-fn').value||'').trim();
+  const ln=(document.getElementById('su-ln').value||'').trim();
+  const em=(document.getElementById('su-em').value||'').trim().toLowerCase();
+  const pw=document.getElementById('su-pw').value||'';
+  const tc=document.getElementById('su-tc').checked;
+  ['su-em'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('inv')});
+  ['su-em-err','su-dup-err'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none'});
+  if(!fn){toast('Please enter your first name','error');return}
+  if(!vEmail(em)){document.getElementById('su-em').classList.add('inv');document.getElementById('su-em-err').style.display='block';return}
+  if(findUser(em)){document.getElementById('su-em').classList.add('inv');document.getElementById('su-dup-err').style.display='block';return}
+  if(pw.length<8){toast('Password must be at least 8 characters','error');return}
+  if(!tc){toast('Please accept the Terms of Service','error');return}
+  const btn=document.getElementById('su-btn');btn.disabled=true;btn.textContent='Creating account...';
+  setTimeout(()=>{
+    const nu={firstName:fn,lastName:ln,name:fn+(ln?' '+ln:''),email:em,pw:btoa(unescape(encodeURIComponent(pw))),joinedAt:new Date().toISOString(),lastActive:new Date().toISOString(),sessions:0,banned:false};
+    const users=getUsers();users.push(nu);saveUsers(users);
+    CU=nu;saveSession(nu);
+    document.getElementById('conf-em').textContent=em;
+    showPg('confirm');
+    btn.disabled=false;btn.textContent='Create my free account';
+  },1400);
+}
+
+// ============ LOGIN ============
+function doLogin(){
+  const em=(document.getElementById('li-em').value||'').trim().toLowerCase();
+  const pw=document.getElementById('li-pw').value||'';
+  ['li-em','li-pw'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('inv')});
+  const errEl=document.getElementById('li-err');if(errEl)errEl.style.display='none';
+  if(!vEmail(em)){document.getElementById('li-em').classList.add('inv');toast('Please enter a valid email','error');return}
+  if(!pw){document.getElementById('li-pw').classList.add('inv');toast('Please enter your password','error');return}
+  const btn=document.getElementById('li-btn');btn.disabled=true;btn.textContent='Signing you in...';
+  setTimeout(()=>{
+    const user=findUser(em);
+    let pwMatch=false;
+    if(user){try{pwMatch=decodeURIComponent(escape(atob(user.pw)))===pw}catch(e){try{pwMatch=atob(user.pw)===pw}catch(e2){pwMatch=false}}}
+    if(!user||!pwMatch){
+      if(errEl)errEl.style.display='block';
+      ['li-em','li-pw'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('inv')});
+      btn.disabled=false;btn.textContent='Sign in to UltraVision AI';return;
+    }
+    // Check banned
+    if(user.banned&&!isAdmin(em)){
+      btn.disabled=false;btn.textContent='Sign in to UltraVision AI';
+      showPg('banned');return;
+    }
+    const users=getUsers();const idx=users.findIndex(u=>u.email===em);
+    if(idx>=0){users[idx].lastActive=new Date().toISOString();saveUsers(users);CU=users[idx];}else{CU=user;}
+    saveSession(CU);launchApp();
+    btn.disabled=false;btn.textContent='Sign in to UltraVision AI';
+  },1200);
+}
+
+// ============ FORGOT ============
+function doForgot(){
+  const em=(document.getElementById('fg-em').value||'').trim().toLowerCase();
+  if(!vEmail(em)){toast('Please enter a valid email','error');return}
+  document.getElementById('fg-ok').style.display='block';
+  toast('Check your inbox!','success');
+}
+
+// ============ LAUNCH APP ============
+function launchApp(){
+  if(!CU){const s=getSession();if(!s)return;CU=s;}
+  // Re-fetch latest user data to get ban status
+  const latestUser=findUser(CU.email);
+  if(latestUser){CU=latestUser;}
+  // Check ban (not for admin)
+  if(CU.banned&&!isAdmin(CU.email)){clearSession();showPg('banned');return}
+  US=getStats(CU.email);US.sessions=(US.sessions||0)+1;
+  const users=getUsers();const idx=users.findIndex(u=>u.email===CU.email);
+  if(idx>=0){users[idx].lastActive=new Date().toISOString();users[idx].sessions=US.sessions;saveUsers(users);CU=users[idx];}
+  saveStatsDB(CU.email,US);saveSession(CU);
+  document.getElementById('auth-wrap').style.display='none';
+  document.getElementById('app').classList.add('on');
+  const init=(CU.firstName||CU.name||'ST').substring(0,2).toUpperCase();
+  const avEl=document.getElementById('sb-av');const plEl=document.getElementById('sb-plan');
+  if(avEl){avEl.textContent=init;if(isAdmin(CU.email)){avEl.className='sb-av admin-av';}else{avEl.className='sb-av';}}
+  if(document.getElementById('sb-name'))document.getElementById('sb-name').textContent=CU.firstName||CU.name;
+  if(plEl){plEl.textContent=isAdmin(CU.email)?'⚡ Super Admin':'✦ Free — AI Powered';if(isAdmin(CU.email))plEl.className='sb-pl admin-pl';else plEl.className='sb-pl';}
+  if(document.getElementById('dash-name'))document.getElementById('dash-name').textContent=CU.firstName||CU.name;
+  if(document.getElementById('dash-date'))document.getElementById('dash-date').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  // Show admin nav ONLY for admin
+  const adminNi=document.getElementById('ni-a');const adminSec=document.getElementById('sb-admin-sec');
+  if(isAdmin(CU.email)){if(adminNi)adminNi.classList.remove('hidden');if(adminSec)adminSec.style.display='';}
+  else{if(adminNi)adminNi.classList.add('hidden');if(adminSec)adminSec.style.display='none';}
+  updateUI();toast('Welcome to UltraVision AI! 🚀','success');
+}
+function doLogout(){clearSession();CU=null;chatH=[];document.getElementById('app').classList.remove('on');document.getElementById('auth-wrap').style.display='flex';showPg('land');toast('Signed out','info')}
+
+// Auto-login
+window.addEventListener('load',()=>{showPg('land');const s=getSession();if(s&&s.email){const user=findUser(s.email);if(user){if(user.banned&&!isAdmin(s.email)){clearSession();showPg('banned');return}CU=s;launchApp()}else clearSession()}});
+
+// ============ NAV ============
+function goV(id,el){
+  // Block non-admin from admin view
+  if(id==='admin'&&!isAdmin(CU?.email)){toast('Access denied','error');return}
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('v-'+id).classList.add('active');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  if(id!=='dashboard')logAct(id);
+  if(id==='admin')refreshAdmin();
+}
+
+// ============ STATS UI ============
+function updateUI(){const g=id=>document.getElementById(id);if(g('st-s'))g('st-s').textContent=US.sessions||0;if(g('st-c'))g('st-c').textContent=US.cards||0;if(g('st-r'))g('st-r').textContent='🔥 '+(US.streak||1);if(g('sb-streak'))g('sb-streak').textContent=US.streak||1;const avg=US.scores&&US.scores.length?Math.round(US.scores.reduce((a,b)=>a+b,0)/US.scores.length)+'%':'—';if(g('st-a'))g('st-a').textContent=avg}
+function saveSt(){if(CU)saveStatsDB(CU.email,US);updateUI()}
+function logAct(type){const lbl={tutor:'AI Tutor session',quiz:'Quiz Generator',flashcards:'Flashcard review',essay:'Essay Helper',homework:'Homework Solver',papers:'Past Papers'};const col={tutor:'var(--ac)',quiz:'var(--pur)',flashcards:'var(--gold)',essay:'var(--grn)',homework:'var(--warn)',papers:'var(--red)'};activity.unshift({l:lbl[type]||type,c:col[type]||'var(--ac)',t:'Just now'});if(activity.length>5)activity.pop();const el=document.getElementById('rec-list');if(el)el.innerHTML=activity.map(a=>`<div class="ri"><div class="ri-d" style="background:${a.c}"></div><div class="ri-t">${a.l}</div><div class="ri-tm">${a.t}</div></div>`).join('')}
+
+// ============ ADMIN ============
+function refreshAdmin(){
+  if(!isAdmin(CU?.email))return;
+  allUsers=getUsers();renderAdmin(allUsers);
+  const today=new Date().toDateString();const week=Date.now()-7*24*60*60*1000;
+  const g=id=>document.getElementById(id);
+  if(g('adm-tot'))g('adm-tot').textContent=allUsers.length;
+  if(g('adm-td'))g('adm-td').textContent=allUsers.filter(u=>new Date(u.joinedAt).toDateString()===today).length;
+  if(g('adm-ac'))g('adm-ac').textContent=allUsers.filter(u=>new Date(u.lastActive).getTime()>week&&!u.banned).length;
+  if(g('adm-bn'))g('adm-bn').textContent=allUsers.filter(u=>u.banned).length;
+}
+function renderAdmin(users){
+  const tb=document.getElementById('adm-body');if(!tb)return;
+  if(!users.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--t3);padding:24px">No registered users yet. Share UltraVision AI and students will appear here!</td></tr>';return}
+  const today=new Date().toDateString();
+  tb.innerHTML=users.map((u,i)=>{
+    const joined=new Date(u.joinedAt);const last=new Date(u.lastActive);
+    const isNew=joined.toDateString()===today;const isBanned=u.banned;
+    const admin=isAdmin(u.email);
+    const statusBadge=isBanned?'<span class="abd ab-b">Banned</span>':isNew?'<span class="abd ab-n">New</span>':'<span class="abd ab-a">Active</span>';
+    const actions=admin?'<span style="font-size:10px;color:var(--gold);font-weight:600">⚡ Admin</span>':
+      isBanned?`<div class="adm-actions"><button class="unban-btn" onclick="unbanUser('${u.email}')">Unban</button><button class="del-btn" onclick="deleteUser('${u.email}')">Delete</button></div>`:
+      `<div class="adm-actions"><button class="ban-btn" onclick="banUser('${u.email}')">Ban</button><button class="del-btn" onclick="deleteUser('${u.email}')">Delete</button></div>`;
+    return`<tr class="${isBanned?'banned-row':''}" style="cursor:pointer" onclick="viewUser('${u.email}')">
+      <td style="color:var(--t3)">${i+1}</td>
+      <td style="font-weight:600">${esc(u.name||u.firstName)}</td>
+      <td style="color:var(--t2);font-size:11px">${esc(u.email)}</td>
+      <td style="color:var(--t3);font-size:11px">${joined.toLocaleDateString('en-GB')}</td>
+      <td style="color:var(--t3);font-size:11px">${last.toLocaleDateString('en-GB')}</td>
+      <td style="color:var(--t2);font-weight:600">${u.sessions||0}</td>
+      <td onclick="event.stopPropagation()">${statusBadge}</td>
+      <td onclick="event.stopPropagation()">${actions}</td>
+    </tr>`;
+  }).join('');
+}
+function filterUsers(q){const lq=q.toLowerCase();renderAdmin(allUsers.filter(u=>(u.name||'').toLowerCase().includes(lq)||(u.email||'').toLowerCase().includes(lq)||(u.firstName||'').toLowerCase().includes(lq)))}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// Ban user
+function banUser(email){
+  if(!isAdmin(CU?.email))return;
+  if(isAdmin(email)){toast('Cannot ban the admin account','error');return}
+  if(!confirm(`Are you sure you want to BAN ${email}? They will be immediately locked out.`))return;
+  const users=getUsers();const idx=users.findIndex(u=>u.email===email);
+  if(idx>=0){users[idx].banned=true;saveUsers(users);}
+  toast(`${email} has been banned`,'success');refreshAdmin();
+}
+// Unban user
+function unbanUser(email){
+  if(!isAdmin(CU?.email))return;
+  const users=getUsers();const idx=users.findIndex(u=>u.email===email);
+  if(idx>=0){users[idx].banned=false;saveUsers(users);}
+  toast(`${email} has been unbanned`,'success');refreshAdmin();
+}
+// Delete user
+function deleteUser(email){
+  if(!isAdmin(CU?.email))return;
+  if(isAdmin(email)){toast('Cannot delete the admin account','error');return}
+  if(!confirm(`PERMANENTLY DELETE ${email}? This cannot be undone.`))return;
+  const users=getUsers().filter(u=>u.email!==email);saveUsers(users);
+  localStorage.removeItem('uv_st_'+email);
+  toast(`${email} deleted permanently`,'success');refreshAdmin();
+}
+// View user detail
+function viewUser(email){
+  const u=findUser(email);if(!u)return;
+  selectedUserEmail=email;
+  document.getElementById('md-name').textContent=u.name||u.firstName||'—';
+  document.getElementById('md-email').textContent=u.email;
+  document.getElementById('md-joined').textContent=new Date(u.joinedAt).toLocaleString('en-GB');
+  document.getElementById('md-last').textContent=new Date(u.lastActive).toLocaleString('en-GB');
+  document.getElementById('md-sess').textContent=(u.sessions||0)+' sessions';
+  document.getElementById('md-status').textContent=u.banned?'🚫 Banned':isAdmin(u.email)?'⚡ Admin':'✅ Active';
+  const actions=document.getElementById('md-actions');
+  if(isAdmin(u.email)){actions.innerHTML='<span style="font-size:12px;color:var(--gold)">⚡ This is the admin account</span>';}
+  else if(u.banned){actions.innerHTML=`<button class="act-btn" style="background:linear-gradient(135deg,var(--grn),#00B880)" onclick="unbanUser('${u.email}');closeModal()">✓ Unban User</button><button class="tbtn danger" onclick="deleteUser('${u.email}');closeModal()">Delete Account</button>`;}
+  else{actions.innerHTML=`<button class="tbtn danger" onclick="banUser('${u.email}');closeModal()">🚫 Ban User</button><button class="tbtn danger" onclick="deleteUser('${u.email}');closeModal()">Delete Account</button>`;}
+  document.getElementById('user-modal').classList.add('show');
+}
+function closeModal(){document.getElementById('user-modal').classList.remove('show');selectedUserEmail=null}
+document.getElementById('user-modal').addEventListener('click',function(e){if(e.target===this)closeModal()})
+
+// Export CSV
+function exportCSV(){
+  if(!isAdmin(CU?.email))return;
+  const users=getUsers();if(!users.length){toast('No users to export','info');return}
+  const rows=[['Name','Email','Joined','Last Active','Sessions','Status'],...users.map(u=>[u.name||u.firstName,u.email,new Date(u.joinedAt).toLocaleDateString('en-GB'),new Date(u.lastActive).toLocaleDateString('en-GB'),u.sessions||0,u.banned?'Banned':isAdmin(u.email)?'Admin':'Active'])];
+  const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ultravision-users-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  toast('CSV exported!','success');
+}
+
+// ============ AI ENGINE ============
+function loadPuter(){
+  return new Promise((res,rej)=>{
+    if(typeof puter!=='undefined'&&puter.ai){res();return}
+    const s=document.createElement('script');s.src='https://js.puter.com/v2/';
+    s.onload=()=>{let t=0;const iv=setInterval(()=>{t++;if(typeof puter!=='undefined'&&puter.ai){clearInterval(iv);res();}if(t>100){clearInterval(iv);rej(new Error('Puter timeout'));}},100);};
+    s.onerror=()=>rej(new Error('Puter load failed'));
+    document.head.appendChild(s);
+  });
+}
+async function aiCall(sys,msg,hist=[]){
+  await loadPuter();
+  let p=sys+'\n\n';
+  hist.forEach(m=>p+=(m.role==='user'?'Student: ':'UltraVision AI: ')+m.content+'\n\n');
+  p+='Student: '+msg+'\n\nUltraVision AI:';
+  const r=await puter.ai.chat(p,{model:'gpt-4o-mini'});
+  if(typeof r==='string')return r.trim();
+  if(r?.message?.content){const c=r.message.content;return(Array.isArray(c)?c.map(x=>x.text||'').join(''):String(c)).trim()}
+  if(r?.text)return r.text.trim();
+  return String(r).trim();
+}
+
+// ============ TUTOR ============
+const MODES={
+  tutor:`You are UltraVision AI — the best AI tutor for UK GCSE and A-Level students. Expert in ALL subjects: Maths, English, Sciences, History, Geography, Languages, Computer Science, Psychology, Economics and more. Explain WHY not just WHAT. Use vivid analogies and real examples. Break things into clear numbered steps. Connect to UK mark schemes. Be warm, encouraging and patient. Ask follow-up questions to check understanding. Format with clear line breaks.`,
+  explain:`You are UltraVision AI in Explain mode. Structure: 1) HOOK — surprising fact 2) SIMPLE CORE — one perfect memorable analogy 3) STEP BY STEP — build understanding progressively with examples 4) REAL WORLD — everyday connection 5) CHECK — one question to verify understanding. Replace jargon with plain language (show proper term in brackets).`,
+  simplify:`You are UltraVision AI in Simplify mode. Transform complex content for a bright 14-year-old. Strip jargon (keep proper term in brackets). Short punchy sentences. ONE unforgettable analogy. Real everyday example. 3-5 must-remember points. End with: THE ONE-LINE SUMMARY. Goal: genuine clarity, not dumbing down.`,
+  exam:`You are UltraVision AI in Exam Mastery mode — UK exam coach knowing AQA, Edexcel, OCR, WJEC. Give: 1) DECODE — what does this command word require? 2) MARK SCHEME SECRETS — exact language examiners reward 3) STRUCTURE — precise answer structure with timing 4) TOP MISTAKES — 4 errors and how to avoid them 5) INSIDER TIP — one thing most students never hear. Be specific and immediately actionable.`,
+  check:`You are UltraVision AI reviewing student work as a UK examiner. Give: ✓ STRENGTHS (3+ specific) | ✗ ERRORS (with correct info) | ⚠ MISSING (key points absent) | 📝 LANGUAGE & STRUCTURE | 🎯 PREDICTED GRADE (with justification) | 🚀 TOP 3 IMPROVEMENTS | ✍ REWRITTEN EXAMPLE of their weakest part. End with genuine encouragement.`
+};
+function setMode(btn,m){document.querySelectorAll('.mchip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');tutorMode=m;chatH=[]}
+function grow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,110)+'px'}
+function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}}
+function clearChat(){chatH=[];document.getElementById('chat-msgs').innerHTML='<div class="mr"><div class="mav ai">UV</div><div class="bub ai">Chat cleared! Ready to help. What are we studying? 📚</div></div>'}
+function qs(t){document.getElementById('chat-ta').value=t;sendMsg()}
+function addMsg(role,text){
+  const c=document.getElementById('chat-msgs');const d=document.createElement('div');d.className='mr'+(role==='user'?' user':'');
+  const init=role==='user'?((CU?.firstName||'Me').substring(0,2).toUpperCase()):'UV';
+  const html=text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>');
+  d.innerHTML=`<div class="mav ${role==='user'?'me':'ai'}">${init}</div><div class="bub ${role==='user'?'user':'ai'}">${html}</div>`;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function showTyping(){const c=document.getElementById('chat-msgs');const d=document.createElement('div');d.className='mr';d.id='typ';d.innerHTML='<div class="mav ai">UV</div><div class="typ-ind"><div class="td"></div><div class="td"></div><div class="td"></div></div>';c.appendChild(d);c.scrollTop=c.scrollHeight}
+function rmTyping(){const t=document.getElementById('typ');if(t)t.remove()}
+async function sendMsg(){
+  if(chatBusy)return;const ta=document.getElementById('chat-ta');const text=(ta.value||'').trim();if(!text)return;
+  ta.value='';ta.style.height='auto';addMsg('user',text);chatH.push({role:'user',content:text});
+  chatBusy=true;document.getElementById('sbtn').disabled=true;showTyping();
+  try{const r=await aiCall(MODES[tutorMode],text,chatH.slice(0,-1));rmTyping();addMsg('ai',r);chatH.push({role:'assistant',content:r})}
+  catch(e){rmTyping();addMsg('ai','⚠️ Connection issue. Check your internet and try again.')}
+  chatBusy=false;document.getElementById('sbtn').disabled=false;
+}
+
+// ============ QUIZ ============
+function resetQuiz(){quizData=[];quizIdx=0;quizScore=0;quizAnswered=false;document.getElementById('quiz-setup').style.display='';document.getElementById('quiz-area').style.display='none'}
+async function genQuiz(){
+  const subj=document.getElementById('q-subj').value,lvl=document.getElementById('q-lvl').value,num=document.getElementById('q-num').value,top=(document.getElementById('q-top').value||'').trim();
+  const btn=document.getElementById('q-btn');btn.disabled=true;btn.textContent='Generating...';
+  showLoad('Creating '+num+' '+subj+' questions...');
+  const sys=`You are an expert ${lvl} ${subj} UK examiner. Generate exactly ${num} multiple choice questions${top?' about: '+top:' on key syllabus topics'} for ${lvl} students. Test genuine understanding. All 4 options must be plausible. Explanations must teach WHY.\nReturn ONLY valid JSON array, no markdown, no text:\n[{"q":"Full question?","opts":["A) opt","B) opt","C) opt","D) opt"],"ans":0,"exp":"Why correct and why others wrong"}]`;
+  try{
+    const raw=await aiCall(sys,'Generate quiz. Return ONLY the JSON array.');hideLoad();
+    const s=raw.indexOf('['),e=raw.lastIndexOf(']');if(s<0||e<0)throw new Error('No JSON');
+    quizData=JSON.parse(raw.substring(s,e+1));if(!quizData.length)throw new Error('Empty');
+    quizIdx=0;quizScore=0;quizAnswered=false;
+    document.getElementById('quiz-setup').style.display='none';
+    const qa=document.getElementById('quiz-area');qa.style.display='flex';
+    renderQ();logAct('quiz');toast('Quiz ready! Good luck 🍀','success');
+  }catch(e){hideLoad();toast('Could not generate quiz. Try again.','error');console.error(e)}
+  btn.disabled=false;btn.textContent='Generate Quiz →';
+}
+function renderQ(){
+  if(quizIdx>=quizData.length){showScore();return}
+  const q=quizData[quizIdx];quizAnswered=false;
+  const pct=Math.round((quizIdx/quizData.length)*100);
+  document.getElementById('quiz-area').innerHTML=`
+    <div style="height:4px;background:var(--b1);border-radius:2px;overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--ac),var(--pur));border-radius:2px;transition:width .4s"></div></div>
+    <div class="qqc">
+      <div class="qq-n">Question ${quizIdx+1} of ${quizData.length} · Score: ${quizScore}/${quizIdx}</div>
+      <div class="qq-q">${q.q}</div>
+      <div class="q-opts">${q.opts.map((o,i)=>`<div class="qopt" id="qo${i}" onclick="pickAns(${i})"><div class="opt-l">${['A','B','C','D'][i]}</div><span>${o.replace(/^[A-D]\)\s*/,'')}</span></div>`).join('')}</div>
+      <div id="q-fb" style="display:none;border-radius:10px;padding:12px 15px;font-size:12px;line-height:1.6;margin-top:10px"></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end"><button class="act-btn" id="q-nxt" onclick="nextQ()" style="display:none;padding:9px 20px;font-size:11px">Next question →</button></div>`;
+}
+function pickAns(i){
+  if(quizAnswered)return;quizAnswered=true;const q=quizData[quizIdx];const ok=i===q.ans;if(ok)quizScore++;
+  for(let x=0;x<4;x++){const el=document.getElementById('qo'+x);if(!el)continue;if(x===q.ans)el.classList.add('ok');else if(x===i&&!ok)el.classList.add('no')}
+  const fb=document.getElementById('q-fb');
+  fb.style.display='block';fb.style.background=ok?'rgba(0,229,160,.08)':'rgba(255,87,87,.06)';fb.style.border=`1px solid ${ok?'rgba(0,229,160,.25)':'rgba(255,87,87,.2)'}`;
+  fb.innerHTML=`<strong style="color:${ok?'var(--grn)':'var(--red)'}">${ok?'✓ Correct!':'✗ Incorrect'}</strong> ${q.exp}`;
+  const nb=document.getElementById('q-nxt');if(nb)nb.style.display='';
+}
+function nextQ(){quizIdx++;renderQ()}
+function showScore(){
+  const pct=Math.round((quizScore/quizData.length)*100);
+  const grade=pct>=90?'A*':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=50?'D':'Below pass';
+  const emoji=pct>=90?'🏆':pct>=70?'🌟':pct>=50?'👍':'📚';
+  document.getElementById('quiz-area').innerHTML=`<div class="qqc" style="text-align:center;padding:36px 20px">
+    <div style="font-size:56px;margin-bottom:16px">${emoji}</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:8px">${pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good effort!':'Keep practising!'}</div>
+    <div style="font-size:14px;color:var(--t2);margin-bottom:6px">Score: <strong style="color:var(--ac);font-size:18px">${quizScore}/${quizData.length}</strong> (${pct}%)</div>
+    <div style="display:inline-block;background:rgba(76,127,255,.1);border:1px solid rgba(76,127,255,.25);color:var(--ac3);padding:7px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:24px">Grade: ${grade}</div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="act-btn" onclick="resetQuiz()">New quiz</button>
+      <button class="tbtn" onclick="genQuiz()" style="padding:11px 18px">Retry topic</button>
+      <button class="tbtn" onclick="goV('tutor',document.getElementById('ni-t'))" style="padding:11px 18px">Ask AI Tutor</button>
+    </div></div>`;
+  US.scores=US.scores||[];US.scores.push(pct);if(US.scores.length>20)US.scores.shift();saveSt();
+}
+
+// ============ FLASHCARDS ============
+async function genCards(){
+  const subj=document.getElementById('fc-s').value,top=(document.getElementById('fc-t').value||'').trim()||document.getElementById('fc-s').value,lvl=document.getElementById('fc-l').value;
+  showLoad('Generating '+top+' flashcards...');
+  const sys=`You are an expert ${lvl} ${subj} teacher. Create exactly 10 premium revision flashcards on: "${top}" for ${lvl} students. Cover the most important exam concepts. Use exam-ready language. Include memory hooks where helpful.\nReturn ONLY valid JSON. No markdown:\n[{"front":"Question or key term?","back":"Complete answer with exam terminology"}]`;
+  try{
+    const raw=await aiCall(sys,'Generate flashcards. Return ONLY the JSON array.');hideLoad();
+    const s=raw.indexOf('['),e=raw.lastIndexOf(']');if(s<0||e<0)throw new Error('No JSON');
+    fcCards=JSON.parse(raw.substring(s,e+1));if(!fcCards.length)throw new Error('Empty');
+    fcIdx=0;fcKnow=0;fcUnsure=0;document.getElementById('fc-hint').textContent='Click card to reveal answer';
+    renderCard();toast('10 flashcards ready! Click to flip 👆','success');logAct('flashcards');
+  }catch(e){hideLoad();toast('Could not generate flashcards. Try again.','error');console.error(e)}
+}
+function renderCard(){
+  if(!fcCards.length)return;const c=fcCards[fcIdx];
+  document.getElementById('fc-front').textContent=c.front;document.getElementById('fc-back').textContent=c.back;
+  document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-ctr').textContent=`${fcIdx+1} / ${fcCards.length}`;
+  document.getElementById('fc-pf').style.width=((fcIdx/fcCards.length)*100)+'%';
+  document.getElementById('fc-stat').textContent=`✓ Know: ${fcKnow}  ·  🤔 Not sure: ${fcUnsure}  ·  Left: ${fcCards.length-fcIdx-1}`;
+}
+function flipCard(){document.getElementById('fc-card').classList.toggle('flipped')}
+function nextCard(){if(fcIdx<fcCards.length-1){fcIdx++;renderCard()}else toast('End of deck! Great work 🎉','success')}
+function prevCard(){if(fcIdx>0){fcIdx--;renderCard()}}
+function rateCard(t){if(!fcCards.length)return;if(t==='know'){fcKnow++;US.cards=(US.cards||0)+1;saveSt()}else fcUnsure++;nextCard()}
+
+// ============ ESSAY ============
+async function essayDo(action){
+  const q=(document.getElementById('es-q').value||'').trim();const txt=(document.getElementById('es-txt').value||'').trim();const lvl=document.getElementById('es-l').value;
+  const res=document.getElementById('es-res');
+  if(!txt&&['feedback','improve','grade'].includes(action)){toast('Please paste your essay text first','error');return}
+  if(!q&&['plan','grade','points'].includes(action)){toast('Please enter your essay title first','error');return}
+  ['eb1','eb2','eb3','eb4','eb5'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
+  res.style.display='block';res.textContent='Analysing...';res.style.color='var(--t2)';showLoad('Analysing your essay...');
+  const sys={
+    feedback:`You are a senior ${lvl} examiner. Structured feedback: OVERALL IMPRESSION / STRENGTHS ✓ (3+ specific with examples from essay) / ARGUMENT & ANALYSIS / STRUCTURE / EVIDENCE / LANGUAGE / MISSING FOR TOP MARKS / PREDICTED GRADE (GCSE:1-9 A-Level:A*-E with justification) / TOP 3 IMPROVEMENTS. Quote the essay. Be specific and constructive.`,
+    plan:`You are a ${lvl} essay expert. Create: INTRODUCTION (hook, context, full thesis statement in quotes) / PARAGRAPHS 1-4 (topic sentence written out fully, key argument, specific evidence to use, analysis approach, link back to question) / CONCLUSION (synthesis approach, final judgement) / KEY TERMINOLOGY (10 terms) / PITFALLS TO AVOID (5 specific).`,
+    improve:`You are a ${lvl} writing expert. Analyse the intro (what works, what's weak). Write an IMPROVED VERSION with compelling hook, clear context, precise arguable thesis, signposting, sophisticated vocabulary. Explain WHAT you changed and WHY for each change so the student learns.`,
+    grade:`You are a ${lvl} chief examiner. Give: GRADE PREDICTION with confidence level / WHAT'S EARNING MARKS ✓ / WHAT'S LOSING MARKS ✗ / GAP TO NEXT GRADE (3 concrete specific changes needed) / EXAMINER PERSPECTIVE (insider knowledge most students miss).`,
+    points:`You are a ${lvl} subject expert. Give: ESSENTIAL ARGUMENTS (by paragraph, specific) / KEY QUOTES & EVIDENCE (6+) / CRITICAL TERMINOLOGY (12-15 with definitions) / STRONGEST ARGUMENTS (for and against) / WHAT TOP ANSWERS DO DIFFERENTLY / COMMON MISTAKES (6 specific).`
+  };
+  try{
+    const um=['plan','points'].includes(action)?`Essay title: "${q}"`: `Essay title: "${q}"\n\nEssay:\n${txt}`;
+    const r=await aiCall(sys[action],um);hideLoad();res.style.color='var(--txt)';
+    res.innerHTML=r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>').replace(/✓/g,'<span style="color:var(--grn)">✓</span>').replace(/✗/g,'<span style="color:var(--red)">✗</span>');
+    logAct('essay');
+  }catch(e){hideLoad();res.textContent='Error. Please try again.';res.style.color='var(--red)'}
+  ['eb1','eb2','eb3','eb4','eb5'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=false});
+}
+
+// ============ HOMEWORK ============
+async function solveHW(){
+  const q=(document.getElementById('hw-q').value||'').trim();if(!q){toast('Please type your question first','error');return}
+  const res=document.getElementById('hw-res');const steps=document.getElementById('hw-steps');
+  res.style.display='block';document.getElementById('hw-title').textContent=q.length>60?q.substring(0,60)+'...':q;
+  steps.innerHTML='<div style="color:var(--t2);font-size:12px">Solving step by step...</div>';showLoad('Solving your homework...');
+  try{
+    const r=await aiCall(`You are UltraVision AI solving homework for UK GCSE/A-Level students. Goal: genuine understanding.\nFORMAT:\nUNDERSTAND THE PROBLEM\nWhat we need, what we have, what method.\n1. [Step title]\nWhat you're doing and WHY. Show all working. Note formulas.\n2. [Next step]...\nFINAL ANSWER:\nComplete answer with units.\nPRACTICE QUESTIONS:\n2 similar questions to try independently.\nFor Maths/Science show ALL working. For English/Humanities give structured analysis. Always explain WHY.`,q);
+    hideLoad();
+    steps.innerHTML=r.split('\n').filter(l=>l.trim()).map(l=>{
+      const t=l.trim();
+      if(/^FINAL ANSWER/i.test(t))return`<div style="margin-top:12px;padding:13px 16px;background:rgba(76,127,255,.1);border:1px solid rgba(76,127,255,.3);border-radius:11px;font-size:13px;color:var(--ac3);font-weight:600">${l}</div>`;
+      if(/^PRACTICE QUESTIONS/i.test(t)||/^UNDERSTAND/i.test(t))return`<div style="margin-top:12px;padding:10px 14px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.18);border-radius:10px;font-size:12px;color:var(--grn);font-weight:700">${l}</div>`;
+      if(/^\d+[\.\):]/.test(t)){const n=t.match(/^\d+/)[0];const tx=t.replace(/^\d+[\.\):\s]+/,'');return`<div class="hw-step"><div class="sn">${n}</div><div class="st"><strong>${tx}</strong></div></div>`}
+      return`<div style="font-size:12px;color:var(--t2);line-height:1.65;padding:2px 0 2px 36px">${l}</div>`;
+    }).join('');
+    logAct('homework');
+  }catch(e){hideLoad();steps.innerHTML='<div style="color:var(--red);font-size:12px">Error. Please try again.</div>'}
+}
+
+// ============ PAST PAPERS ============
+function openPaper(name,subj){
+  document.getElementById('chat-ta').value=`Help me prepare for the ${name}. What are the key topics to revise, what types of questions come up, and what do I need for a top grade?`;
+  goV('tutor',document.getElementById('ni-t'));
+  toast('AI Tutor ready to help with '+name+'!','success');
+}
+</script>
+</body></html>
