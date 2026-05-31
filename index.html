@@ -1120,7 +1120,7 @@ let CU=null,US={sessions:0,scores:[],cards:0,streak:1};
 let chatH=[],tMode='tutor',chatBusy=false;
 let qData=[],qIdx=0,qScore=0,qAns=false;
 let fcCards=[],fcIdx=0,fcKnow=0,fcUnsure=0;
-let acts=[],admUsers=[],selLevel='',selTier='',selBoard='';
+let acts=[],admUsers=[],selLevel='',selTier='',selBoardVal='';
 let recog=null,isRec=false,voiceTxt='';
 let currentLang='en',pendingEmail='',pendingCode='',pendingReset={};
 
@@ -1178,7 +1178,7 @@ function vEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
 
 // ── ONBOARDING ──
 function selOpt(el,type,val){const p=el.parentElement;p.querySelectorAll('.obn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');if(type==='level'){selLevel=val;const t=document.getElementById('gcse-tier');if(t)t.classList.toggle('hidden',val!=='gcse')}if(type==='tier')selTier=val}
-function selBoard(el,board){document.querySelectorAll('#board-opts .bopt').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selBoard=board}
+function selBoard(el,board){document.querySelectorAll('#board-opts .bopt').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selBoardVal=board}
 function goStep2(){const fn=(document.getElementById('su-fn').value||'').trim(),em=(document.getElementById('su-em').value||'').trim().toLowerCase(),pw=document.getElementById('su-pw').value||'';document.getElementById('su-em').classList.remove('inv');document.getElementById('su-em-e').style.display='none';document.getElementById('su-dup-e').style.display='none';if(!fn){toast('Please enter your first name','error');return}if(!vEmail(em)){document.getElementById('su-em').classList.add('inv');document.getElementById('su-em-e').style.display='block';return}if(DB.findUser(em)){document.getElementById('su-em').classList.add('inv');document.getElementById('su-dup-e').style.display='block';return}if(pw.length<8){toast('Password must be at least 8 characters','error');return}goStep(2)}
 function goStep3(){if(!selLevel){toast('Please select your study level','error');return}goStep(3)}
 function goStep(n){['step1','step2','step3'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden')});const el=document.getElementById('step'+n);if(el)el.classList.remove('hidden')}
@@ -1188,7 +1188,7 @@ function doSignup(){
   const fn=(document.getElementById('su-fn').value||'').trim(),ln=(document.getElementById('su-ln').value||'').trim(),em=(document.getElementById('su-em').value||'').trim().toLowerCase(),pw=document.getElementById('su-pw').value||'';
   if(!document.getElementById('su-tc').checked){toast('Please accept the Terms of Service','error');return}
   const btn=document.getElementById('su-btn');btn.disabled=true;btn.textContent='Creating account...';
-  const nu={firstName:fn,lastName:ln,name:fn+(ln?' '+ln:''),email:em,pw:enc(pw),joinedAt:new Date().toISOString(),lastActive:new Date().toISOString(),sessions:0,banned:false,verified:false,level:selLevel,tier:selTier,board:selBoard,school:(document.getElementById('su-school').value||'').trim(),country:(document.getElementById('su-country').value||'').trim(),subjects:(document.getElementById('su-subjects').value||'').trim()};
+  const nu={firstName:fn,lastName:ln,name:fn+(ln?' '+ln:''),email:em,pw:enc(pw),joinedAt:new Date().toISOString(),lastActive:new Date().toISOString(),sessions:0,banned:false,verified:false,level:selLevel,tier:selTier,board:selBoardVal,school:(document.getElementById('su-school').value||'').trim(),country:(document.getElementById('su-country').value||'').trim(),subjects:(document.getElementById('su-subjects').value||'').trim()};
   const users=DB.getUsers();users.push(nu);DB.saveUsers(users);CU=nu;
   const code=String(Math.floor(100000+Math.random()*900000));
   pendingEmail=em;pendingCode=code;
