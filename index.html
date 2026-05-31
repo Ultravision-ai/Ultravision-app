@@ -1085,544 +1085,901 @@ html,body{height:100%;font-family:'Outfit',sans-serif;background:var(--bg);color
 <div id="toast"></div>
 <div id="aiol"><div class="spin"></div><div class="aimt" id="ai-msg">UltraVision AI is thinking...</div></div>
 <script>
+
 const ADMIN='admin-ultravisionai@proton.me';
-// ── FULL TRANSLATIONS ──
+
 const LANGS={
-en:{dir:'ltr',badge:"The World's Best Free AI Study Platform",hero:'Study smarter. Achieve extraordinary results.',sub:'9 powerful AI tools. Every exam board. Any language. Free forever.',start:'Get started free →',signin:'Sign in',fn:'First name',ln:'Last name',email:'Email address',pw:'Password',signinbtn:'Sign in to UltraVision AI',verifytitle:'Check your email',verifysub:'We sent a 6-digit code to:',verifyhint:'Enter the code below. Check spam if not received.',resend:'Resend code',resettitle:'Reset your password',stud:'Students',free:'Forever',tools:'AI Tools',countries:'Countries'},
-ar:{dir:'rtl',badge:'أفضل منصة دراسة ذكاء اصطناعي مجانية في العالم',hero:'ادرس بذكاء. حقّق نتائج استثنائية.',sub:'9 أدوات ذكاء اصطناعي. كل لجان الامتحانات. أي لغة. مجاناً للأبد.',start:'ابدأ مجاناً ←',signin:'تسجيل الدخول',fn:'الاسم الأول',ln:'اسم العائلة',email:'البريد الإلكتروني',pw:'كلمة المرور',signinbtn:'تسجيل الدخول إلى UltraVision AI',verifytitle:'تحقق من بريدك الإلكتروني',verifysub:'أرسلنا رمزاً مكوناً من 6 أرقام إلى:',verifyhint:'أدخل الرمز أدناه. تحقق من البريد العشوائي.',resend:'إعادة إرسال الرمز',resettitle:'إعادة تعيين كلمة المرور',stud:'طالب',free:'مجاني',tools:'أدوات',countries:'دولة'},
-fr:{dir:'ltr',badge:"La meilleure plateforme d'IA scolaire gratuite",hero:"Étudiez mieux. Obtenez des résultats extraordinaires.",sub:'9 outils IA. Tous les examens. Toutes les langues. Gratuit pour toujours.',start:'Commencer gratuitement →',signin:'Se connecter',fn:'Prénom',ln:'Nom',email:'Adresse e-mail',pw:'Mot de passe',signinbtn:'Se connecter à UltraVision AI',verifytitle:'Vérifiez votre e-mail',verifysub:'Nous avons envoyé un code à 6 chiffres à:',verifyhint:'Entrez le code ci-dessous. Vérifiez les spams.',resend:'Renvoyer le code',resettitle:'Réinitialiser votre mot de passe',stud:'Étudiants',free:'Gratuit',tools:'Outils IA',countries:'Pays'},
-es:{dir:'ltr',badge:'La mejor plataforma de estudio con IA del mundo',hero:'Estudia más inteligente. Logra resultados extraordinarios.',sub:'9 herramientas de IA. Todos los exámenes. Cualquier idioma. Gratis para siempre.',start:'Comenzar gratis →',signin:'Iniciar sesión',fn:'Nombre',ln:'Apellido',email:'Correo electrónico',pw:'Contraseña',signinbtn:'Iniciar sesión en UltraVision AI',verifytitle:'Verifica tu correo',verifysub:'Enviamos un código de 6 dígitos a:',verifyhint:'Introduce el código abajo. Revisa el spam.',resend:'Reenviar código',resettitle:'Restablecer contraseña',stud:'Estudiantes',free:'Gratis',tools:'Herramientas IA',countries:'Países'},
-de:{dir:'ltr',badge:'Die beste kostenlose KI-Lernplattform der Welt',hero:'Lerne intelligenter. Erziele außergewöhnliche Ergebnisse.',sub:'9 KI-Tools. Alle Prüfungen. Jede Sprache. Kostenlos für immer.',start:'Kostenlos starten →',signin:'Anmelden',fn:'Vorname',ln:'Nachname',email:'E-Mail-Adresse',pw:'Passwort',signinbtn:'Bei UltraVision AI anmelden',verifytitle:'E-Mail verifizieren',verifysub:'Wir haben einen 6-stelligen Code gesendet an:',verifyhint:'Gib den Code unten ein.',resend:'Code erneut senden',resettitle:'Passwort zurücksetzen',stud:'Schüler',free:'Kostenlos',tools:'KI-Tools',countries:'Länder'},
-zh:{dir:'ltr',badge:'全球最好的免费AI学习平台',hero:'聰明学习，取得非凡成绩。',sub:'9大AI工具。覆盖所有考试。支持任何语言。永久免费。',start:'免费开始 →',signin:'登录',fn:'名',ln:'姓',email:'电子邮件地址',pw:'密码',signinbtn:'登录 UltraVision AI',verifytitle:'验证您的邮筱',verifysub:'我们发送了一个6位验证码至:',verifyhint:'在下方输入验证码。如未收到请检查垃圾邮件。',resend:'重新发送验证码',resettitle:'重置密码',stud:'学生',free:'永久免费',tools:'AI工具',countries:'国家'},
-hi:{dir:'ltr',badge:'दुनिया का सबसे अच्छा मुफ़्त AI अध्ययन मंच',hero:'स्मार्ट तरीके से पढ़ें। असाधारण परिणाम पाएं।',sub:'9 शक्तिशाली AI उपकरण। हर परीक्षा। कोई भी भाषा। हमेशा मुफ़्त।',start:'मुफ़्त शुरू करें →',signin:'साइन इन',fn:'पहला नाम',ln:'अंतिम नाम',email:'ईमेल पता',pw:'पासवर्ड',signinbtn:'UltraVision AI में साइन इन करें',verifytitle:'अपना ईमेल सत्यापित करें',verifysub:'हमने 6-अंकीय कोड भेजा:',verifyhint:'नीचे कोड दर्ज करें। स्पैम फ़ोल्डर जांचें।',resend:'कोड पुनः भेजें',resettitle:'पासवर्ड रीसेट करें',stud:'छात्र',free:'मुफ़्त',tools:'AI उपकरण',countries:'देश'},
-pt:{dir:'ltr',badge:'A melhor plataforma de estudo com IA do mundo',hero:'Estude de forma mais inteligente. Obtenha resultados extraordinários.',sub:'9 ferramentas de IA. Todos os exames. Qualquer idioma. Gratuito para sempre.',start:'Começar grátis →',signin:'Entrar',fn:'Primeiro nome',ln:'Sobrenome',email:'Endereço de e-mail',pw:'Senha',signinbtn:'Entrar no UltraVision AI',verifytitle:'Verifique seu e-mail',verifysub:'Enviamos um código de 6 dígitos para:',verifyhint:'Digite o código abaixo. Verifique o spam.',resend:'Reenviar código',resettitle:'Redefinir senha',stud:'Estudantes',free:'Grátis',tools:'Ferramentas IA',countries:'Países'},
-ja:{dir:'ltr',badge:'世界最高の無料AI学習プラットフォーム',hero:'賢く学ぼう。素晴らしい結果を達成しよう。',sub:'9つのAIツール。あらゆる試験。あらゆる言語。永久無料。',start:'無料で始める →',signin:'サインイン',fn:'名前',ln:'姓',email:'メールアドレス',pw:'パスワード',signinbtn:'UltraVision AIにサインイン',verifytitle:'メールを確認してください',verifysub:'6桁のコードを送信しました:',verifyhint:'下にコードを入力してください。スパムフォルダも確認してください。',resend:'コードを再送信',resettitle:'パスワードをリセット',stud:'学生',free:'永久無料',tools:'AIツール',countries:'国'},
-tr:{dir:'ltr',badge:'Dünyanın en iyi ücretsiz AI çalışma platformu',hero:'Daha akıllı çalış. Olağüstü sonuçlar elde et.',sub:'9 güçlü AI aracı. Her sınav kurulu. Her dil. Sonsuza kadar ücretsiz.',start:'Ücretsiz başla →',signin:'Giriş yap',fn:'Ad',ln:'Soyad',email:'E-posta adresi',pw:'Şifre',signinbtn:"UltraVision AI'e giriş yap",verifytitle:'E-postanızı doğrulayın',verifysub:'6 haneli bir kod gönderdik:',verifyhint:'Kodu aşağıya girin. Spam klasörünü kontrol edin.',resend:'Kodu yeniden gönder',resettitle:'Şifrenizi sıfırlayın',stud:'Öğrenci',free:'Ücretsiz',tools:'AI Araçları',countries:'Ülke'}
+en:{dir:'ltr',badge:"The World's Best Free AI Study Platform",hero:'Study smarter. Achieve extraordinary results.',sub:'9 powerful AI tools. Every exam board. Any language. Free forever.',start:'Get started free \u2192',signin:'Sign in',fn:'First name',ln:'Last name',email:'Email address',pw:'Password',signinbtn:'Sign in to UltraVision AI',stud:'Students',free:'Forever',tools:'AI Tools',countries:'Countries'},
+ar:{dir:'rtl',badge:'\u0623\u0641\u0636\u0644 \u0645\u0646\u0635\u0629 \u062f\u0631\u0627\u0633\u0629 \u0630\u0643\u0627\u0621 \u0627\u0635\u0637\u0646\u0627\u0639\u064a \u0645\u062c\u0627\u0646\u064a\u0629 \u0641\u064a \u0627\u0644\u0639\u0627\u0644\u0645',hero:'\u0627\u062f\u0631\u0633 \u0628\u0630\u0643\u0627\u0621. \u062d\u0642\u0651\u0642 \u0646\u062a\u0627\u0626\u062c \u0627\u0633\u062a\u062b\u0646\u0627\u0626\u064a\u0629.',sub:'9 \u0623\u062f\u0648\u0627\u062a \u0630\u0643\u0627\u0621 \u0627\u0635\u0637\u0646\u0627\u0639\u064a. \u0643\u0644 \u0644\u062c\u0627\u0646 \u0627\u0644\u0627\u0645\u062a\u062d\u0627\u0646\u0627\u062a. \u0623\u064a \u0644\u063a\u0629. \u0645\u062c\u0627\u0646\u0627\u064b \u0644\u0644\u0623\u0628\u062f.',start:'\u0627\u0628\u062f\u0623 \u0645\u062c\u0627\u0646\u0627\u064b \u2190',signin:'\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644',fn:'\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0623\u0648\u0644',ln:'\u0627\u0633\u0645 \u0627\u0644\u0639\u0627\u0626\u0644\u0629',email:'\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a',pw:'\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631',signinbtn:'\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0625\u0644\u0649 UltraVision AI',stud:'\u0637\u0627\u0644\u0628',free:'\u0645\u062c\u0627\u0646\u064a',tools:'\u0623\u062f\u0648\u0627\u062a',countries:'\u062f\u0648\u0644\u0629'},
+fr:{dir:'ltr',badge:"La meilleure plateforme d'IA scolaire gratuite",hero:'\xc9tudiez mieux. Obtenez des r\xe9sultats extraordinaires.',sub:'9 outils IA puissants. Tous les examens. Toutes les langues. Gratuit pour toujours.',start:'Commencer gratuitement \u2192',signin:'Se connecter',fn:'Pr\xe9nom',ln:'Nom',email:'Adresse e-mail',pw:'Mot de passe',signinbtn:'Se connecter \xe0 UltraVision AI',stud:'\xc9tudiants',free:'Gratuit',tools:'Outils IA',countries:'Pays'},
+es:{dir:'ltr',badge:'La mejor plataforma de estudio con IA del mundo',hero:'Estudia m\xe1s inteligente. Logra resultados extraordinarios.',sub:'9 herramientas de IA. Todos los ex\xe1menes. Cualquier idioma. Gratis para siempre.',start:'Comenzar gratis \u2192',signin:'Iniciar sesi\xf3n',fn:'Nombre',ln:'Apellido',email:'Correo electr\xf3nico',pw:'Contrase\xf1a',signinbtn:'Iniciar sesi\xf3n en UltraVision AI',stud:'Estudiantes',free:'Gratis',tools:'Herramientas IA',countries:'Pa\xedses'},
+de:{dir:'ltr',badge:'Die beste kostenlose KI-Lernplattform der Welt',hero:'Lerne intelligenter. Erziele au\xdfgew\xf6hnliche Ergebnisse.',sub:'9 KI-Tools. Alle Pr\xfcfungen. Jede Sprache. Kostenlos f\xfcr immer.',start:'Kostenlos starten \u2192',signin:'Anmelden',fn:'Vorname',ln:'Nachname',email:'E-Mail-Adresse',pw:'Passwort',signinbtn:'Bei UltraVision AI anmelden',stud:'Sch\xfcler',free:'Kostenlos',tools:'KI-Tools',countries:'L\xe4nder'},
+zh:{dir:'ltr',badge:'\u5168\u7403\u6700\u597d\u7684\u514d\u8d39AI\u5b66\u4e60\u5e73\u53f0',hero:'\u8070\u660e\u5b66\u4e60\uff0c\u53d6\u5f97\u975e\u51e1\u6210\u7ee9\u3002',sub:'9\u5927AI\u5de5\u5177\u3002\u8986\u76d6\u6240\u6709\u8003\u8bd5\u3002\u652f\u6301\u4efb\u4f55\u8bed\u8a00\u3002\u6c38\u4e45\u514d\u8d39\u3002',start:'\u514d\u8d39\u5f00\u59cb \u2192',signin:'\u767b\u5f55',fn:'\u540d',ln:'\u59d3',email:'\u7535\u5b50\u90ae\u4ef6\u5730\u5740',pw:'\u5bc6\u7801',signinbtn:'\u767b\u5f55 UltraVision AI',stud:'\u5b66\u751f',free:'\u6c38\u4e45\u514d\u8d39',tools:'AI\u5de5\u5177',countries:'\u56fd\u5bb6'},
+hi:{dir:'ltr',badge:'\u0926\u0941\u0928\u093f\u092f\u093e \u0915\u093e \u0938\u092c\u0938\u0947 \u0905\u091a\u094d\u091b\u093e \u092e\u0941\u092b\u093c\u094d\u0924 AI \u0905\u0927\u094d\u092f\u092f\u0928 \u092e\u0902\u091a',hero:'\u0938\u094d\u092e\u093e\u0930\u094d\u091f \u0924\u0930\u0940\u0915\u0947 \u0938\u0947 \u092a\u0922\u093c\u0947\u0902\u0964 \u0905\u0938\u093e\u0927\u093e\u0930\u0923 \u092a\u0930\u093f\u0923\u093e\u092e \u092a\u093e\u090f\u0902\u0964',sub:'9 AI \u0909\u092a\u0915\u0930\u0923\u0964 \u0939\u0930 \u092a\u0930\u0940\u0915\u094d\u0937\u093e\u0964 \u0915\u094b\u0908 \u092d\u0940 \u092d\u093e\u0937\u093e\u0964 \u0939\u092e\u0947\u0936\u093e \u092e\u0941\u092b\u093c\u094d\u0924\u0964',start:'\u092e\u0941\u092b\u093c\u094d\u0924 \u0936\u0941\u0930\u0942 \u0915\u0930\u0947\u0902 \u2192',signin:'\u0938\u093e\u0907\u0928 \u0907\u0928',fn:'\u092a\u0939\u0932\u093e \u0928\u093e\u092e',ln:'\u0905\u0902\u0924\u093f\u092e \u0928\u093e\u092e',email:'\u0908\u092e\u0947\u0932 \u092a\u0924\u093e',pw:'\u092a\u093e\u0938\u0935\u0930\u094d\u0921',signinbtn:'UltraVision AI \u092e\u0947\u0902 \u0938\u093e\u0907\u0928 \u0907\u0928 \u0915\u0930\u0947\u0902',stud:'\u091b\u093e\u0924\u094d\u0930',free:'\u092e\u0941\u092b\u093c\u094d\u0924',tools:'AI \u0909\u092a\u0915\u0930\u0923',countries:'\u0926\u0947\u0936'},
+pt:{dir:'ltr',badge:'A melhor plataforma de estudo com IA do mundo',hero:'Estude de forma mais inteligente. Obtenha resultados extraordin\xe1rios.',sub:'9 ferramentas de IA. Todos os exames. Qualquer idioma. Gratuito para sempre.',start:'Come\xe7ar gr\xe1tis \u2192',signin:'Entrar',fn:'Primeiro nome',ln:'Sobrenome',email:'Endere\xe7o de e-mail',pw:'Senha',signinbtn:'Entrar no UltraVision AI',stud:'Estudantes',free:'Gr\xe1tis',tools:'Ferramentas IA',countries:'Pa\xedses'},
+ja:{dir:'ltr',badge:'\u4e16\u754c\u6700\u9ad8\u306e\u7121\u6599AI\u5b66\u7fd2\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0',hero:'\u8ce2\u304f\u5b66\u307c\u3046\u3002\u7d20\u6674\u3089\u3057\u3044\u7d50\u679c\u3092\u9054\u6210\u3057\u3088\u3046\u3002',sub:'9\u3064\u306eAI\u30c4\u30fc\u30eb\u3002\u3042\u3089\u3086\u308b\u8a66\u9a13\u3002\u3042\u3089\u3086\u308b\u8a00\u8a9e\u3002\u6c38\u4e45\u7121\u6599\u3002',start:'\u7121\u6599\u3067\u59cb\u3081\u308b \u2192',signin:'\u30b5\u30a4\u30f3\u30a4\u30f3',fn:'\u540d\u524d',ln:'\u59d3',email:'\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9',pw:'\u30d1\u30b9\u30ef\u30fc\u30c9',signinbtn:'UltraVision AI\u306b\u30b5\u30a4\u30f3\u30a4\u30f3',stud:'\u5b66\u751f',free:'\u6c38\u4e45\u7121\u6599',tools:'AI\u30c4\u30fc\u30eb',countries:'\u56fd'},
+tr:{dir:'ltr',badge:'D\xfcnyan\u0131n en iyi \xfccretsiz AI \xe7al\u0131\u015fma platformu',hero:'Daha ak\u0131ll\u0131 \xe7al\u0131\u015f. Ola\u011f\xfcst\xfc sonu\xe7lar elde et.',sub:'9 g\xfc\xe7l\xfc AI arac\u0131. Her s\u0131nav kurulu. Her dil. Sonsuza kadar \xfccretsiz.',start:'\xdccretsiz ba\u015fla \u2192',signin:'Giri\u015f yap',fn:'Ad',ln:'Soyad',email:'E-posta adresi',pw:'\u015eifre',signinbtn:"UltraVision AI'e giri\u015f yap",stud:'\xd6\u011frenci',free:'\xdccretsiz',tools:'AI Ara\xe7lar\u0131',countries:'\xdclke'}
 };
 
-// ── DATABASE ──
 const DB={
-  getUsers:()=>{try{return JSON.parse(localStorage.getItem('uv6_users')||'[]')}catch(e){return[]}},
-  saveUsers:u=>localStorage.setItem('uv6_users',JSON.stringify(u)),
+  getUsers:()=>{try{return JSON.parse(localStorage.getItem('uv7_users')||'[]')}catch(e){return[]}},
+  saveUsers:u=>localStorage.setItem('uv7_users',JSON.stringify(u)),
   findUser:e=>DB.getUsers().find(u=>u.email.toLowerCase()===e.toLowerCase()),
-  getSess:()=>{try{return JSON.parse(localStorage.getItem('uv6_sess')||'null')}catch(e){return null}},
-  saveSess:u=>localStorage.setItem('uv6_sess',JSON.stringify(u)),
-  clearSess:()=>localStorage.removeItem('uv6_sess'),
-  getStat:e=>{try{return JSON.parse(localStorage.getItem('uv6_st_'+e)||'{"sessions":0,"scores":[],"cards":0,"streak":1}')}catch(e){return{sessions:0,scores:[],cards:0,streak:1}}},
-  saveStat:(e,s)=>localStorage.setItem('uv6_st_'+e,JSON.stringify(s))
+  getSess:()=>{try{return JSON.parse(localStorage.getItem('uv7_sess')||'null')}catch(e){return null}},
+  saveSess:u=>localStorage.setItem('uv7_sess',JSON.stringify(u)),
+  clearSess:()=>localStorage.removeItem('uv7_sess'),
+  getStat:e=>{try{return JSON.parse(localStorage.getItem('uv7_st_'+e)||'{"sessions":0,"scores":[],"cards":0,"streak":1}')}catch(e){return{sessions:0,scores:[],cards:0,streak:1}}},
+  saveStat:(e,s)=>localStorage.setItem('uv7_st_'+e,JSON.stringify(s))
 };
-const isAdmin=e=>e&&e.toLowerCase()===ADMIN.toLowerCase();
-const enc=p=>{try{return btoa(unescape(encodeURIComponent(p)))}catch(e){return btoa(p)}};
-const dec=h=>{try{return decodeURIComponent(escape(atob(h)))}catch(e){try{return atob(h)}catch(e2){return ''}}};
 
-// ── STATE ──
-let CU=null,US={sessions:0,scores:[],cards:0,streak:1};
-let chatH=[],tMode='tutor',chatBusy=false;
-let qData=[],qIdx=0,qScore=0,qAns=false;
-let fcCards=[],fcIdx=0,fcKnow=0,fcUnsure=0;
-let acts=[],admUsers=[],selLevel='',selTier='',selBoardVal='';
-let recog=null,isRec=false,voiceTxt='';
-let currentLang='en',pendingEmail='',pendingCode='',pendingReset={};
+const isAdmin = e => e && e.toLowerCase() === ADMIN.toLowerCase();
+const encPw = p => { try { return btoa(unescape(encodeURIComponent(p))); } catch(e) { return btoa(p); } };
+const decPw = h => { try { return decodeURIComponent(escape(atob(h))); } catch(e) { try { return atob(h); } catch(e2) { return ''; } } };
 
-// ── LANGUAGE (actually translates the page) ──
-function applyLang(lang){
-  const L=LANGS[lang]||LANGS.en;
-  currentLang=lang;
-  document.documentElement.setAttribute('lang',lang);
-  document.documentElement.setAttribute('dir',L.dir);
-  // Apply all translations by element ID
-  const map={
-    'hero-badge':'badge','hero-h1':'hero','hero-sub-text':'sub',
-    'hero-btn1':'start','hero-btn2':'signin',
-    'nav-signin-btn':'signin','nav-start-btn':'start',
-    'su-fn-lbl':'fn','su-ln-lbl':'ln','su-em-lbl':'email','su-pw-lbl':'pw',
-    'li-em-lbl':'email','li-pw-lbl':'pw','li-btn':'signinbtn',
-    'verify-title':'verifytitle','verify-sub':'verifysub',
-    'verify-hint':'verifyhint','verify-resend-btn':'resend',
-    'sc-stud-lbl':'stud','sc-free-lbl':'free','sc-tools-lbl':'tools','sc-count-lbl':'countries'
+let CU = null;
+let US = {sessions:0, scores:[], cards:0, streak:1};
+let chatH = [], tutorMode = 'tutor', chatBusy = false;
+let qData = [], qIdx = 0, qScore = 0, qAnswered = false;
+let fcCards = [], fcIdx = 0, fcKnow = 0, fcUnsure = 0;
+let recentActs = [], admUsers = [];
+let selLevel = '', selTier = '', selBoardVal = '';
+let recog = null, isRec = false, voiceTxt = '';
+let currentLang = 'en';
+let pendingEmail = '', pendingCode = '', pendingReset = {};
+
+function applyLang(lang) {
+  const L = LANGS[lang] || LANGS.en;
+  currentLang = lang;
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', L.dir);
+  const map = {
+    'hero-badge': 'badge', 'hero-h1': 'hero', 'hero-sub-text': 'sub',
+    'hero-btn1': 'start', 'hero-btn2': 'signin',
+    'nav-signin-btn': 'signin', 'nav-start-btn': 'start',
+    'su-fn-lbl': 'fn', 'su-ln-lbl': 'ln', 'su-em-lbl': 'email', 'su-pw-lbl': 'pw',
+    'li-em-lbl': 'email', 'li-pw-lbl': 'pw', 'li-btn': 'signinbtn',
+    'sc-stud-lbl': 'stud', 'sc-free-lbl': 'free',
+    'sc-tools-lbl': 'tools', 'sc-count-lbl': 'countries'
   };
-  Object.entries(map).forEach(([id,key])=>{
-    const el=document.getElementById(id);
-    if(el&&L[key])el.textContent=L[key];
+  Object.entries(map).forEach(function(entry) {
+    var el = document.getElementById(entry[0]);
+    if (el && L[entry[1]]) el.textContent = L[entry[1]];
   });
-  // Update placeholders
-  const ph={
-    'su-fn':L.fn,'su-ln':L.ln,'su-em':L.email,'su-pw':L.pw,
-    'li-em':L.email,'li-pw':L.pw
-  };
-  Object.entries(ph).forEach(([id,txt])=>{const el=document.getElementById(id);if(el&&txt)el.placeholder=txt});
-  // Handle RTL layout
-  if(L.dir==='rtl'){
-    document.querySelectorAll('.hbtns,.hpills').forEach(el=>{el.style.justifyContent='flex-end'});
-  }else{
-    document.querySelectorAll('.hbtns,.hpills').forEach(el=>{el.style.justifyContent='flex-start'});
+  var phs = {'li-em': L.email, 'li-pw': L.pw, 'su-fn': L.fn, 'su-ln': L.ln, 'su-em': L.email, 'su-pw': L.pw};
+  Object.entries(phs).forEach(function(entry) {
+    var el = document.getElementById(entry[0]);
+    if (el && entry[1]) el.placeholder = entry[1];
+  });
+  if (L.dir === 'rtl') {
+    document.querySelectorAll('.hbtns, .hpills').forEach(function(el) { el.style.justifyContent = 'flex-end'; });
+  } else {
+    document.querySelectorAll('.hbtns, .hpills').forEach(function(el) { el.style.justifyContent = 'flex-start'; });
   }
 }
-function setLang(lang){
-  if(!LANGS[lang])return;
+
+function setLang(lang) {
+  if (!LANGS[lang]) return;
   applyLang(lang);
-  const names={en:'English',ar:'\u0627\u0644\u0639\u0631\u0628\u064a\u0629',fr:'Fran\u00e7ais',es:'Espa\u00f1ol',de:'Deutsch',zh:'\u4e2d\u6587',hi:'\u0939\u093f\u0902\u0926\u0940',pt:'Portugu\u00eas',ja:'\u65e5\u672c\u8a9e',tr:'T\u00fcrk\u00e7e'};
-  toast('Language updated: '+(names[lang]||lang),'success');
+  var names = {en:'English',ar:'\u0627\u0644\u0639\u0631\u0628\u064a\u0629',fr:'Fran\xe7ais',es:'Espa\xf1ol',de:'Deutsch',zh:'\u4e2d\u6587',hi:'\u0939\u093f\u0902\u0926\u0940',pt:'Portugu\xeas',ja:'\u65e5\u672c\u8a9e',tr:'T\xfcrk\xe7e'};
+  toast('Language: ' + (names[lang] || lang), 'success');
 }
 
-// ── UI HELPERS ──
-function toast(m,t){const el=document.getElementById('toast');const c={success:'#00E8A8',info:'#5585FF',error:'#FF4F6B'};el.textContent=m;el.style.borderColor=c[t]||c.info;el.style.color=c[t]||c.info;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3800)}
-function showLoad(m){document.getElementById('ai-msg').textContent=m||'UltraVision AI is thinking...';document.getElementById('aiol').classList.add('show')}
-function hideLoad(){document.getElementById('aiol').classList.remove('show')}
-function toggleSB(){const sb=document.getElementById('sidebar'),ov=document.getElementById('sovl');sb.classList.toggle('open');ov.classList.toggle('show')}
-function closeSB(){document.getElementById('sidebar')?.classList.remove('open');document.getElementById('sovl')?.classList.remove('show')}
-function showPg(id){document.querySelectorAll('#auth-wrap > div').forEach(el=>el.classList.add('hidden'));const el=document.getElementById('pg-'+id);if(el){el.classList.remove('hidden');window.scrollTo(0,0)}}
-function togglePw(id){const el=document.getElementById(id);if(el)el.type=el.type==='password'?'text':'password'}
-function pwStr(v){const b=document.getElementById('sw-b'),l=document.getElementById('sw-l');if(!b)return;if(!v){b.style.width='0';l.textContent='';return}let s=0;if(v.length>=8)s++;if(/[A-Z]/.test(v))s++;if(/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;const m=[['0','',''],['25%','#FF4F6B','Too short'],['50%','#FFB030','Weak'],['75%','#F5C842','Good'],['100%','#00E8A8','Strong']];b.style.width=m[s][0];b.style.background=m[s][1];l.textContent=m[s][2];l.style.color=m[s][1]}
-function vEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+function toast(msg, type) {
+  var el = document.getElementById('toast');
+  var colors = {success:'#00E8A8', info:'#5585FF', error:'#FF4F6B'};
+  el.textContent = msg;
+  el.style.borderColor = colors[type] || colors.info;
+  el.style.color = colors[type] || colors.info;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 3800);
+}
+function showLoad(m) { document.getElementById('ai-msg').textContent = m || 'UltraVision AI is thinking...'; document.getElementById('aiol').classList.add('show'); }
+function hideLoad() { document.getElementById('aiol').classList.remove('show'); }
+function toggleSB() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sovl').classList.toggle('show'); }
+function closeSB() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sovl').classList.remove('show'); }
 
-// ── ONBOARDING ──
-function selOpt(el,type,val){const p=el.parentElement;p.querySelectorAll('.obn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');if(type==='level'){selLevel=val;const t=document.getElementById('gcse-tier');if(t)t.classList.toggle('hidden',val!=='gcse')}if(type==='tier')selTier=val}
-function selBoard(el,board){document.querySelectorAll('#board-opts .bopt').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selBoardVal=board}
-function goStep2(){const fn=(document.getElementById('su-fn').value||'').trim(),em=(document.getElementById('su-em').value||'').trim().toLowerCase(),pw=document.getElementById('su-pw').value||'';document.getElementById('su-em').classList.remove('inv');document.getElementById('su-em-e').style.display='none';document.getElementById('su-dup-e').style.display='none';if(!fn){toast('Please enter your first name','error');return}if(!vEmail(em)){document.getElementById('su-em').classList.add('inv');document.getElementById('su-em-e').style.display='block';return}if(DB.findUser(em)){document.getElementById('su-em').classList.add('inv');document.getElementById('su-dup-e').style.display='block';return}if(pw.length<8){toast('Password must be at least 8 characters','error');return}goStep(2)}
-function goStep3(){if(!selLevel){toast('Please select your study level','error');return}goStep(3)}
-function goStep(n){['step1','step2','step3'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden')});const el=document.getElementById('step'+n);if(el)el.classList.remove('hidden')}
+function showPg(id) {
+  document.querySelectorAll('#auth-wrap > div').forEach(function(el) { el.classList.add('hidden'); });
+  var el = document.getElementById('pg-' + id);
+  if (el) { el.classList.remove('hidden'); window.scrollTo(0, 0); }
+}
 
-// ── SIGNUP + EMAIL VERIFY ──
-function doSignup(){
-  const fn=(document.getElementById('su-fn').value||'').trim(),ln=(document.getElementById('su-ln').value||'').trim(),em=(document.getElementById('su-em').value||'').trim().toLowerCase(),pw=document.getElementById('su-pw').value||'';
-  if(!document.getElementById('su-tc').checked){toast('Please accept the Terms of Service','error');return}
-  const btn=document.getElementById('su-btn');btn.disabled=true;btn.textContent='Creating account...';
-  const nu={firstName:fn,lastName:ln,name:fn+(ln?' '+ln:''),email:em,pw:enc(pw),joinedAt:new Date().toISOString(),lastActive:new Date().toISOString(),sessions:0,banned:false,verified:false,level:selLevel,tier:selTier,board:selBoardVal,school:(document.getElementById('su-school').value||'').trim(),country:(document.getElementById('su-country').value||'').trim(),subjects:(document.getElementById('su-subjects').value||'').trim()};
-  const users=DB.getUsers();users.push(nu);DB.saveUsers(users);CU=nu;
-  const code=String(Math.floor(100000+Math.random()*900000));
-  pendingEmail=em;pendingCode=code;
-  document.getElementById('verify-email-display').textContent=em;
+function togglePw(id) { var el = document.getElementById(id); if (el) el.type = el.type === 'password' ? 'text' : 'password'; }
+
+function pwStr(v) {
+  var b = document.getElementById('sw-b'), l = document.getElementById('sw-l');
+  if (!b) return;
+  if (!v) { b.style.width = '0'; l.textContent = ''; return; }
+  var s = 0;
+  if (v.length >= 8) s++;
+  if (/[A-Z]/.test(v)) s++;
+  if (/[0-9]/.test(v)) s++;
+  if (/[^A-Za-z0-9]/.test(v)) s++;
+  var m = [['0','',''], ['25%','#FF4F6B','Too short'], ['50%','#FFB030','Weak'], ['75%','#F5C842','Good'], ['100%','#00E8A8','Strong']];
+  b.style.width = m[s][0]; b.style.background = m[s][1]; l.textContent = m[s][2]; l.style.color = m[s][1];
+}
+
+function vEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function selOpt(el, type, val) {
+  el.parentElement.querySelectorAll('.obn').forEach(function(b) { b.classList.remove('sel'); });
+  el.classList.add('sel');
+  if (type === 'level') {
+    selLevel = val;
+    var t = document.getElementById('gcse-tier');
+    if (t) t.classList.toggle('hidden', val !== 'gcse');
+  }
+  if (type === 'tier') selTier = val;
+}
+
+function selBoard(el, board) {
+  document.querySelectorAll('#board-opts .bopt').forEach(function(b) { b.classList.remove('sel'); });
+  el.classList.add('sel');
+  selBoardVal = board;
+}
+
+function goStep(n) {
+  ['step1','step2','step3'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('hidden');
+  });
+  var el = document.getElementById('step' + n);
+  if (el) el.classList.remove('hidden');
+}
+
+function goStep2() {
+  var fn = (document.getElementById('su-fn').value || '').trim();
+  var em = (document.getElementById('su-em').value || '').trim().toLowerCase();
+  var pw = document.getElementById('su-pw').value || '';
+  document.getElementById('su-em').classList.remove('inv');
+  document.getElementById('su-em-e').style.display = 'none';
+  document.getElementById('su-dup-e').style.display = 'none';
+  if (!fn) { toast('Please enter your first name', 'error'); return; }
+  if (!vEmail(em)) { document.getElementById('su-em').classList.add('inv'); document.getElementById('su-em-e').style.display = 'block'; return; }
+  if (DB.findUser(em)) { document.getElementById('su-em').classList.add('inv'); document.getElementById('su-dup-e').style.display = 'block'; return; }
+  if (pw.length < 8) { toast('Password must be at least 8 characters', 'error'); return; }
+  goStep(2);
+}
+
+function goStep3() {
+  if (!selLevel) { toast('Please select your study level', 'error'); return; }
+  goStep(3);
+}
+
+function doSignup() {
+  var fn = (document.getElementById('su-fn').value || '').trim();
+  var ln = (document.getElementById('su-ln').value || '').trim();
+  var em = (document.getElementById('su-em').value || '').trim().toLowerCase();
+  var pw = document.getElementById('su-pw').value || '';
+  if (!document.getElementById('su-tc').checked) { toast('Please accept the Terms of Service', 'error'); return; }
+  var btn = document.getElementById('su-btn');
+  btn.disabled = true; btn.textContent = 'Creating account...';
+  var nu = {
+    firstName: fn, lastName: ln, name: fn + (ln ? ' ' + ln : ''),
+    email: em, pw: encPw(pw),
+    joinedAt: new Date().toISOString(), lastActive: new Date().toISOString(),
+    sessions: 0, banned: false, verified: false,
+    level: selLevel, tier: selTier, board: selBoardVal,
+    school: (document.getElementById('su-school').value || '').trim(),
+    country: (document.getElementById('su-country').value || '').trim(),
+    subjects: (document.getElementById('su-subjects').value || '').trim()
+  };
+  var users = DB.getUsers(); users.push(nu); DB.saveUsers(users); CU = nu;
+  var code = String(Math.floor(100000 + Math.random() * 900000));
+  pendingEmail = em; pendingCode = code;
+  document.getElementById('verify-email-display').textContent = em;
   showPg('verify');
-  // Show code in console since EmailJS requires setup
-  console.log('%c UltraVision AI Verification Code: '+code+' ','font-size:20px;font-weight:bold;background:#5585FF;color:white;padding:12px 20px;border-radius:8px');
-  toast('Code generated — open browser console (F12) to see it','info');
-  btn.disabled=false;btn.textContent='Create free account \uD83D\uDE80';
+  console.log('%c UltraVision AI Verification Code: ' + code + ' ', 'font-size:20px;font-weight:bold;background:#5585FF;color:white;padding:12px 20px;border-radius:8px');
+  toast('Account created! Code in browser console (F12)', 'success');
+  btn.disabled = false; btn.textContent = 'Create free account \uD83D\uDE80';
 }
-// Verify code UX
-function vcKey(el,idx,e){if(e.type==='keyup'){if(el.value.length===1&&idx<5)document.querySelectorAll('.vci')[idx+1]?.focus();if(el.value)el.style.borderColor='rgba(85,133,255,.6)'}else if(e.type==='keydown'&&e.key==='Backspace'&&!el.value&&idx>0)document.querySelectorAll('.vci')[idx-1]?.focus()}
-function vcPaste(e){e.preventDefault();const p=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);const ins=document.querySelectorAll('#pg-verify .vci');p.split('').forEach((c,i)=>{if(ins[i]){ins[i].value=c;ins[i].style.borderColor='rgba(85,133,255,.6)'}});ins[Math.min(p.length,5)]?.focus()}
-function submitCode(){
-  const entered=Array.from(document.querySelectorAll('#pg-verify .vci')).map(i=>i.value).join('');
-  if(entered.length!==6){toast('Please enter all 6 digits','error');return}
-  if(entered===pendingCode){
-    const users=DB.getUsers();const i=users.findIndex(u=>u.email===pendingEmail);
-    if(i>=0){users[i].verified=true;DB.saveUsers(users);CU=users[i]}
-    DB.saveSess(CU);launchApp();toast('Email verified! Welcome \uD83C\uDF89','success');
-  }else{
-    toast('Incorrect code — check browser console (F12) for the code','error');
-    document.querySelectorAll('#pg-verify .vci').forEach(el=>{el.value='';el.style.borderColor='var(--red)'});
-    document.querySelector('#pg-verify .vci')?.focus();
+
+function vcKeyUp(el, idx) {
+  if (el.value.length === 1 && idx < 5) {
+    var inputs = document.querySelectorAll('#pg-verify .vci');
+    if (inputs[idx + 1]) inputs[idx + 1].focus();
+  }
+  if (el.value) el.style.borderColor = 'rgba(85,133,255,.6)';
+}
+function vcKeyDown(el, e, idx) {
+  if (e.key === 'Backspace' && !el.value && idx > 0) {
+    var inputs = document.querySelectorAll('#pg-verify .vci');
+    if (inputs[idx - 1]) inputs[idx - 1].focus();
   }
 }
-function skipVerify(){const users=DB.getUsers();const i=users.findIndex(u=>u.email===pendingEmail);if(i>=0){users[i].verified=true;DB.saveUsers(users);CU=users[i]}DB.saveSess(CU);launchApp()}
-function resendCode(){const code=String(Math.floor(100000+Math.random()*900000));pendingCode=code;console.log('%c New Code: '+code+' ','font-size:20px;font-weight:bold;background:#5585FF;color:white;padding:12px 20px;border-radius:8px');toast('New code in browser console (F12)','success')}
-
-// ── LOGIN ──
-function doLogin(){
-  const em=(document.getElementById('li-em').value||'').trim().toLowerCase(),pw=document.getElementById('li-pw').value||'';
-  ['li-em','li-pw'].forEach(id=>document.getElementById(id).classList.remove('inv'));
-  document.getElementById('li-err').style.display='none';
-  if(!vEmail(em)){document.getElementById('li-em').classList.add('inv');toast('Please enter a valid email','error');return}
-  if(!pw){document.getElementById('li-pw').classList.add('inv');toast('Please enter your password','error');return}
-  const btn=document.getElementById('li-btn');btn.disabled=true;btn.textContent='Signing in...';
-  setTimeout(()=>{
-    const user=DB.findUser(em);let ok=false;
-    if(user){try{ok=dec(user.pw)===pw}catch(e){}}
-    if(!user||!ok){document.getElementById('li-err').style.display='block';['li-em','li-pw'].forEach(id=>document.getElementById(id).classList.add('inv'));btn.disabled=false;btn.textContent=(LANGS[currentLang]||LANGS.en).signinbtn;return}
-    if(user.banned&&!isAdmin(em)){btn.disabled=false;btn.textContent=(LANGS[currentLang]||LANGS.en).signinbtn;showPg('banned');return}
-    const users=DB.getUsers();const idx=users.findIndex(u=>u.email===em);
-    if(idx>=0){users[idx].lastActive=new Date().toISOString();DB.saveUsers(users);CU=users[idx]}else CU=user;
-    DB.saveSess(CU);launchApp();btn.disabled=false;btn.textContent=(LANGS[currentLang]||LANGS.en).signinbtn;
-  },1200);
+function vcPaste(e) {
+  e.preventDefault();
+  var paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+  var inputs = document.querySelectorAll('#pg-verify .vci');
+  paste.split('').forEach(function(c, i) { if (inputs[i]) { inputs[i].value = c; inputs[i].style.borderColor = 'rgba(85,133,255,.6)'; } });
+  if (inputs[Math.min(paste.length, 5)]) inputs[Math.min(paste.length, 5)].focus();
+}
+function submitVerifyCode() {
+  var inputs = document.querySelectorAll('#pg-verify .vci');
+  var entered = Array.from(inputs).map(function(i) { return i.value; }).join('');
+  if (entered.length !== 6) { toast('Please enter all 6 digits', 'error'); return; }
+  if (entered === pendingCode) {
+    var users = DB.getUsers();
+    var i = users.findIndex(function(u) { return u.email === pendingEmail; });
+    if (i >= 0) { users[i].verified = true; DB.saveUsers(users); CU = users[i]; }
+    DB.saveSess(CU); launchApp(); toast('Email verified! Welcome \uD83C\uDF89', 'success');
+  } else {
+    toast('Incorrect code. Check browser console (F12)', 'error');
+    document.querySelectorAll('#pg-verify .vci').forEach(function(el) { el.value = ''; el.style.borderColor = 'var(--red)'; });
+    var first = document.querySelector('#pg-verify .vci');
+    if (first) first.focus();
+  }
+}
+function skipVerify() {
+  var users = DB.getUsers();
+  var i = users.findIndex(function(u) { return u.email === pendingEmail; });
+  if (i >= 0) { users[i].verified = true; DB.saveUsers(users); CU = users[i]; }
+  DB.saveSess(CU); launchApp();
+}
+function resendCode() {
+  var code = String(Math.floor(100000 + Math.random() * 900000));
+  pendingCode = code;
+  console.log('%c New Code: ' + code + ' ', 'font-size:20px;font-weight:bold;background:#5585FF;color:white;padding:12px 20px;border-radius:8px');
+  toast('New code in browser console (F12)', 'success');
 }
 
-// ── FORGOT PASSWORD ──
-function doForgot(){
-  const em=(document.getElementById('fg-em').value||'').trim().toLowerCase();
-  if(!vEmail(em)){toast('Please enter a valid email','error');return}
-  const code=String(Math.floor(100000+Math.random()*900000));
-  pendingReset={email:em,code,expires:Date.now()+15*60*1000};
-  console.log('%c Password Reset Code for '+em+': '+code+' ','font-size:18px;font-weight:bold;background:#A07BFF;color:white;padding:12px 20px;border-radius:8px');
-  document.getElementById('fg-ok').style.display='block';
+function doLogin() {
+  var em = (document.getElementById('li-em').value || '').trim().toLowerCase();
+  var pw = document.getElementById('li-pw').value || '';
+  document.getElementById('li-em').classList.remove('inv');
+  document.getElementById('li-pw').classList.remove('inv');
+  document.getElementById('li-err').style.display = 'none';
+  if (!vEmail(em)) { document.getElementById('li-em').classList.add('inv'); toast('Please enter a valid email', 'error'); return; }
+  if (!pw) { document.getElementById('li-pw').classList.add('inv'); toast('Please enter your password', 'error'); return; }
+  var btn = document.getElementById('li-btn');
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  setTimeout(function() {
+    var user = DB.findUser(em); var ok = false;
+    if (user) { try { ok = decPw(user.pw) === pw; } catch(e) {} }
+    if (!user || !ok) {
+      document.getElementById('li-err').style.display = 'block';
+      document.getElementById('li-em').classList.add('inv');
+      document.getElementById('li-pw').classList.add('inv');
+      btn.disabled = false; btn.textContent = 'Sign in to UltraVision AI'; return;
+    }
+    if (user.banned && !isAdmin(em)) { btn.disabled = false; btn.textContent = 'Sign in to UltraVision AI'; showPg('banned'); return; }
+    var users = DB.getUsers();
+    var idx = users.findIndex(function(u) { return u.email === em; });
+    if (idx >= 0) { users[idx].lastActive = new Date().toISOString(); DB.saveUsers(users); CU = users[idx]; } else { CU = user; }
+    DB.saveSess(CU); launchApp();
+    btn.disabled = false; btn.textContent = 'Sign in to UltraVision AI';
+  }, 1200);
+}
+
+function doForgot() {
+  var em = (document.getElementById('fg-em').value || '').trim().toLowerCase();
+  if (!vEmail(em)) { toast('Please enter a valid email', 'error'); return; }
+  var code = String(Math.floor(100000 + Math.random() * 900000));
+  pendingReset = {email: em, code: code, expires: Date.now() + 15 * 60 * 1000};
+  console.log('%c Password Reset Code for ' + em + ': ' + code + ' ', 'font-size:18px;font-weight:bold;background:#A07BFF;color:white;padding:12px 20px;border-radius:8px');
+  document.getElementById('fg-ok').style.display = 'block';
   document.getElementById('reset-section').classList.remove('hidden');
-  toast('Reset code in browser console (F12)','info');
-}
-function rcKey(el,idx,e){if(e.type==='keyup'){if(el.value.length===1&&idx<5)document.querySelectorAll('#reset-code-wrap .vci')[idx+1]?.focus()}else if(e.type==='keydown'&&e.key==='Backspace'&&!el.value&&idx>0)document.querySelectorAll('#reset-code-wrap .vci')[idx-1]?.focus()}
-function rcPaste(e){e.preventDefault();const p=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);const ins=document.querySelectorAll('#reset-code-wrap .vci');p.split('').forEach((c,i)=>{if(ins[i])ins[i].value=c});ins[Math.min(p.length,5)]?.focus()}
-function doReset(){
-  const code=Array.from(document.querySelectorAll('#reset-code-wrap .vci')).map(i=>i.value).join('');
-  const np=document.getElementById('reset-pw').value||'',cp=document.getElementById('reset-cpw').value||'';
-  if(!pendingReset.email){toast('Request a reset code first','error');return}
-  if(Date.now()>pendingReset.expires){toast('Code expired. Request a new one.','error');return}
-  if(code!==pendingReset.code){toast('Incorrect code — check browser console (F12)','error');return}
-  if(np.length<8){toast('Password must be 8+ characters','error');return}
-  if(np!==cp){toast('Passwords do not match','error');return}
-  const users=DB.getUsers();const i=users.findIndex(u=>u.email===pendingReset.email);
-  if(i>=0){users[i].pw=enc(np);DB.saveUsers(users)}
-  toast('Password reset! Please sign in.','success');pendingReset={};showPg('login');
+  toast('Reset code in browser console (F12)', 'info');
 }
 
-// ── LAUNCH APP ──
-function launchApp(){
-  if(!CU){const s=DB.getSess();if(!s)return;CU=s}
-  const lu=DB.findUser(CU.email);if(lu)CU=lu;
-  if(CU.banned&&!isAdmin(CU.email)){DB.clearSess();showPg('banned');return}
-  US=DB.getStat(CU.email);US.sessions=(US.sessions||0)+1;
-  const users=DB.getUsers();const idx=users.findIndex(u=>u.email===CU.email);
-  if(idx>=0){users[idx].lastActive=new Date().toISOString();users[idx].sessions=US.sessions;DB.saveUsers(users);CU=users[idx]}
-  DB.saveStat(CU.email,US);DB.saveSess(CU);
-  document.getElementById('auth-wrap').style.display='none';
-  document.getElementById('app').classList.add('on');
-  const init=(CU.firstName||'UV').substring(0,2).toUpperCase();
-  const av=document.getElementById('sb-av');if(av){av.textContent=init;av.className=isAdmin(CU.email)?'sbav adm':'sbav'}
-  const nm=document.getElementById('sb-name');if(nm)nm.textContent=CU.firstName||CU.name;
-  const pl=document.getElementById('sb-plan');if(pl){pl.textContent=isAdmin(CU.email)?'\u26A1 Super Admin':'\u2736 Free Plan';pl.className=isAdmin(CU.email)?'sbpl adm':'sbpl'}
-  const dn=document.getElementById('dash-name');if(dn)dn.textContent=CU.firstName||CU.name;
-  const dd=document.getElementById('dash-date');if(dd)dd.textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const di=document.getElementById('dash-info');if(di){const lm={secondary:'Secondary School',gcse:'GCSE',alevel:'A-Level',university:'University'};const p=[];if(CU.level)p.push(lm[CU.level]||CU.level);if(CU.board&&CU.board!=='Other')p.push(CU.board);if(CU.country)p.push(CU.country);di.textContent=p.join(' \u00B7')}
-  const an=document.getElementById('ni-a'),as2=document.getElementById('sb-admsec');
-  if(isAdmin(CU.email)){an?.classList.remove('hidden');if(as2)as2.style.display=''}else{an?.classList.add('hidden');if(as2)as2.style.display='none'}
-  updateUI();toast('Welcome to UltraVision AI! \uD83D\uDE80','success');
+function rcKeyUp(el, idx) {
+  if (el.value.length === 1 && idx < 5) {
+    var inputs = document.querySelectorAll('#reset-code-wrap .vci');
+    if (inputs[idx + 1]) inputs[idx + 1].focus();
+  }
+  if (el.value) el.style.borderColor = 'rgba(160,123,255,.6)';
 }
-function doLogout(){DB.clearSess();CU=null;chatH=[];document.getElementById('app').classList.remove('on');document.getElementById('auth-wrap').style.display='flex';showPg('land');toast('Signed out','info')}
-window.addEventListener('load',()=>{
-  applyLang('en');showPg('land');
-  const s=DB.getSess();if(s&&s.email&&DB.findUser(s.email)){CU=s;launchApp()}else DB.clearSess();
+function rcKeyDown(el, e, idx) {
+  if (e.key === 'Backspace' && !el.value && idx > 0) {
+    var inputs = document.querySelectorAll('#reset-code-wrap .vci');
+    if (inputs[idx - 1]) inputs[idx - 1].focus();
+  }
+}
+function rcPaste(e) {
+  e.preventDefault();
+  var paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+  var inputs = document.querySelectorAll('#reset-code-wrap .vci');
+  paste.split('').forEach(function(c, i) { if (inputs[i]) inputs[i].value = c; });
+  if (inputs[Math.min(paste.length, 5)]) inputs[Math.min(paste.length, 5)].focus();
+}
+function doReset() {
+  var inputs = document.querySelectorAll('#reset-code-wrap .vci');
+  var code = Array.from(inputs).map(function(i) { return i.value; }).join('');
+  var np = document.getElementById('reset-pw').value || '';
+  var cp = document.getElementById('reset-cpw').value || '';
+  if (!pendingReset.email) { toast('Request a reset code first', 'error'); return; }
+  if (Date.now() > pendingReset.expires) { toast('Code expired. Request a new one.', 'error'); return; }
+  if (code !== pendingReset.code) { toast('Incorrect code. Check browser console (F12)', 'error'); return; }
+  if (np.length < 8) { toast('Password must be 8+ characters', 'error'); return; }
+  if (np !== cp) { toast('Passwords do not match', 'error'); return; }
+  var users = DB.getUsers();
+  var i = users.findIndex(function(u) { return u.email === pendingReset.email; });
+  if (i >= 0) { users[i].pw = encPw(np); DB.saveUsers(users); }
+  toast('Password reset! Please sign in.', 'success');
+  pendingReset = {}; showPg('login');
+}
+
+function launchApp() {
+  if (!CU) { var s = DB.getSess(); if (!s) return; CU = s; }
+  var lu = DB.findUser(CU.email); if (lu) CU = lu;
+  if (CU.banned && !isAdmin(CU.email)) { DB.clearSess(); showPg('banned'); return; }
+  US = DB.getStat(CU.email);
+  US.sessions = (US.sessions || 0) + 1;
+  var users = DB.getUsers();
+  var idx = users.findIndex(function(u) { return u.email === CU.email; });
+  if (idx >= 0) { users[idx].lastActive = new Date().toISOString(); users[idx].sessions = US.sessions; DB.saveUsers(users); CU = users[idx]; }
+  DB.saveStat(CU.email, US); DB.saveSess(CU);
+  document.getElementById('auth-wrap').style.display = 'none';
+  document.getElementById('app').classList.add('on');
+  var init = (CU.firstName || CU.name || 'UV').substring(0, 2).toUpperCase();
+  var av = document.getElementById('sb-av'); if (av) { av.textContent = init; av.className = isAdmin(CU.email) ? 'sbav adm' : 'sbav'; }
+  var nm = document.getElementById('sb-name'); if (nm) nm.textContent = CU.firstName || CU.name;
+  var pl = document.getElementById('sb-plan'); if (pl) { pl.textContent = isAdmin(CU.email) ? '\u26A1 Super Admin' : '\u2736 Free Plan'; pl.className = isAdmin(CU.email) ? 'sbpl adm' : 'sbpl'; }
+  var dn = document.getElementById('dash-name'); if (dn) dn.textContent = CU.firstName || CU.name;
+  var dd = document.getElementById('dash-date'); if (dd) dd.textContent = new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var di = document.getElementById('dash-info');
+  if (di) { var lmap={secondary:'Secondary School',gcse:'GCSE',alevel:'A-Level',university:'University'}; var parts=[]; if(CU.level)parts.push(lmap[CU.level]||CU.level); if(CU.board&&CU.board!=='Other')parts.push(CU.board); if(CU.country)parts.push(CU.country); di.textContent=parts.join(' \u00B7'); }
+  var an = document.getElementById('ni-a'), as2 = document.getElementById('sb-admsec');
+  if (isAdmin(CU.email)) { if(an) an.classList.remove('hidden'); if(as2) as2.style.display=''; }
+  else { if(an) an.classList.add('hidden'); if(as2) as2.style.display='none'; }
+  updateUI(); toast('Welcome to UltraVision AI! \uD83D\uDE80', 'success');
+}
+
+function doLogout() {
+  DB.clearSess(); CU = null; chatH = [];
+  document.getElementById('app').classList.remove('on');
+  document.getElementById('auth-wrap').style.display = 'flex';
+  showPg('land'); toast('Signed out', 'info');
+}
+
+window.addEventListener('load', function() {
+  applyLang('en'); showPg('land');
+  var s = DB.getSess();
+  if (s && s.email && DB.findUser(s.email)) { CU = s; launchApp(); } else { DB.clearSess(); }
   initParticles();
 });
 
-// ── PARTICLES ──
-function initParticles(){
-  const c=document.getElementById('pc');if(!c)return;
-  const ctx=c.getContext('2d');let W,H;
-  const pts=[];
-  const resize=()=>{W=c.width=window.innerWidth;H=c.height=window.innerHeight};
-  resize();window.addEventListener('resize',resize);
-  for(let i=0;i<55;i++)pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.5+.5,o:Math.random()*.3+.08});
-  (function draw(){
+function initParticles() {
+  var c = document.getElementById('pc'); if (!c) return;
+  var ctx = c.getContext('2d'); var W, H, pts = [];
+  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  for (var i = 0; i < 55; i++) pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.5+.5,o:Math.random()*.3+.08});
+  function draw() {
     ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(85,133,255,'+p.o+')';ctx.fill()});
-    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<130){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(85,133,255,'+(0.06*(1-d/130))+')';ctx.lineWidth=.8;ctx.stroke()}}
+    pts.forEach(function(p) { p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(85,133,255,'+p.o+')'; ctx.fill(); });
+    for (var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++) { var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy); if(d<130){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(85,133,255,'+(0.06*(1-d/130))+')';ctx.lineWidth=.8;ctx.stroke();} }
     requestAnimationFrame(draw);
-  })();
+  }
+  draw();
 }
 
-// ── NAV ──
-function goV(id,el){
-  if(id==='admin'&&!isAdmin(CU?.email)){toast('Access denied','error');return}
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('v-'+id)?.classList.add('active');
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
-  if(el)el.classList.add('active');
-  if(id!=='dashboard')logAct(id);
-  if(id==='admin')refreshAdmin();
+function goV(id, el) {
+  if (id === 'admin' && !isAdmin(CU && CU.email)) { toast('Access denied', 'error'); return; }
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  var v = document.getElementById('v-' + id); if (v) v.classList.add('active');
+  document.querySelectorAll('.ni').forEach(function(n) { n.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  if (id !== 'dashboard') logAct(id);
+  if (id === 'admin') refreshAdmin();
   closeSB();
 }
 
-// ── STATS ──
-function updateUI(){const g=id=>document.getElementById(id);if(g('st-s'))g('st-s').textContent=US.sessions||0;if(g('st-c'))g('st-c').textContent=US.cards||0;if(g('st-r'))g('st-r').textContent='\uD83D\uDD25 '+(US.streak||1);if(g('sb-streak'))g('sb-streak').textContent=US.streak||1;const avg=US.scores?.length?Math.round(US.scores.reduce((a,b)=>a+b,0)/US.scores.length)+'%':'\u2014';if(g('st-a'))g('st-a').textContent=avg}
-function saveSt(){if(CU)DB.saveStat(CU.email,US);updateUI()}
-function logAct(id){const lb={tutor:'AI Tutor session',quiz:'Quiz Generator',flashcards:'Flashcard review',essay:'Essay Helper',homework:'Homework Solver',papers:'Past Papers',youtube:'YouTube Summariser',notes:'Smart Notes',voice:'Voice Notes'};const cl={tutor:'var(--ac)',quiz:'var(--pur)',flashcards:'var(--gold)',essay:'var(--grn)',homework:'var(--warn)',papers:'var(--red)',youtube:'var(--cyan)',notes:'var(--pink)',voice:'var(--grn)'};acts.unshift({l:lb[id]||id,c:cl[id]||'var(--ac)',t:'Just now'});if(acts.length>5)acts.pop();const el=document.getElementById('rec-list');if(el)el.innerHTML=acts.map(a=>'<div class="ri"><div class="rid" style="background:'+a.c+'"></div><div class="rit">'+a.l+'</div><div class="ritm">'+a.t+'</div></div>').join('')}
-
-// ── ADMIN ──
-function refreshAdmin(){
-  if(!isAdmin(CU?.email))return;
-  admUsers=DB.getUsers();renderAdm(admUsers);
-  const today=new Date().toDateString(),week=Date.now()-7*864e5,g=id=>document.getElementById(id);
-  if(g('adm-tot'))g('adm-tot').textContent=admUsers.length;
-  if(g('adm-td'))g('adm-td').textContent=admUsers.filter(u=>new Date(u.joinedAt).toDateString()===today).length;
-  if(g('adm-ac'))g('adm-ac').textContent=admUsers.filter(u=>new Date(u.lastActive).getTime()>week&&!u.banned).length;
-  if(g('adm-bn'))g('adm-bn').textContent=admUsers.filter(u=>u.banned).length;
+function updateUI() {
+  var g = function(id) { return document.getElementById(id); };
+  if(g('st-s')) g('st-s').textContent = US.sessions || 0;
+  if(g('st-c')) g('st-c').textContent = US.cards || 0;
+  if(g('st-r')) g('st-r').textContent = '\uD83D\uDD25 ' + (US.streak || 1);
+  if(g('sb-streak')) g('sb-streak').textContent = US.streak || 1;
+  var avg = (US.scores && US.scores.length) ? Math.round(US.scores.reduce(function(a,b){return a+b;},0)/US.scores.length)+'%' : '\u2014';
+  if(g('st-a')) g('st-a').textContent = avg;
 }
-function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function renderAdm(users){
-  const tb=document.getElementById('adm-body');if(!tb)return;
-  if(!users.length){tb.innerHTML='<tr><td colspan="13" style="text-align:center;color:var(--t3);padding:30px">No users yet.</td></tr>';return}
-  const lm={secondary:'Secondary',gcse:'GCSE',alevel:'A-Level',university:'University'};
-  const today=new Date().toDateString();
-  tb.innerHTML=users.map((u,i)=>{
-    const jd=new Date(u.joinedAt),ld=new Date(u.lastActive),isNew=jd.toDateString()===today,a2=isAdmin(u.email);
-    const badge=u.banned?'<span class="abd abb">Banned</span>':isNew?'<span class="abd abn">New</span>':'<span class="abd aba">Active</span>';
-    const vb=u.verified===false?'<span style="color:var(--warn);font-size:10px">unverified</span>':'<span style="color:var(--grn);font-size:10px">\u2713</span>';
-    const btns=a2?'<span style="color:var(--gold);font-size:10px;font-weight:700">\u26A1 Admin</span>':
-      u.banned?'<button class="unbanbtn" onclick="unbanUser(''+u.email+'')">Unban</button><button class="delbtn" onclick="delUser(''+u.email+'')">Del</button>':
-      '<button class="banbtn" onclick="banUser(''+u.email+'')">Ban</button><button class="delbtn" onclick="delUser(''+u.email+'')">Del</button>';
-    return '<tr class="'+(u.banned?'bnr':'')+'" onclick="viewUser(''+u.email+'')" style="cursor:pointer"><td style="color:var(--t3)">'+(i+1)+'</td><td style="font-weight:700">'+esc(u.name||u.firstName)+'</td><td style="color:var(--t2);font-size:11px">'+esc(u.email)+'</td><td>'+esc(lm[u.level]||u.level||'\u2014')+'</td><td>'+esc(u.board||'\u2014')+'</td><td style="color:var(--t3);font-size:11px">'+esc(u.country||'\u2014')+'</td><td style="color:var(--t3);font-size:11px">'+esc(u.school||'\u2014')+'</td><td style="color:var(--t3);font-size:11px">'+jd.toLocaleDateString('en-GB')+'</td><td style="color:var(--t3);font-size:11px">'+ld.toLocaleDateString('en-GB')+'</td><td style="font-weight:700">'+(u.sessions||0)+'</td><td onclick="event.stopPropagation()">'+vb+'</td><td onclick="event.stopPropagation()">'+badge+'</td><td onclick="event.stopPropagation()" style="display:flex;gap:4px;margin-top:2px">'+btns+'</td></tr>';
+function saveSt() { if(CU) DB.saveStat(CU.email, US); updateUI(); }
+
+function logAct(id) {
+  var lb={tutor:'AI Tutor session',quiz:'Quiz Generator',flashcards:'Flashcard review',essay:'Essay Helper',homework:'Homework Solver',papers:'Past Papers',youtube:'YouTube Summariser',notes:'Smart Notes',voice:'Voice Notes'};
+  var cl={tutor:'var(--ac)',quiz:'var(--pur)',flashcards:'var(--gold)',essay:'var(--grn)',homework:'var(--warn)',papers:'var(--red)',youtube:'var(--cyan)',notes:'var(--pink)',voice:'var(--grn)'};
+  recentActs.unshift({l:lb[id]||id, c:cl[id]||'var(--ac)', t:'Just now'});
+  if(recentActs.length > 5) recentActs.pop();
+  var el = document.getElementById('rec-list');
+  if(el) el.innerHTML = recentActs.map(function(a) { return '<div class="ri"><div class="rid" style="background:'+a.c+'"></div><div class="rit">'+a.l+'</div><div class="ritm">'+a.t+'</div></div>'; }).join('');
+}
+
+function refreshAdmin() {
+  if (!isAdmin(CU && CU.email)) return;
+  admUsers = DB.getUsers(); renderAdm(admUsers);
+  var today = new Date().toDateString(), week = Date.now() - 7*864e5;
+  var g = function(id){return document.getElementById(id);};
+  if(g('adm-tot')) g('adm-tot').textContent = admUsers.length;
+  if(g('adm-td')) g('adm-td').textContent = admUsers.filter(function(u){return new Date(u.joinedAt).toDateString()===today;}).length;
+  if(g('adm-ac')) g('adm-ac').textContent = admUsers.filter(function(u){return new Date(u.lastActive).getTime()>week&&!u.banned;}).length;
+  if(g('adm-bn')) g('adm-bn').textContent = admUsers.filter(function(u){return u.banned;}).length;
+}
+
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function renderAdm(users) {
+  var tb = document.getElementById('adm-body'); if (!tb) return;
+  if (!users.length) { tb.innerHTML = '<tr><td colspan="13" style="text-align:center;color:var(--t3);padding:30px">No users yet.</td></tr>'; return; }
+  var lm = {secondary:'Secondary',gcse:'GCSE',alevel:'A-Level',university:'University'};
+  var today = new Date().toDateString();
+  tb.innerHTML = users.map(function(u, i) {
+    var jd = new Date(u.joinedAt), ld = new Date(u.lastActive);
+    var isNew = jd.toDateString() === today, a2 = isAdmin(u.email);
+    var badge = u.banned ? '<span class="abd abb">Banned</span>' : isNew ? '<span class="abd abn">New</span>' : '<span class="abd aba">Active</span>';
+    var vb = u.verified === false ? '<span style="color:var(--warn);font-size:10px">unverified</span>' : '<span style="color:var(--grn);font-size:10px">\u2713</span>';
+    var em = u.email.replace(/'/g, "\\'");
+    var btns;
+    if (a2) {
+      btns = '<span style="color:var(--gold);font-size:10px;font-weight:700">\u26A1 Admin</span>';
+    } else if (u.banned) {
+      btns = '<button class="unbanbtn" onclick="unbanUser(\'' + em + '\')">Unban</button> <button class="delbtn" onclick="delUser(\'' + em + '\')">Del</button>';
+    } else {
+      btns = '<button class="banbtn" onclick="banUser(\'' + em + '\')">Ban</button> <button class="delbtn" onclick="delUser(\'' + em + '\')">Del</button>';
+    }
+    return '<tr class="' + (u.banned?'bnr':'') + '" onclick="viewUser(\'' + em + '\')" style="cursor:pointer">' +
+      '<td style="color:var(--t3)">'+(i+1)+'</td>' +
+      '<td style="font-weight:700">'+esc(u.name||u.firstName)+'</td>' +
+      '<td style="color:var(--t2);font-size:11px">'+esc(u.email)+'</td>' +
+      '<td>'+esc(lm[u.level]||u.level||'\u2014')+'</td>' +
+      '<td>'+esc(u.board||'\u2014')+'</td>' +
+      '<td style="color:var(--t3);font-size:11px">'+esc(u.country||'\u2014')+'</td>' +
+      '<td style="color:var(--t3);font-size:11px">'+esc(u.school||'\u2014')+'</td>' +
+      '<td style="color:var(--t3);font-size:11px">'+jd.toLocaleDateString('en-GB')+'</td>' +
+      '<td style="color:var(--t3);font-size:11px">'+ld.toLocaleDateString('en-GB')+'</td>' +
+      '<td style="font-weight:700">'+(u.sessions||0)+'</td>' +
+      '<td onclick="event.stopPropagation()">'+vb+'</td>' +
+      '<td onclick="event.stopPropagation()">'+badge+'</td>' +
+      '<td onclick="event.stopPropagation()">'+btns+'</td></tr>';
   }).join('');
 }
-function filterUsers(q){const lq=q.toLowerCase();renderAdm(admUsers.filter(u=>(u.name||'').toLowerCase().includes(lq)||(u.email||'').toLowerCase().includes(lq)||(u.country||'').toLowerCase().includes(lq)||(u.school||'').toLowerCase().includes(lq)))}
-function banUser(email){if(!isAdmin(CU?.email)||isAdmin(email))return;if(!confirm('Ban '+email+'?'))return;const u=DB.getUsers(),i=u.findIndex(x=>x.email===email);if(i>=0){u[i].banned=true;DB.saveUsers(u)}toast(email+' banned','success');refreshAdmin()}
-function unbanUser(email){if(!isAdmin(CU?.email))return;const u=DB.getUsers(),i=u.findIndex(x=>x.email===email);if(i>=0){u[i].banned=false;DB.saveUsers(u)}toast(email+' unbanned','success');refreshAdmin()}
-function delUser(email){if(!isAdmin(CU?.email)||isAdmin(email))return;if(!confirm('Delete '+email+' permanently?'))return;DB.saveUsers(DB.getUsers().filter(u=>u.email!==email));localStorage.removeItem('uv6_st_'+email);toast(email+' deleted','success');refreshAdmin()}
-function viewUser(email){
-  const u=DB.findUser(email);if(!u)return;
-  const lm={secondary:'Secondary School',gcse:'GCSE',alevel:'A-Level',university:'University'};
-  const g=id=>document.getElementById(id);
-  g('md-name').textContent=u.name||u.firstName||'\u2014';g('md-email').textContent=u.email;g('md-level').textContent=lm[u.level]||u.level||'\u2014';g('md-board').textContent=u.board||'\u2014';g('md-country').textContent=u.country||'Not provided';g('md-school').textContent=u.school||'Not provided';g('md-subjs').textContent=u.subjects||'Not provided';g('md-joined').textContent=new Date(u.joinedAt).toLocaleString('en-GB');g('md-last').textContent=new Date(u.lastActive).toLocaleString('en-GB');g('md-sess').textContent=(u.sessions||0)+' sessions';g('md-verified').textContent=u.verified===false?'\u274C Unverified':'\u2705 Verified';g('md-status').textContent=u.banned?'\uD83D\uDEAB Banned':isAdmin(u.email)?'\u26A1 Admin':'\u2705 Active';
-  const ma=g('md-acts');
-  if(isAdmin(u.email))ma.innerHTML='<span style="color:var(--gold)">\u26A1 Admin account</span>';
-  else if(u.banned)ma.innerHTML='<button class="abt" style="background:linear-gradient(135deg,var(--grn),#00B880)" onclick="unbanUser(''+u.email+'');closeMol()">Unban</button><button class="tbtn danger" onclick="delUser(''+u.email+'');closeMol()">Delete</button>';
-  else ma.innerHTML='<button class="tbtn danger" onclick="banUser(''+u.email+'');closeMol()">\uD83D\uDEAB Ban</button><button class="tbtn danger" onclick="delUser(''+u.email+'');closeMol()">Delete</button>';
+
+function filterUsers(q) {
+  var lq = q.toLowerCase();
+  renderAdm(admUsers.filter(function(u) {
+    return (u.name||'').toLowerCase().includes(lq) || (u.email||'').toLowerCase().includes(lq) ||
+           (u.country||'').toLowerCase().includes(lq) || (u.school||'').toLowerCase().includes(lq);
+  }));
+}
+
+function banUser(email) {
+  if (!isAdmin(CU && CU.email) || isAdmin(email)) return;
+  if (!confirm('Ban ' + email + '?')) return;
+  var users = DB.getUsers(), i = users.findIndex(function(u){return u.email===email;});
+  if (i >= 0) { users[i].banned = true; DB.saveUsers(users); }
+  toast(email + ' banned', 'success'); refreshAdmin();
+}
+function unbanUser(email) {
+  if (!isAdmin(CU && CU.email)) return;
+  var users = DB.getUsers(), i = users.findIndex(function(u){return u.email===email;});
+  if (i >= 0) { users[i].banned = false; DB.saveUsers(users); }
+  toast(email + ' unbanned', 'success'); refreshAdmin();
+}
+function delUser(email) {
+  if (!isAdmin(CU && CU.email) || isAdmin(email)) return;
+  if (!confirm('Permanently delete ' + email + '?')) return;
+  DB.saveUsers(DB.getUsers().filter(function(u){return u.email!==email;}));
+  localStorage.removeItem('uv7_st_' + email);
+  toast(email + ' deleted', 'success'); refreshAdmin();
+}
+function viewUser(email) {
+  var u = DB.findUser(email); if (!u) return;
+  var lm={secondary:'Secondary School',gcse:'GCSE',alevel:'A-Level',university:'University'};
+  var g = function(id){return document.getElementById(id);};
+  g('md-name').textContent = u.name||u.firstName||'\u2014';
+  g('md-email').textContent = u.email;
+  g('md-level').textContent = lm[u.level]||u.level||'\u2014';
+  g('md-board').textContent = u.board||'\u2014';
+  g('md-country').textContent = u.country||'Not provided';
+  g('md-school').textContent = u.school||'Not provided';
+  g('md-subjs').textContent = u.subjects||'Not provided';
+  g('md-joined').textContent = new Date(u.joinedAt).toLocaleString('en-GB');
+  g('md-last').textContent = new Date(u.lastActive).toLocaleString('en-GB');
+  g('md-sess').textContent = (u.sessions||0) + ' sessions';
+  g('md-verified').textContent = u.verified === false ? '\u274C Unverified' : '\u2705 Verified';
+  g('md-status').textContent = u.banned ? '\uD83D\uDEAB Banned' : isAdmin(u.email) ? '\u26A1 Admin' : '\u2705 Active';
+  var em = email.replace(/'/g, "\\'");
+  var ma = g('md-acts');
+  if (isAdmin(u.email)) {
+    ma.innerHTML = '<span style="color:var(--gold)">\u26A1 Admin account</span>';
+  } else if (u.banned) {
+    ma.innerHTML = '<button class="abt" style="background:linear-gradient(135deg,var(--grn),#00B880)" onclick="unbanUser(\'' + em + '\');closeMol()">Unban</button> <button class="tbtn danger" onclick="delUser(\'' + em + '\');closeMol()">Delete</button>';
+  } else {
+    ma.innerHTML = '<button class="tbtn danger" onclick="banUser(\'' + em + '\');closeMol()">\uD83D\uDEAB Ban</button> <button class="tbtn danger" onclick="delUser(\'' + em + '\');closeMol()">Delete</button>';
+  }
   document.getElementById('user-mol').classList.add('show');
 }
-function closeMol(){document.getElementById('user-mol').classList.remove('show')}
-document.addEventListener('click',e=>{const m=document.getElementById('user-mol');if(m&&e.target===m)closeMol()});
-function exportCSV(){
-  if(!isAdmin(CU?.email))return;const users=DB.getUsers();if(!users.length){toast('No users','info');return}
-  const rows=[['Name','Email','Level','Board','Country','School','Subjects','Joined','Last Active','Sessions','Verified','Status'],...users.map(u=>[u.name||u.firstName,u.email,u.level||'',u.board||'',u.country||'',u.school||'',u.subjects||'',new Date(u.joinedAt).toLocaleDateString('en-GB'),new Date(u.lastActive).toLocaleDateString('en-GB'),u.sessions||0,u.verified===false?'No':'Yes',u.banned?'Banned':isAdmin(u.email)?'Admin':'Active'])];
-  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ultravision-'+new Date().toISOString().slice(0,10)+'.csv';a.click();toast('CSV exported!','success');
+function closeMol() { document.getElementById('user-mol').classList.remove('show'); }
+document.addEventListener('click', function(e) { var m = document.getElementById('user-mol'); if (m && e.target === m) closeMol(); });
+
+function exportCSV() {
+  if (!isAdmin(CU && CU.email)) return;
+  var users = DB.getUsers(); if (!users.length) { toast('No users', 'info'); return; }
+  var rows = [['Name','Email','Level','Board','Country','School','Subjects','Joined','Last Active','Sessions','Verified','Status']];
+  users.forEach(function(u) {
+    rows.push([u.name||u.firstName, u.email, u.level||'', u.board||'', u.country||'', u.school||'', u.subjects||'',
+      new Date(u.joinedAt).toLocaleDateString('en-GB'), new Date(u.lastActive).toLocaleDateString('en-GB'),
+      u.sessions||0, u.verified===false?'No':'Yes', u.banned?'Banned':isAdmin(u.email)?'Admin':'Active']);
+  });
+  var csv = rows.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download = 'ultravision-' + new Date().toISOString().slice(0,10) + '.csv'; a.click();
+  toast('CSV exported!', 'success');
 }
 
-// ── PUTER AI ENGINE ──
-function loadPuter(){return new Promise((res,rej)=>{if(typeof puter!=='undefined'&&puter.ai){res();return}const s=document.createElement('script');s.src='https://js.puter.com/v2/';s.onload=()=>{let t=0;const iv=setInterval(()=>{t++;if(typeof puter!=='undefined'&&puter.ai){clearInterval(iv);res()}if(t>150){clearInterval(iv);rej(new Error('timeout'))}},100)};s.onerror=()=>rej(new Error('Cannot load AI'));document.head.appendChild(s)})}
-async function aiCall(sys,msg,hist=[]){
-  await loadPuter();
-  // CONCISE system prompt — prevents over-writing
-  let p=sys+'\n\n';
-  hist.slice(-6).forEach(m=>p+=(m.role==='user'?'Student: ':'Tutor: ')+m.content+'\n\n');
-  p+='Student: '+msg+'\n\nTutor:';
-  const r=await puter.ai.chat(p,{model:'gpt-4o-mini'});
-  if(typeof r==='string')return r.trim();
-  if(r?.message?.content){const c=r.message.content;return(Array.isArray(c)?c.map(x=>x.text||'').join(''):String(c)).trim()}
-  if(r?.text)return r.text.trim();
-  return String(r).trim();
+function loadPuter() {
+  return new Promise(function(res, rej) {
+    if (typeof puter !== 'undefined' && puter.ai) { res(); return; }
+    var s = document.createElement('script'); s.src = 'https://js.puter.com/v2/';
+    s.onload = function() {
+      var t = 0;
+      var iv = setInterval(function() {
+        t++;
+        if (typeof puter !== 'undefined' && puter.ai) { clearInterval(iv); res(); }
+        if (t > 150) { clearInterval(iv); rej(new Error('timeout')); }
+      }, 100);
+    };
+    s.onerror = function() { rej(new Error('Cannot load AI')); };
+    document.head.appendChild(s);
+  });
 }
 
-// ── AI TUTOR ── (concise and powerful)
-const LVM={secondary:'KS3/Year 7-9',gcse:'GCSE',alevel:'A-Level',university:'University'};
-function getSys(mode){
-  const lv=CU?.level?LVM[CU.level]:'GCSE';
-  const bd=CU?.board&&CU.board!=='Other'?' aligned to '+CU.board+' mark schemes':'';
-  const lang=currentLang!=='en'?'\nCRITICAL RULE: You MUST respond in the exact same language the student writes in. If they write Arabic, respond ENTIRELY in Arabic. If Spanish, respond in Spanish. Never respond in English when they use another language.':'';
-  const base='You are UltraVision AI, an expert tutor for '+lv+' students'+bd+'.'+lang+'\n\nGOLDEN RULES:\n- Be CONCISE. Maximum 200 words unless a step-by-step solution genuinely needs more.\n- NO PADDING. Every sentence must add value.\n- Bold **key terms**.\n- Explain WHY not just WHAT.\n- Always connect to exam requirements.';
-  const modes={
-    tutor:base+'\n\nTutor mode: Teach with ONE clear analogy. End with one sharp follow-up question.',
-    explain:base+'\nExplain mode: Hook (surprising fact) → Core analogy → 3 clear steps → Real-world example → One check question. Keep it under 150 words.',
-    simplify:base+'\nSimplify mode: Explain for a 12-year-old. No jargon (put term in brackets if needed). One memorable analogy. 4 bullet points max. End with ONE-LINE SUMMARY.',
-    exam:base+'\nExam coach mode: 1) Decode the command word 2) Mark scheme secrets (exact phrases) 3) Answer structure with timing 4) Top 3 mistakes to avoid 5) One insider tip. Be sharp.',
-    check:base+'\nExaminer mode: ✓ Strengths (2-3 specific) | ✗ Errors (with corrections) | ⚠ Missing points | Grade prediction with reason | Top 2 improvements.',
-    concise:base+'\nCONCISE mode: Maximum 5 bullet points. No filler. Exam-critical facts only.',
-    translate:base+'\nTranslation mode: Help in the student's language. Explain vocabulary and concepts in their language, support bilingual understanding.'
+function aiCall(sys, msg, hist) {
+  hist = hist || [];
+  return loadPuter().then(function() {
+    var p = sys + '\n\n';
+    hist.slice(-6).forEach(function(m) { p += (m.role==='user'?'Student: ':'Tutor: ') + m.content + '\n\n'; });
+    p += 'Student: ' + msg + '\n\nTutor:';
+    return puter.ai.chat(p, {model: 'gpt-4o-mini'});
+  }).then(function(r) {
+    if (typeof r === 'string') return r.trim();
+    if (r && r.message && r.message.content) {
+      var c = r.message.content;
+      return (Array.isArray(c) ? c.map(function(x){return x.text||'';}).join('') : String(c)).trim();
+    }
+    if (r && r.text) return r.text.trim();
+    return String(r).trim();
+  });
+}
+
+var LVM = {secondary:'KS3/Year 7-9', gcse:'GCSE', alevel:'A-Level', university:'University'};
+
+function getSys(mode) {
+  var lv = (CU && CU.level) ? (LVM[CU.level] || CU.level) : 'GCSE';
+  var bd = (CU && CU.board && CU.board !== 'Other') ? ' (' + CU.board + ' mark scheme)' : '';
+  var langRule = currentLang !== 'en' ? '\nCRITICAL: Respond in the SAME language the student writes in.' : '';
+  var base = 'You are UltraVision AI, expert tutor for ' + lv + ' students' + bd + '.' + langRule + '\nRULES: Be CONCISE (max 200 words). No padding. Bold **key terms**. Explain WHY. Link to exam requirements.';
+  var modes = {
+    tutor: base + '\nTutor mode: Teach with one clear analogy. End with one follow-up question.',
+    explain: base + '\nExplain: Hook \u2192 Core analogy \u2192 3 steps \u2192 Real example \u2192 Check question.',
+    simplify: base + '\nSimplify for age 12: No jargon. One analogy. 4 bullets max. End: ONE-LINE SUMMARY.',
+    exam: base + '\nExam coach: Command word \u2192 Mark scheme secrets \u2192 Answer structure \u2192 Top 3 mistakes \u2192 Insider tip.',
+    check: base + '\nExaminer: \u2713 Strengths | \u2717 Errors | \u26A0 Missing | Grade + reason | Top 2 improvements.',
+    concise: base + '\nConcise mode: 5 bullets MAX. Exam facts only.',
+    translate: base + '\nTranslation mode: Help in the student\'s own language.'
   };
-  return modes[mode]||modes.tutor;
-}
-function setMode(btn,m){document.querySelectorAll('.mchip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');tMode=m;chatH=[]}
-function grow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px'}
-function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}}
-function clearChat(){chatH=[];document.getElementById('chat-msgs').innerHTML='<div class="mr"><div class="mav ai">UV</div><div class="bub ai">Chat cleared! What shall we study? \uD83D\uDCDA</div></div>'}
-function qs(t){document.getElementById('chat-ta').value=t;sendMsg()}
-function addMsg(role,text){
-  const c=document.getElementById('chat-msgs'),d=document.createElement('div');
-  d.className='mr'+(role==='user'?' user':'');
-  const init=role==='user'?(CU?.firstName||'Me').substring(0,2).toUpperCase():'UV';
-  const html=text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>');
-  d.innerHTML='<div class="mav '+(role==='user'?'me':'ai')+'">'+init+'</div><div class="bub '+(role==='user'?'user':'ai')+'">'+html+'</div>';
-  c.appendChild(d);c.scrollTop=c.scrollHeight;
-}
-function showTyping(){const c=document.getElementById('chat-msgs'),d=document.createElement('div');d.className='mr';d.id='typ';d.innerHTML='<div class="mav ai">UV</div><div class="typi"><div class="td"></div><div class="td"></div><div class="td"></div></div>';c.appendChild(d);c.scrollTop=c.scrollHeight}
-function rmTyping(){document.getElementById('typ')?.remove()}
-async function sendMsg(){
-  if(chatBusy)return;const ta=document.getElementById('chat-ta');const text=(ta.value||'').trim();if(!text)return;
-  ta.value='';ta.style.height='auto';addMsg('user',text);chatH.push({role:'user',content:text});
-  chatBusy=true;document.getElementById('sbtn2').disabled=true;showTyping();
-  try{const r=await aiCall(getSys(tMode),text,chatH.slice(0,-1));rmTyping();addMsg('ai',r);chatH.push({role:'assistant',content:r})}
-  catch(e){rmTyping();addMsg('ai','\u26A0\uFE0F Connection issue. Check your internet and try again.')}
-  chatBusy=false;document.getElementById('sbtn2').disabled=false;
+  return modes[mode] || modes.tutor;
 }
 
-// ── QUIZ ──
-function resetQuiz(){qData=[];qIdx=0;qScore=0;qAns=false;document.getElementById('quiz-setup').style.display='';document.getElementById('quiz-area').style.display='none'}
-async function genQuiz(){
-  const subj=document.getElementById('q-subj').value,lvl=document.getElementById('q-lvl').value,num=document.getElementById('q-num').value,top=(document.getElementById('q-top').value||'').trim(),board=document.getElementById('q-board').value;
-  const btn=document.getElementById('q-btn');btn.disabled=true;btn.textContent='Generating...';
-  showLoad('Creating '+num+' questions...');
-  const sys='You are an expert '+lvl+' '+subj+' examiner'+(board!=='Any'?' ('+board+')':'')+'. Generate exactly '+num+' multiple choice questions'+(top?' on: '+top:' on key syllabus topics')+'. Each question must test genuine understanding. All 4 options must be plausible.\nReturn ONLY a valid JSON array, nothing else:\n[{"q":"Full question?","opts":["A) opt","B) opt","C) opt","D) opt"],"ans":0,"exp":"Why correct, why others wrong"}]\nans=0-based index (0=A,1=B,2=C,3=D)';
-  try{
-    const raw=await aiCall(sys,'Generate quiz now. Return ONLY the JSON array.');hideLoad();
-    const s=raw.indexOf('['),e=raw.lastIndexOf(']');if(s<0||e<0)throw new Error('No JSON');
-    qData=JSON.parse(raw.substring(s,e+1));if(!qData.length)throw new Error('Empty');
-    qIdx=0;qScore=0;qAns=false;document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-area').style.display='flex';
-    renderQ();logAct('quiz');toast('Quiz ready! Good luck \uD83C\uDF40','success');
-  }catch(e){hideLoad();toast('Failed to generate quiz. Try again.','error');console.error(e)}
-  btn.disabled=false;btn.textContent='Generate Quiz \u2192';
+function setMode(btn, m) {
+  document.querySelectorAll('.mchip').forEach(function(c) { c.classList.remove('active'); });
+  btn.classList.add('active'); tutorMode = m; chatH = [];
 }
-function renderQ(){
-  if(qIdx>=qData.length){showScore();return}
-  const q=qData[qIdx];qAns=false;const pct=Math.round(qIdx/qData.length*100);
-  document.getElementById('quiz-area').innerHTML='<div style="height:4px;background:var(--b1);border-radius:2px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:var(--g1);border-radius:2px;transition:width .4s"></div></div><div class="qqc"><div class="qqn">Question '+(qIdx+1)+' of '+qData.length+' \u00B7 Score: '+qScore+'/'+qIdx+'</div><div class="qqq">'+q.q+'</div><div class="qopts">'+q.opts.map((o,i)=>'<div class="qopt" id="qo'+i+'" onclick="pickAns('+i+')"><div class="optl">'+['A','B','C','D'][i]+'</div><span>'+o.replace(/^[A-D]\)\s*/,'')+'</span></div>').join('')+'</div><div id="q-fb" style="display:none;border-radius:11px;padding:12px 15px;font-size:12.5px;line-height:1.6;margin-top:11px"></div></div><div style="display:flex;justify-content:flex-end"><button class="abt" id="q-nxt" onclick="nextQ()" style="display:none;padding:10px 20px;font-size:12px">Next \u2192</button></div>';
+function grow(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 120) + 'px'; }
+function chatKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); } }
+function clearChat() {
+  chatH = [];
+  document.getElementById('chat-msgs').innerHTML = '<div class="mr"><div class="mav ai">UV</div><div class="bub ai">Chat cleared! What shall we study? \uD83D\uDCDA</div></div>';
 }
-function pickAns(i){
-  if(qAns)return;qAns=true;const q=qData[qIdx];const ok=i===q.ans;if(ok)qScore++;
-  for(let x=0;x<4;x++){const el=document.getElementById('qo'+x);if(!el)continue;if(x===q.ans)el.classList.add('ok');else if(x===i&&!ok)el.classList.add('no')}
-  const fb=document.getElementById('q-fb');fb.style.display='block';fb.style.background=ok?'rgba(0,232,168,.07)':'rgba(255,79,107,.07)';fb.style.border='1px solid '+(ok?'rgba(0,232,168,.25)':'rgba(255,79,107,.2)');fb.innerHTML='<strong style="color:'+(ok?'var(--grn)':'var(--red)')+'"> '+(ok?'\u2713 Correct!':'\u2717 Incorrect')+'</strong> '+q.exp;document.getElementById('q-nxt').style.display='';
+function qs(t) { document.getElementById('chat-ta').value = t; sendMsg(); }
+
+function addMsg(role, text) {
+  var c = document.getElementById('chat-msgs');
+  var d = document.createElement('div');
+  d.className = 'mr' + (role === 'user' ? ' user' : '');
+  var init = role === 'user' ? ((CU && CU.firstName || 'Me').substring(0, 2).toUpperCase()) : 'UV';
+  var html = text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  d.innerHTML = '<div class="mav ' + (role==='user'?'me':'ai') + '">' + init + '</div><div class="bub ' + (role==='user'?'user':'ai') + '">' + html + '</div>';
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
-function nextQ(){qIdx++;renderQ()}
-function showScore(){
-  const pct=Math.round(qScore/qData.length*100),grade=pct>=90?'A*':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=50?'D':'U',emoji=pct>=90?'\uD83C\uDFC6':pct>=70?'\uD83C\uDF1F':pct>=50?'\uD83D\uDC4D':'\uD83D\uDCDA';
-  document.getElementById('quiz-area').innerHTML='<div class="qqc" style="text-align:center;padding:40px 20px"><div style="font-size:60px;margin-bottom:18px">'+emoji+'</div><div style="font-family:\'Playfair Display\',serif;font-size:26px;font-weight:800;margin-bottom:8px">'+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good effort!':'Keep practising!')+'</div><div style="font-size:14px;color:var(--t2);margin-bottom:8px">Score: <strong style="color:var(--ac);font-size:20px">'+qScore+'/'+qData.length+'</strong> ('+pct+'%)</div><div style="display:inline-block;background:rgba(85,133,255,.12);border:1px solid rgba(85,133,255,.3);color:var(--ac3);padding:8px 24px;border-radius:22px;font-size:14px;font-weight:700;margin-bottom:28px">Grade: '+grade+'</div><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="abt" onclick="resetQuiz()">New quiz</button><button class="tbtn" onclick="genQuiz()" style="padding:11px 20px">Retry</button><button class="tbtn" onclick="goV('tutor',document.getElementById('ni-t'))" style="padding:11px 20px">Ask AI Tutor</button></div></div>';
-  US.scores=US.scores||[];US.scores.push(pct);if(US.scores.length>20)US.scores.shift();saveSt();
+function showTyping() {
+  var c = document.getElementById('chat-msgs'), d = document.createElement('div');
+  d.className = 'mr'; d.id = 'typ';
+  d.innerHTML = '<div class="mav ai">UV</div><div class="typi"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+function rmTyping() { var t = document.getElementById('typ'); if (t) t.remove(); }
+
+function sendMsg() {
+  if (chatBusy) return;
+  var ta = document.getElementById('chat-ta');
+  var text = (ta.value || '').trim(); if (!text) return;
+  ta.value = ''; ta.style.height = 'auto';
+  addMsg('user', text); chatH.push({role:'user', content:text});
+  chatBusy = true; document.getElementById('sbtn2').disabled = true; showTyping();
+  var prevHist = chatH.slice(0, -1);
+  aiCall(getSys(tutorMode), text, prevHist).then(function(r) {
+    rmTyping(); addMsg('ai', r); chatH.push({role:'assistant', content:r});
+  }).catch(function() {
+    rmTyping(); addMsg('ai', '\u26A0\uFE0F Connection issue. Check your internet and try again.');
+  }).finally(function() {
+    chatBusy = false; document.getElementById('sbtn2').disabled = false;
+  });
 }
 
-// ── FLASHCARDS ──
-async function genCards(){
-  const subj=document.getElementById('fc-s').value,top=(document.getElementById('fc-t').value||'').trim()||document.getElementById('fc-s').value,lvl=document.getElementById('fc-l').value;
-  showLoad('Generating flashcards...');
-  const sys='You are an expert '+lvl+' '+subj+' teacher. Create exactly 10 exam-ready revision flashcards on "'+top+'" for '+lvl+' students. Cover the most important exam concepts. Each answer: 2-3 sentences, precise exam language.\nReturn ONLY valid JSON array:\n[{"front":"Question or key term?","back":"Precise exam-ready answer with key terminology"}]';
-  try{
-    const raw=await aiCall(sys,'Generate 10 flashcards. Return ONLY the JSON array.');hideLoad();
-    const s=raw.indexOf('['),e=raw.lastIndexOf(']');if(s<0||e<0)throw new Error('No JSON');
-    fcCards=JSON.parse(raw.substring(s,e+1));if(!fcCards.length)throw new Error('Empty');
-    fcIdx=0;fcKnow=0;fcUnsure=0;document.getElementById('fc-hint').textContent='Tap card to flip and reveal answer';
-    renderCard();toast('10 flashcards ready! Tap to flip \uD83D\uDC46','success');logAct('flashcards');
-  }catch(e){hideLoad();toast('Failed. Try again.','error');console.error(e)}
-}
-function renderCard(){if(!fcCards.length)return;const c=fcCards[fcIdx];document.getElementById('fc-front').textContent=c.front;document.getElementById('fc-back').textContent=c.back;document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-ctr').textContent=(fcIdx+1)+' / '+fcCards.length;document.getElementById('fc-pf').style.width=(fcIdx/fcCards.length*100)+'%';document.getElementById('fc-stat').textContent='\u2713 Know: '+fcKnow+' \u00B7 \uD83E\uDD14 Not sure: '+fcUnsure+' \u00B7 Remaining: '+(fcCards.length-fcIdx-1)}
-function flipCard(){document.getElementById('fc-card').classList.toggle('flipped')}
-function nextCard(){if(fcIdx<fcCards.length-1){fcIdx++;renderCard()}else toast('End of deck! \uD83C\uDF89','success')}
-function prevCard(){if(fcIdx>0){fcIdx--;renderCard()}}
-function rateCard(t){if(!fcCards.length)return;if(t==='know'){fcKnow++;US.cards=(US.cards||0)+1;saveSt()}else fcUnsure++;nextCard()}
-
-// ── ESSAY HELPER ──
-async function essayDo(action){
-  const q=(document.getElementById('es-q').value||'').trim(),txt=(document.getElementById('es-txt').value||'').trim(),lvl=document.getElementById('es-l').value,board=document.getElementById('es-b').value;
-  const res=document.getElementById('es-res');
-  if(!txt&&['feedback','improve','grade'].includes(action)){toast('Paste your essay first','error');return}
-  if(!q&&['plan','grade','points'].includes(action)){toast('Enter the essay title first','error');return}
-  ['eb1','eb2','eb3','eb4','eb5'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
-  res.style.display='block';res.textContent='Analysing...';res.style.color='var(--t2)';showLoad('Analysing essay...');
-  const bd=board!=='Any'?' ('+board+' mark scheme)':'';
-  const sys={
-    feedback:'You are a senior '+lvl+' examiner'+bd+'. Give structured feedback — CONCISE and SPECIFIC. Use this format:\n\nOVERALL: [2 sentences]\n\nSTRENGTHS \u2713\n- [specific strength with brief quote]\n- [specific strength]\n\nERRORS \u2717\n- [error with correction]\n\nMISSING \u26A0\n- [key absent points]\n\nGRADE: [grade] — [one sentence justification]\n\nTOP 2 IMPROVEMENTS:\n1. [specific actionable change]\n2. [specific actionable change]',
-    plan:'You are a '+lvl+' essay planning expert'+bd+'. Create a concise plan:\n\nTHESIS: [full thesis statement]\n\nPARA 1: [topic sentence] + [evidence] + [analysis]\nPARA 2: [topic sentence] + [evidence] + [analysis]\nPARA 3: [topic sentence] + [evidence] + [analysis]\nCONCLUSION: [synthesis approach]\n\nKEY TERMS (8): [list]\n\nAVOID: [3 common mistakes]',
-    improve:'You are a '+lvl+' writing expert'+bd+'. Show:\n1. DIAGNOSIS: 2-3 specific weaknesses in this intro\n2. IMPROVED VERSION: Write a better intro with hook, context, precise thesis, signposting\n3. KEY CHANGES: What you changed and why it earns marks',
-    grade:'You are a '+lvl+' chief examiner'+bd+'. Grade this essay:\n\nGRADE: [specific grade] (Confidence: High/Medium/Low)\n\nEARNING MARKS \u2713: [specific elements working]\nLOSING MARKS \u2717: [specific issues costing marks]\n\nGAP TO NEXT GRADE: [exactly 2-3 changes needed]\nEXAMINER SECRET: [one insider tip]',
-    points:'You are a '+lvl+' subject expert'+bd+'. For this title:\n\nKEY ARGUMENTS (5): [numbered list]\nESSENTIAL EVIDENCE (6): [specific quotes/facts/data]\nKEY TERMS (10): [term: definition]\nTOP ANSWERS DO: [3 techniques]\nCOMMON MISTAKES: [3 errors to avoid]'
-  };
-  try{
-    const um=['plan','points'].includes(action)?'Essay title: "'+q+'"':'Essay title: "'+q+'"\n\nEssay:\n'+txt;
-    const r=await aiCall(sys[action],um);hideLoad();res.style.color='var(--txt)';
-    res.innerHTML=r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>').replace(/\u2713/g,'<span style="color:var(--grn)">\u2713</span>').replace(/\u2717/g,'<span style="color:var(--red)">\u2717</span>').replace(/\u26A0/g,'<span style="color:var(--warn)">\u26A0</span>');
-    logAct('essay');
-  }catch(e){hideLoad();res.textContent='Error. Try again.';res.style.color='var(--red)'}
-  ['eb1','eb2','eb3','eb4','eb5'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=false});
+function resetQuiz() {
+  qData=[]; qIdx=0; qScore=0; qAnswered=false;
+  document.getElementById('quiz-setup').style.display = '';
+  document.getElementById('quiz-area').style.display = 'none';
 }
 
-// ── HOMEWORK SOLVER ──
-async function solveHW(){
-  const q=(document.getElementById('hw-q').value||'').trim();if(!q){toast('Please type your question','error');return}
-  const res=document.getElementById('hw-res'),steps=document.getElementById('hw-steps');
-  res.style.display='block';document.getElementById('hw-title').textContent=q.length>65?q.substring(0,65)+'...':q;
-  steps.innerHTML='<div style="color:var(--t2);font-size:12px">Solving...</div>';showLoad('Solving...');
-  const lv=CU?.level?LVM[CU.level]:'GCSE';
-  try{
-    const r=await aiCall('You are solving a '+lv+' homework question. Be PRECISE and COMPLETE — but not verbose. Respond in the same language the student used.\n\nFORMAT:\nUNDERSTAND: [what we need to find — 1 sentence]\n\n1. [Step title]\n[What + WHY. Show ALL working for Maths/Science.]\n\n[Continue numbering...]\n\nFINAL ANSWER: [complete answer with units]\n\nPRACTICE: [2 similar questions to try]',q);
+function genQuiz() {
+  var subj = document.getElementById('q-subj').value;
+  var lvl = document.getElementById('q-lvl').value;
+  var num = document.getElementById('q-num').value;
+  var top = (document.getElementById('q-top').value || '').trim();
+  var board = document.getElementById('q-board').value;
+  var btn = document.getElementById('q-btn'); btn.disabled = true; btn.textContent = 'Generating...';
+  showLoad('Creating ' + num + ' questions...');
+  var sys = 'You are an expert ' + lvl + ' ' + subj + ' examiner' + (board!=='Any'?' ('+board+')':'') + '. Generate exactly ' + num + ' multiple choice questions' + (top?' on: '+top:' on key syllabus topics') + '. Test genuine understanding. All 4 options must be plausible.\nReturn ONLY a valid JSON array:\n[{"q":"Full question?","opts":["A) opt","B) opt","C) opt","D) opt"],"ans":0,"exp":"Why correct and why others wrong"}]\nans=0-based index (0=A,1=B,2=C,3=D)';
+  aiCall(sys, 'Generate the quiz. Return ONLY the JSON array.').then(function(raw) {
     hideLoad();
-    steps.innerHTML=r.split('\n').filter(l=>l.trim()).map(l=>{const t=l.trim();if(/^FINAL ANSWER/i.test(t))return'<div style="margin-top:14px;padding:13px 16px;background:rgba(85,133,255,.1);border:1px solid rgba(85,133,255,.28);border-radius:12px;font-size:13px;color:var(--ac3);font-weight:700">'+l+'</div>';if(/^PRACTICE/i.test(t))return'<div style="margin-top:14px;padding:11px 14px;background:rgba(0,232,168,.07);border:1px solid rgba(0,232,168,.18);border-radius:11px;font-size:12.5px;color:var(--grn);font-weight:700">'+l+'</div>';if(/^UNDERSTAND/i.test(t))return'<div style="padding:10px 14px;background:rgba(160,123,255,.07);border:1px solid rgba(160,123,255,.18);border-radius:11px;font-size:12.5px;color:var(--pur);font-weight:700">'+l+'</div>';if(/^\d+[\.):]/.test(t)){const n=t.match(/^\d+/)[0],tx=t.replace(/^\d+[\.):\s]+/,'');return'<div class="hwstep"><div class="sn2">'+n+'</div><div class="st"><strong>'+tx+'</strong></div></div>'}return'<div style="font-size:12.5px;color:var(--t2);line-height:1.65;padding:2px 0 2px 38px">'+l+'</div>'}).join('');logAct('homework');
-  }catch(e){hideLoad();steps.innerHTML='<div style="color:var(--red)">Error. Check your internet and try again.</div>'}
+    var s = raw.indexOf('['), e = raw.lastIndexOf(']');
+    if (s < 0 || e < 0) throw new Error('No JSON');
+    qData = JSON.parse(raw.substring(s, e + 1));
+    if (!qData.length) throw new Error('Empty');
+    qIdx = 0; qScore = 0; qAnswered = false;
+    document.getElementById('quiz-setup').style.display = 'none';
+    document.getElementById('quiz-area').style.display = 'flex';
+    renderQ(); logAct('quiz'); toast('Quiz ready! Good luck \uD83C\uDF40', 'success');
+  }).catch(function(err) {
+    hideLoad(); toast('Failed to generate quiz. Try again.', 'error'); console.error(err);
+  }).finally(function() {
+    btn.disabled = false; btn.textContent = 'Generate Quiz \u2192';
+  });
 }
 
-// ── PAST PAPERS ──
-function openPaper(name,subj,board){
-  document.getElementById('chat-ta').value='Help me prepare for the '+name+' ('+board+'). Give me: 1) Key topics always tested 2) Mark scheme secrets 3) Common mistakes 4) Top 5 tips for a top grade';
-  goV('tutor',document.getElementById('ni-t'));toast('AI ready for '+name+'!','success');
+function renderQ() {
+  if (qIdx >= qData.length) { showScore(); return; }
+  var q = qData[qIdx]; qAnswered = false;
+  var pct = Math.round(qIdx / qData.length * 100);
+  var opts = q.opts.map(function(o, i) {
+    return '<div class="qopt" id="qo' + i + '" onclick="pickAns(' + i + ')"><div class="optl">' + ['A','B','C','D'][i] + '</div><span>' + o.replace(/^[A-D]\)\s*/,'') + '</span></div>';
+  }).join('');
+  document.getElementById('quiz-area').innerHTML =
+    '<div style="height:4px;background:var(--b1);border-radius:2px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:var(--g1);border-radius:2px;transition:width .4s"></div></div>' +
+    '<div class="qqc"><div class="qqn">Question '+(qIdx+1)+' of '+qData.length+' \u00B7 Score: '+qScore+'/'+qIdx+'</div>' +
+    '<div class="qqq">'+q.q+'</div>' +
+    '<div class="qopts">'+opts+'</div>' +
+    '<div id="q-fb" style="display:none;border-radius:11px;padding:12px 15px;font-size:12.5px;line-height:1.6;margin-top:11px"></div></div>' +
+    '<div style="display:flex;justify-content:flex-end"><button class="abt" id="q-nxt" onclick="nextQ()" style="display:none;padding:10px 20px;font-size:12px">Next \u2192</button></div>';
 }
 
-// ── YOUTUBE SUMMARISER ──
-async function summariseYT(){
-  const url=(document.getElementById('yt-url').value||'').trim();if(!url){toast('Please paste a YouTube URL or topic','error');return}
-  const res=document.getElementById('yt-res');res.style.display='block';res.textContent='Generating comprehensive notes...';res.style.color='var(--t2)';showLoad('Generating full revision notes...');
-  const vid=url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1];
-  const ref=url.includes('youtube.com')||url.includes('youtu.be')?'YouTube video'+(vid?' (ID: '+vid+')':''):url;
-  try{
-    const r=await aiCall('You are UltraVision AI creating COMPREHENSIVE revision notes. Generate detailed structured notes a student can revise entirely from.',
-      'Create FULL comprehensive revision notes for this educational content: "'+ref+'"\n\n\uD83D\uDCCB OVERVIEW\n[3-4 sentences: main topic, exam relevance]\n\n\uD83C\uDFAF LEARNING OBJECTIVES\n[6-7 specific things students should understand]\n\n\uD83D\uDCDA DETAILED NOTES\n\nSection 1: [First major concept]\n\u2022 [Detailed point with explanation]\n\u2022 [Key detail and examples]\n\nSection 2: [Second major concept]\n\u2022 [Detailed explanation]\n\nSection 3: [Third major concept]\n\u2022 [Explanation with applications]\n\n\uD83D\uDD11 KEY TERMINOLOGY (12 terms)\n[Term]: [Clear definition]\n...\n\n\uD83D\uDCCA KEY FACTS AND FIGURES\n\u2022 [Important fact/stat/date]\n...10+ facts\n\n\u26A1 EXAM TIPS\n1. [Specific exam tip]\n2. [Common mistake to avoid]\n3. [Mark scheme insight]\n4. [Structure advice]\n5. [Time management tip]\n\n\u2753 PRACTICE QUESTIONS\nQ1 (6 marks): [Question]\nModel answer: [Key points]\n\nQ2 (4 marks): [Question]\nModel answer: [Key points]');
-    hideLoad();res.style.color='var(--txt)';
-    res.innerHTML=r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');
-    logAct('youtube');toast('Notes generated! \u2713','success');
-  }catch(e){hideLoad();res.style.color='var(--red)';res.textContent='Error. Check your internet and try again.'}
+function pickAns(i) {
+  if (qAnswered) return; qAnswered = true;
+  var q = qData[qIdx]; var ok = (i === q.ans); if (ok) qScore++;
+  for (var x = 0; x < 4; x++) { var el = document.getElementById('qo' + x); if (!el) continue; if (x === q.ans) el.classList.add('ok'); else if (x === i && !ok) el.classList.add('no'); }
+  var fb = document.getElementById('q-fb');
+  fb.style.display = 'block';
+  fb.style.background = ok ? 'rgba(0,232,168,.07)' : 'rgba(255,79,107,.07)';
+  fb.style.border = '1px solid ' + (ok ? 'rgba(0,232,168,.25)' : 'rgba(255,79,107,.2)');
+  fb.innerHTML = '<strong style="color:' + (ok?'var(--grn)':'var(--red)') + '">' + (ok?'\u2713 Correct!':'\u2717 Incorrect') + '</strong> ' + q.exp;
+  document.getElementById('q-nxt').style.display = '';
 }
-function ytDemo(topic){document.getElementById('yt-url').value=topic;summariseYT()}
+function nextQ() { qIdx++; renderQ(); }
 
-// ── SMART NOTES ──
-async function notesAI(action){
-  const notes=(document.getElementById('notes-ta').value||'').trim();if(!notes){toast('Write some notes first','error');return}
-  const res=document.getElementById('notes-res');res.style.display='block';res.textContent='Processing...';showLoad('Analysing notes...');
-  const sys={
-    summarise:'Summarise these student notes — be CONCISE. Format:\nKEY POINTS (6 bullets)\nCORE CONCEPTS (2-3 sentences each)\nONE-LINE SUMMARY:',
-    flashcards:'Create 8 flashcard pairs from these notes:\nQ1: [exam-style question]\nA1: [complete answer]\n...(repeat for all 8)',
-    gaps:'Identify 4-5 KNOWLEDGE GAPS in these notes. For each:\nGAP: [topic name]\nWHY IT MATTERS: [exam importance]\nWHAT TO ADD: [key points]',
-    improve:'Improve and restructure these notes into polished exam-ready format. Add structure, fill gaps, add terminology. Keep all original content but elevate it.',
-    quiz:'Generate 5 quiz questions from these notes:\n1. [Question] ([marks] marks)\nAnswer: [model answer]\n...',
-    mindmap:'Create a text mind map:\nCENTRAL TOPIC: [main topic]\n\u251C\u2500\u2500 BRANCH 1: [concept]\n\u2502   \u251C\u2500\u2500 [sub-point]\n\u2502   \u2514\u2500\u2500 [sub-point]\n\u251C\u2500\u2500 BRANCH 2: [concept]\n...'
+function showScore() {
+  var pct = Math.round(qScore / qData.length * 100);
+  var grade = pct>=90?'A*':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=50?'D':'U';
+  var emoji = pct>=90?'\uD83C\uDFC6':pct>=70?'\uD83C\uDF1F':pct>=50?'\uD83D\uDC4D':'\uD83D\uDCDA';
+  document.getElementById('quiz-area').innerHTML =
+    '<div class="qqc" style="text-align:center;padding:40px 20px">' +
+    '<div style="font-size:60px;margin-bottom:18px">'+emoji+'</div>' +
+    '<div style="font-family:\'Playfair Display\',serif;font-size:26px;font-weight:800;margin-bottom:8px">'+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good effort!':'Keep practising!')+'</div>' +
+    '<div style="font-size:14px;color:var(--t2);margin-bottom:8px">Score: <strong style="color:var(--ac);font-size:20px">'+qScore+'/'+qData.length+'</strong> ('+pct+'%)</div>' +
+    '<div style="display:inline-block;background:rgba(85,133,255,.12);border:1px solid rgba(85,133,255,.3);color:var(--ac3);padding:8px 24px;border-radius:22px;font-size:14px;font-weight:700;margin-bottom:28px">Grade: '+grade+'</div>' +
+    '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+    '<button class="abt" onclick="resetQuiz()">New quiz</button>' +
+    '<button class="tbtn" onclick="genQuiz()" style="padding:11px 20px">Retry</button>' +
+    '<button class="tbtn" onclick="goV(\'tutor\',document.getElementById(\'ni-t\'))" style="padding:11px 20px">AI Tutor</button>' +
+    '</div></div>';
+  US.scores = US.scores || []; US.scores.push(pct); if (US.scores.length > 20) US.scores.shift(); saveSt();
+}
+
+function genCards() {
+  var subj = document.getElementById('fc-s').value;
+  var top = (document.getElementById('fc-t').value || '').trim() || subj;
+  var lvl = document.getElementById('fc-l').value;
+  showLoad('Generating flashcards...');
+  var sys = 'You are an expert ' + lvl + ' ' + subj + ' teacher. Create exactly 10 exam-ready revision flashcards on "' + top + '". Each answer: 2-3 sentences, precise exam language.\nReturn ONLY valid JSON array:\n[{"front":"Question?","back":"Exam-ready answer"}]';
+  aiCall(sys, 'Generate 10 flashcards. Return ONLY the JSON array.').then(function(raw) {
+    hideLoad();
+    var s = raw.indexOf('['), e = raw.lastIndexOf(']');
+    if (s < 0 || e < 0) throw new Error('No JSON');
+    fcCards = JSON.parse(raw.substring(s, e + 1));
+    if (!fcCards.length) throw new Error('Empty');
+    fcIdx = 0; fcKnow = 0; fcUnsure = 0;
+    document.getElementById('fc-hint').textContent = 'Tap card to flip and reveal answer';
+    renderCard(); toast('10 flashcards ready! Tap to flip \uD83D\uDC46', 'success'); logAct('flashcards');
+  }).catch(function(err) { hideLoad(); toast('Failed. Try again.', 'error'); console.error(err); });
+}
+
+function renderCard() {
+  if (!fcCards.length) return;
+  var c = fcCards[fcIdx];
+  document.getElementById('fc-front').textContent = c.front;
+  document.getElementById('fc-back').textContent = c.back;
+  document.getElementById('fc-card').classList.remove('flipped');
+  document.getElementById('fc-ctr').textContent = (fcIdx+1) + ' / ' + fcCards.length;
+  document.getElementById('fc-pf').style.width = (fcIdx / fcCards.length * 100) + '%';
+  document.getElementById('fc-stat').textContent = '\u2713 Know: ' + fcKnow + ' \u00B7 \uD83E\uDD14 Not sure: ' + fcUnsure + ' \u00B7 Remaining: ' + (fcCards.length - fcIdx - 1);
+}
+function flipCard() { document.getElementById('fc-card').classList.toggle('flipped'); }
+function nextCard() { if (fcIdx < fcCards.length - 1) { fcIdx++; renderCard(); } else toast('End of deck! \uD83C\uDF89', 'success'); }
+function prevCard() { if (fcIdx > 0) { fcIdx--; renderCard(); } }
+function rateCard(t) { if (!fcCards.length) return; if (t === 'know') { fcKnow++; US.cards = (US.cards||0)+1; saveSt(); } else fcUnsure++; nextCard(); }
+
+function essayDo(action) {
+  var q = (document.getElementById('es-q').value || '').trim();
+  var txt = (document.getElementById('es-txt').value || '').trim();
+  var lvl = document.getElementById('es-l').value;
+  var board = document.getElementById('es-b').value;
+  var res = document.getElementById('es-res');
+  if (!txt && ['feedback','improve','grade'].includes(action)) { toast('Paste your essay first', 'error'); return; }
+  if (!q && ['plan','grade','points'].includes(action)) { toast('Enter the essay title first', 'error'); return; }
+  ['eb1','eb2','eb3','eb4','eb5'].forEach(function(id) { var el=document.getElementById(id); if(el) el.disabled=true; });
+  res.style.display = 'block'; res.textContent = 'Analysing...'; res.style.color = 'var(--t2)';
+  showLoad('Analysing essay...');
+  var bd = board !== 'Any' ? ' (' + board + ' mark scheme)' : '';
+  var systems = {
+    feedback: 'Senior ' + lvl + ' examiner' + bd + '. Feedback:\nOVERALL: [2 sentences]\nSTRENGTHS \u2713\n- [specific]\nERRORS \u2717\n- [with correction]\nMISSING \u26A0\n- [key points]\nGRADE: [grade] \u2014 [reason]\nTOP 2 IMPROVEMENTS:\n1. [actionable]\n2. [actionable]',
+    plan: lvl + ' essay planner' + bd + '.\nTHESIS: [full thesis]\nPARA 1: [topic] + [evidence] + [analysis]\nPARA 2: [topic] + [evidence] + [analysis]\nPARA 3: [topic] + [evidence] + [analysis]\nCONCLUSION: [synthesis]\nKEY TERMS (8): [list]\nAVOID: [3 mistakes]',
+    improve: lvl + ' writing expert' + bd + '.\n1. DIAGNOSIS: 2-3 specific weaknesses\n2. IMPROVED VERSION: Better intro with hook, thesis, signposting\n3. KEY CHANGES: What changed and why it earns marks',
+    grade: lvl + ' chief examiner' + bd + '.\nGRADE: [grade] (Confidence: High/Med/Low)\nEARNING \u2713: [working elements]\nLOSING \u2717: [issues]\nGAP TO NEXT GRADE: [2-3 changes]\nEXAMINER TIP: [one insider tip]',
+    points: lvl + ' subject expert' + bd + '.\nKEY ARGUMENTS (5): [list]\nESSENTIAL EVIDENCE (6): [quotes/facts]\nKEY TERMS (10): [term: def]\nTOP ANSWERS DO: [3 techniques]\nCOMMON MISTAKES: [3 errors]'
   };
-  try{
-    const r=await aiCall(sys[action],'Notes:\n\n'+notes);hideLoad();res.style.color='var(--txt)';
-    res.innerHTML=r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');
-    logAct('notes');toast('Done! \u2713','success');
-  }catch(e){hideLoad();res.style.color='var(--red)';res.textContent='Error. Try again.'}
-}
-function clearNotes(){document.getElementById('notes-ta').value='';document.getElementById('notes-res').style.display='none'}
-function saveNote(){const n=document.getElementById('notes-ta').value;if(!n){toast('Nothing to save','info');return}localStorage.setItem('uv6_note_'+Date.now(),JSON.stringify({content:n,saved:new Date().toISOString()}));toast('Notes saved! \u2713','success')}
-
-// ── VOICE NOTES ──
-function toggleRec(){
-  if(isRec){stopRec();return}
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){toast('Voice notes need Chrome or Safari','error');return}
-  recog=new SR();recog.continuous=true;recog.interimResults=true;
-  const langMap={en:'en-GB',ar:'ar-SA',fr:'fr-FR',es:'es-ES',de:'de-DE',zh:'zh-CN',hi:'hi-IN',pt:'pt-BR',ja:'ja-JP',tr:'tr-TR'};
-  recog.lang=langMap[currentLang]||'en-GB';
-  recog.onresult=e=>{let fin='',int='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)fin+=e.results[i][0].transcript;else int+=e.results[i][0].transcript}if(fin)voiceTxt+=fin+' ';const tt=document.getElementById('v-trans');if(tt)tt.textContent=voiceTxt+int};
-  recog.onerror=e=>{stopRec();toast('Voice error: '+e.error,'error')};
-  recog.start();isRec=true;
-  const ring=document.getElementById('v-ring'),st=document.getElementById('v-status'),trans=document.getElementById('v-trans');
-  if(ring)ring.classList.add('rec');if(st)st.textContent='Recording... tap to stop';if(trans){trans.style.display='block';if(!voiceTxt)trans.textContent='Listening...'}
-}
-function stopRec(){if(recog)recog.stop();isRec=false;const ring=document.getElementById('v-ring'),st=document.getElementById('v-status'),acts2=document.getElementById('v-acts');if(ring)ring.classList.remove('rec');if(st)st.textContent=voiceTxt?'Done — choose an AI action below':'No speech detected. Try again.';if(acts2&&voiceTxt)acts2.style.display='flex'}
-async function voiceAI(action){
-  if(!voiceTxt){toast('Please record something first','error');return}
-  const resw=document.getElementById('v-resw'),res=document.getElementById('v-res');resw.style.display='block';res.textContent='Processing...';showLoad('Processing voice notes...');
-  const sys={notes:'Create structured revision notes from these spoken notes. Use clear headings and bullet points. Make them exam-ready.',flashcards:'Create 8 flashcard pairs:\nQ1: [question]\nA1: [answer]\n...',quiz:'Create 5 quiz questions:\n1. [Question] ([marks] marks)\nAnswer: [model answer]\n...'};
-  try{const r=await aiCall(sys[action],'Spoken notes:\n\n'+voiceTxt);hideLoad();res.innerHTML=r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');logAct('voice');toast('Done! \u2713','success')}catch(e){hideLoad();res.textContent='Error. Try again.'}
-}
-function clearVoice(){voiceTxt='';const t=document.getElementById('v-trans'),rw=document.getElementById('v-resw'),a=document.getElementById('v-acts'),s=document.getElementById('v-status');if(t){t.style.display='none';t.textContent=''}if(rw)rw.style.display='none';if(a)a.style.display='none';if(s)s.textContent='Tap to start recording'}
-
-// ── MISSING FUNCTION FIXES ──
-// These functions are called from HTML but were named differently in JS
-
-// Verify code inputs (called as vcKeyUp/vcKeyDown from HTML)
-function vcKeyUp(el, idx) {
-  if(el.value.length===1 && idx<5) {
-    document.querySelectorAll('#pg-verify .vci')[idx+1]?.focus();
-  }
-  if(el.value) el.style.borderColor='rgba(85,133,255,.6)';
-}
-function vcKeyDown(el, e, idx) {
-  if(e.key==='Backspace' && !el.value && idx>0) {
-    document.querySelectorAll('#pg-verify .vci')[idx-1]?.focus();
-  }
+  var um = ['plan','points'].includes(action) ? 'Essay title: "' + q + '"' : 'Essay title: "' + q + '"\n\nEssay:\n' + txt;
+  aiCall(systems[action], um).then(function(r) {
+    hideLoad(); res.style.color = 'var(--txt)';
+    res.innerHTML = r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');
+    logAct('essay');
+  }).catch(function() {
+    hideLoad(); res.textContent = 'Error. Try again.'; res.style.color = 'var(--red)';
+  }).finally(function() {
+    ['eb1','eb2','eb3','eb4','eb5'].forEach(function(id) { var el=document.getElementById(id); if(el) el.disabled=false; });
+  });
 }
 
-// Reset code inputs (called as rcKeyUp/rcKeyDown from HTML)
-function rcKeyUp(el, idx) {
-  if(el.value.length===1 && idx<5) {
-    document.querySelectorAll('#reset-code-wrap .vci')[idx+1]?.focus();
-  }
-  if(el.value) el.style.borderColor='rgba(160,123,255,.6)';
-}
-function rcKeyDown(el, e, idx) {
-  if(e.key==='Backspace' && !el.value && idx>0) {
-    document.querySelectorAll('#reset-code-wrap .vci')[idx-1]?.focus();
-  }
+function solveHW() {
+  var q = (document.getElementById('hw-q').value || '').trim();
+  if (!q) { toast('Please type your question', 'error'); return; }
+  var res = document.getElementById('hw-res'), steps = document.getElementById('hw-steps');
+  res.style.display = 'block';
+  document.getElementById('hw-title').textContent = q.length > 65 ? q.substring(0, 65) + '...' : q;
+  steps.innerHTML = '<div style="color:var(--t2);font-size:12px">Solving...</div>';
+  showLoad('Solving...');
+  var lv = (CU && CU.level) ? (LVM[CU.level] || 'GCSE') : 'GCSE';
+  var sys = 'Solve this ' + lv + ' homework question. Be PRECISE. Respond in student\'s language.\nFORMAT:\nUNDERSTAND: [what we need \u2014 1 sentence]\n\n1. [Step]\n[What + WHY. Show ALL working for Maths/Science.]\n\nFINAL ANSWER: [complete answer with units]\n\nPRACTICE: [2 similar questions]';
+  aiCall(sys, q).then(function(r) {
+    hideLoad();
+    steps.innerHTML = r.split('\n').filter(function(l){return l.trim();}).map(function(l) {
+      var t = l.trim();
+      if (/^FINAL ANSWER/i.test(t)) return '<div style="margin-top:14px;padding:13px 16px;background:rgba(85,133,255,.1);border:1px solid rgba(85,133,255,.28);border-radius:12px;font-size:13px;color:var(--ac3);font-weight:700">'+l+'</div>';
+      if (/^PRACTICE/i.test(t)) return '<div style="margin-top:14px;padding:11px 14px;background:rgba(0,232,168,.07);border:1px solid rgba(0,232,168,.18);border-radius:11px;font-size:12.5px;color:var(--grn);font-weight:700">'+l+'</div>';
+      if (/^UNDERSTAND/i.test(t)) return '<div style="padding:10px 14px;background:rgba(160,123,255,.07);border:1px solid rgba(160,123,255,.18);border-radius:11px;font-size:12.5px;color:var(--pur);font-weight:700">'+l+'</div>';
+      if (/^\d+[.):]/.test(t)) { var n=t.match(/^\d+/)[0]; var tx=t.replace(/^\d+[.):\s]+/,''); return '<div class="hwstep"><div class="sn2">'+n+'</div><div class="st"><strong>'+tx+'</strong></div></div>'; }
+      return '<div style="font-size:12.5px;color:var(--t2);line-height:1.65;padding:2px 0 2px 38px">'+l+'</div>';
+    }).join('');
+    logAct('homework');
+  }).catch(function() {
+    hideLoad(); steps.innerHTML = '<div style="color:var(--red)">Error. Check internet and try again.</div>';
+  });
 }
 
-// submitVerifyCode (called from verify button in HTML)
-function submitVerifyCode() { submitCode(); }
+function openPaper(name, subj, board) {
+  document.getElementById('chat-ta').value = 'Help me prepare for ' + name + ' (' + board + '). Give me: 1) Key topics 2) Mark scheme secrets 3) Common mistakes 4) Top 5 tips for a top grade';
+  goV('tutor', document.getElementById('ni-t'));
+  toast('AI ready for ' + name + '!', 'success');
+}
 
-// vcPaste already defined but ensure it works for verify page
-// rcPaste already defined for reset page
+function summariseYT() {
+  var url = (document.getElementById('yt-url').value || '').trim();
+  if (!url) { toast('Please paste a YouTube URL or topic', 'error'); return; }
+  var res = document.getElementById('yt-res');
+  res.style.display = 'block'; res.textContent = 'Generating notes...'; res.style.color = 'var(--t2)';
+  showLoad('Generating full revision notes...');
+  var vid = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  var ref = (url.includes('youtube.com') || url.includes('youtu.be')) ? 'YouTube video' + (vid ? ' ID: ' + vid[1] : '') : url;
+  var prompt = 'Create COMPREHENSIVE revision notes for: "' + ref + '"\n\n\uD83D\uDCCB OVERVIEW\n[3-4 sentences]\n\n\uD83C\uDFAF LEARNING OBJECTIVES\n[6-7 specific points]\n\n\uD83D\uDCDA CONTENT NOTES\nSection 1: [concept]\n\u2022 [detail]\n\nSection 2: [concept]\n\u2022 [detail]\n\n\uD83D\uDD11 KEY TERMS (12)\n[Term]: [definition]\n\n\uD83D\uDCCA KEY FACTS (10+)\n\u2022 [fact]\n\n\u26A1 EXAM TIPS\n1. [tip]\n\n\u2753 PRACTICE QUESTIONS\nQ1 (6 marks): [question]\nAnswer: [key points]';
+  aiCall('You are UltraVision AI creating comprehensive revision notes. Be detailed and thorough.', prompt).then(function(r) {
+    hideLoad(); res.style.color = 'var(--txt)';
+    res.innerHTML = r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');
+    logAct('youtube'); toast('Notes generated! \u2713', 'success');
+  }).catch(function() {
+    hideLoad(); res.style.color = 'var(--red)'; res.textContent = 'Error. Check internet and try again.';
+  });
+}
+function ytDemo(topic) { document.getElementById('yt-url').value = topic; summariseYT(); }
+
+function notesAI(action) {
+  var notes = (document.getElementById('notes-ta').value || '').trim();
+  if (!notes) { toast('Write some notes first', 'error'); return; }
+  var res = document.getElementById('notes-res');
+  res.style.display = 'block'; res.textContent = 'Processing...';
+  showLoad('Analysing notes...');
+  var systems = {
+    summarise: 'Summarise these notes:\nKEY POINTS (6 bullets)\nCORE CONCEPTS (2-3 sentences each)\nONE-LINE SUMMARY:',
+    flashcards: 'Create 8 flashcard pairs:\nQ1: [question]\nA1: [answer]\n...',
+    gaps: 'Identify 4-5 knowledge gaps:\nGAP: [topic]\nWHY: [importance]\nADD: [what to learn]',
+    improve: 'Improve these notes into polished exam-ready format. Keep content, elevate structure and vocabulary.',
+    quiz: 'Create 5 quiz questions:\n1. [Question] ([marks] marks)\nAnswer: [model answer]',
+    mindmap: 'Text mind map:\nCENTRAL TOPIC: [topic]\n\u251C\u2500\u2500 BRANCH 1\n\u2502 \u251C\u2500\u2500 [sub]\n\u2502 \u2514\u2500\u2500 [sub]'
+  };
+  aiCall(systems[action], 'Notes:\n\n' + notes).then(function(r) {
+    hideLoad(); res.style.color = 'var(--txt)';
+    res.innerHTML = r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');
+    logAct('notes'); toast('Done! \u2713', 'success');
+  }).catch(function() { hideLoad(); res.style.color = 'var(--red)'; res.textContent = 'Error. Try again.'; });
+}
+function clearNotes() { document.getElementById('notes-ta').value = ''; document.getElementById('notes-res').style.display = 'none'; }
+function saveNote() {
+  var n = document.getElementById('notes-ta').value;
+  if (!n) { toast('Nothing to save', 'info'); return; }
+  localStorage.setItem('uv7_note_' + Date.now(), JSON.stringify({content:n, saved:new Date().toISOString()}));
+  toast('Notes saved! \u2713', 'success');
+}
+
+function toggleRec() {
+  if (isRec) { stopRec(); return; }
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { toast('Voice notes need Chrome or Safari', 'error'); return; }
+  recog = new SR(); recog.continuous = true; recog.interimResults = true;
+  var langMap = {en:'en-GB',ar:'ar-SA',fr:'fr-FR',es:'es-ES',de:'de-DE',zh:'zh-CN',hi:'hi-IN',pt:'pt-BR',ja:'ja-JP',tr:'tr-TR'};
+  recog.lang = langMap[currentLang] || 'en-GB';
+  recog.onresult = function(e) {
+    var fin = '', intr = '';
+    for (var i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) fin += e.results[i][0].transcript;
+      else intr += e.results[i][0].transcript;
+    }
+    if (fin) voiceTxt += fin + ' ';
+    var tt = document.getElementById('v-trans'); if (tt) tt.textContent = voiceTxt + intr;
+  };
+  recog.onerror = function(e) { stopRec(); toast('Voice error: ' + e.error, 'error'); };
+  recog.start(); isRec = true;
+  document.getElementById('v-ring').classList.add('rec');
+  document.getElementById('v-status').textContent = 'Recording... tap to stop';
+  var trans = document.getElementById('v-trans');
+  trans.style.display = 'block'; if (!voiceTxt) trans.textContent = 'Listening...';
+}
+function stopRec() {
+  if (recog) recog.stop(); isRec = false;
+  document.getElementById('v-ring').classList.remove('rec');
+  document.getElementById('v-status').textContent = voiceTxt ? 'Done \u2014 choose an AI action below' : 'No speech detected. Try again.';
+  if (voiceTxt) document.getElementById('v-acts').style.display = 'flex';
+}
+function voiceAI(action) {
+  if (!voiceTxt) { toast('Please record something first', 'error'); return; }
+  var resw = document.getElementById('v-resw'), res = document.getElementById('v-res');
+  resw.style.display = 'block'; res.textContent = 'Processing...'; showLoad('Processing...');
+  var systems = {
+    notes: 'Create structured revision notes from these spoken notes. Clear headings, bullets, exam-ready.',
+    flashcards: 'Create 8 flashcard pairs:\nQ1: [question]\nA1: [answer]\n...',
+    quiz: 'Create 5 quiz questions:\n1. [Question] ([marks] marks)\nAnswer: [model answer]'
+  };
+  aiCall(systems[action], 'Spoken notes:\n\n' + voiceTxt).then(function(r) {
+    hideLoad(); res.innerHTML = r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');
+    logAct('voice'); toast('Done! \u2713', 'success');
+  }).catch(function() { hideLoad(); res.textContent = 'Error. Try again.'; });
+}
+function clearVoice() {
+  voiceTxt = '';
+  var t = document.getElementById('v-trans'), rw = document.getElementById('v-resw');
+  var a = document.getElementById('v-acts'), s = document.getElementById('v-status');
+  t.style.display = 'none'; t.textContent = '';
+  rw.style.display = 'none'; a.style.display = 'none';
+  s.textContent = 'Tap to start recording';
+}
 
 </script>
 </body>
