@@ -1588,6 +1588,42 @@ async function voiceAI(action){
   try{const r=await aiCall(sys[action],'Spoken notes:\n\n'+voiceTxt);hideLoad();res.innerHTML=r.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--gold)">$1</strong>');logAct('voice');toast('Done! \u2713','success')}catch(e){hideLoad();res.textContent='Error. Try again.'}
 }
 function clearVoice(){voiceTxt='';const t=document.getElementById('v-trans'),rw=document.getElementById('v-resw'),a=document.getElementById('v-acts'),s=document.getElementById('v-status');if(t){t.style.display='none';t.textContent=''}if(rw)rw.style.display='none';if(a)a.style.display='none';if(s)s.textContent='Tap to start recording'}
+
+// ── MISSING FUNCTION FIXES ──
+// These functions are called from HTML but were named differently in JS
+
+// Verify code inputs (called as vcKeyUp/vcKeyDown from HTML)
+function vcKeyUp(el, idx) {
+  if(el.value.length===1 && idx<5) {
+    document.querySelectorAll('#pg-verify .vci')[idx+1]?.focus();
+  }
+  if(el.value) el.style.borderColor='rgba(85,133,255,.6)';
+}
+function vcKeyDown(el, e, idx) {
+  if(e.key==='Backspace' && !el.value && idx>0) {
+    document.querySelectorAll('#pg-verify .vci')[idx-1]?.focus();
+  }
+}
+
+// Reset code inputs (called as rcKeyUp/rcKeyDown from HTML)
+function rcKeyUp(el, idx) {
+  if(el.value.length===1 && idx<5) {
+    document.querySelectorAll('#reset-code-wrap .vci')[idx+1]?.focus();
+  }
+  if(el.value) el.style.borderColor='rgba(160,123,255,.6)';
+}
+function rcKeyDown(el, e, idx) {
+  if(e.key==='Backspace' && !el.value && idx>0) {
+    document.querySelectorAll('#reset-code-wrap .vci')[idx-1]?.focus();
+  }
+}
+
+// submitVerifyCode (called from verify button in HTML)
+function submitVerifyCode() { submitCode(); }
+
+// vcPaste already defined but ensure it works for verify page
+// rcPaste already defined for reset page
+
 </script>
 </body>
 </html>
